@@ -1,5 +1,5 @@
 function Intro() {
-  return <div>Intro Area</div>;
+  return <div className='border-4 border-yellow-300'>Intro Area</div>;
 }
 
 export default Intro;

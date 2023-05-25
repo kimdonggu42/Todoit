@@ -4,11 +4,11 @@ import Schedule from "../components/nav/Schedule";
 
 function TodoPage() {
   return (
-    <>
+    <div className='flex h-screen'>
       <SideBar />
       <TodoMain />
       <Schedule />
-    </>
+    </div>
   );
 }
 
