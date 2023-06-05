@@ -1,11 +1,14 @@
 import styled from "styled-components";
 
 const AsideContainer = styled.div`
-  border: 1px solid blue;
-  width: 100vw;
-  max-width: 25rem;
+  width: 25rem;
   height: 100vh;
   font-size: 1rem;
+  border-left: 1px solid #e3e7f7;
+
+  @media screen and (max-width: 1300px) {
+    display: none;
+  }
 `;
 
 function Aside() {

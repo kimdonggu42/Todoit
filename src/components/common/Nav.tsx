@@ -4,11 +4,14 @@ const NavContainer = styled.div`
   background-color: #f4f8ff;
   width: 100vw;
   max-width: 20rem;
-  min-width: 15rem;
   height: 100vh;
   padding: 7rem 3rem 7rem 3rem;
   font-size: 1rem;
-  border: 1px solid red;
+  border-right: 1px solid #e3e7f7;
+
+  @media screen and (max-width: 750px) {
+    display: none;
+  }
 `;
 
 const MenuList = styled.ul`
@@ -17,24 +20,34 @@ const MenuList = styled.ul`
   row-gap: 1rem;
   color: #353535;
   font-weight: 500;
-  border: 1px solid blue;
+  /* border: 1px solid blue; */
 `;
 
 const MenuItem = styled.li`
   display: flex;
   align-items: center;
   height: 2rem;
-  border: 1px solid green;
   cursor: pointer;
+  /* border: 1px solid green; */
 `;
 
-function Nav() {
+function Nav({ setCurrentMenu }: any) {
+  const menuArr = [{ name: "Today" }, { name: "Upcoming" }, { name: "Past" }];
+
+  const selectMenuHandler = (index: number) => {
+    setCurrentMenu(index);
+  };
+
   return (
     <NavContainer>
       <MenuList>
-        <MenuItem>Today</MenuItem>
-        <MenuItem>Upcoming</MenuItem>
-        <MenuItem>Past</MenuItem>
+        {menuArr.map((menu, index) => {
+          return (
+            <MenuItem key={index} onClick={() => selectMenuHandler(index)}>
+              {menu.name}
+            </MenuItem>
+          );
+        })}
       </MenuList>
     </NavContainer>
   );
