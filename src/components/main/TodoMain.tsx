@@ -9,6 +9,8 @@ const TodoMainContainer = styled.div`
   display: flex;
   flex-direction: column;
   width: calc(100vw - 45rem);
+  /* height: calc(100vh - 3rem); */
+  height: 100vh;
   font-size: 1rem;
   // flex item의 최소 크기는 자식 요소의 크기보다 더 줄어들 수 없기 때문에
   // 부모 요소인 flex item 의 최소 크기를 0 으로 변경해야 flex 상태에서 말줄임 적용됨
@@ -42,6 +44,9 @@ const TodoTitle = styled.div`
 `;
 
 const TodoMainList = styled.ul`
+  display: flex;
+  flex-direction: column;
+  row-gap: 1rem;
   width: 100%;
   list-style: none;
   /* border: 1px solid blue; */
@@ -90,7 +95,13 @@ function TodoMain({ currentMenu }: any) {
           <TodoTitle>Upcoming Tasks</TodoTitle>
           <TodoMainList>
             {upComingTodoData.map((value: any) => {
-              return <UpComingTodoList key={value.id} upComingTodoData={value} />;
+              return (
+                <UpComingTodoList
+                  key={value.id}
+                  upComingTodoData={value}
+                  getTodoData={getTodoData}
+                />
+              );
             })}
           </TodoMainList>
         </TodoMainArea>
@@ -99,7 +110,7 @@ function TodoMain({ currentMenu }: any) {
           <TodoTitle>Past Tasks</TodoTitle>
           <TodoMainList>
             {pastTodoData.map((value: any) => {
-              return <PastTodoList key={value.id} pastTodoData={value} />;
+              return <PastTodoList key={value.id} pastTodoData={value} getTodoData={getTodoData} />;
             })}
           </TodoMainList>
         </TodoMainArea>

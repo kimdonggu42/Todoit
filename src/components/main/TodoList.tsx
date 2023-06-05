@@ -5,13 +5,14 @@ import { useState } from "react";
 import { AiFillStar, AiOutlineStar } from "react-icons/ai";
 import { BsThreeDotsVertical } from "react-icons/bs";
 
-const TodoListContainer = styled.li`
+export const TodoListContainer = styled.li`
   display: flex;
   align-items: center;
   height: 4rem;
+  /* border: 1px solid red; */
 `;
 
-const CheckboxArea = styled.div`
+export const CheckboxArea = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
@@ -22,11 +23,13 @@ const CheckboxArea = styled.div`
   > input {
     width: 1.1rem;
     height: 1.1rem;
+    accent-color: #e0bfe6;
+
     cursor: pointer;
   }
 `;
 
-const TextArea = styled.div`
+export const TextArea = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -48,7 +51,7 @@ const TextArea = styled.div`
   }
 `;
 
-const BtnArea = styled.div`
+export const BtnArea = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
@@ -59,7 +62,7 @@ const BtnArea = styled.div`
   /* border: 1px solid green; */
 `;
 
-const ImportantBtn = styled.button`
+export const ImportantBtn = styled.button`
   display: flex;
   justify-content: center;
   align-items: center;
@@ -69,7 +72,7 @@ const ImportantBtn = styled.button`
   /* border: 1px solid red; */
 `;
 
-const EditDropdownBtn = styled.button`
+export const EditDropdownBtn = styled.button`
   display: flex;
   justify-content: center;
   align-items: center;
@@ -78,7 +81,7 @@ const EditDropdownBtn = styled.button`
   /* border: 1px solid red; */
 `;
 
-const Dropdown = styled.ul`
+export const Dropdown = styled.ul`
   display: flex;
   flex-direction: column;
   width: 6rem;
@@ -89,6 +92,7 @@ const Dropdown = styled.ul`
   top: 3.4rem;
   right: 1rem;
   list-style: none;
+  z-index: 999;
   cursor: pointer;
 
   > li {
@@ -105,12 +109,21 @@ const Dropdown = styled.ul`
 function TodoList({ todayTodoData, getTodoData }: any) {
   const [isOpen, setIsOpen] = useState<boolean>(false);
 
+  // 완료한 todo Patch
+  const changeCheck = async (todoId: number) => {
+    const editCheck = {
+      isCheck: !todayTodoData.isCheck,
+    };
+    const res = await axios.patch(`http://localhost:3001/todos/${todoId}`, editCheck);
+    getTodoData(res.data);
+  };
+
   // 중요 todo Patch
   const changeImportant = async (todoId: number) => {
-    const editTodoList = {
+    const editImportant = {
       important: !todayTodoData.important,
     };
-    const res = await axios.patch(`http://localhost:3001/todos/${todoId}`, editTodoList);
+    const res = await axios.patch(`http://localhost:3001/todos/${todoId}`, editImportant);
     getTodoData(res.data);
   };
 
@@ -122,7 +135,11 @@ function TodoList({ todayTodoData, getTodoData }: any) {
   return (
     <TodoListContainer>
       <CheckboxArea>
-        <input type='checkbox' id={todayTodoData.id} />
+        <input
+          type='checkbox'
+          checked={todayTodoData.isCheck}
+          onClick={() => changeCheck(todayTodoData.id)}
+        />
       </CheckboxArea>
       <TextArea>
         <div className='content'>{todayTodoData.content}</div>

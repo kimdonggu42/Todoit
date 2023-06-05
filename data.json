@@ -2,21 +2,45 @@
   "todos": [
     {
       "id": 1,
-      "createdAt": "2023-06-05",
+      "createdAt": "2023-06-06",
       "content": "오늘 할 일 오늘 할 일 오늘 할 일 오늘 할 일 오늘 할 일 오늘 할 일 오늘 할 일",
-      "important": false
+      "important": false,
+      "isCheck": false
     },
     {
       "id": 2,
-      "createdAt": "2023-06-01",
-      "content": "어제 한 일",
-      "important": false
+      "createdAt": "2023-06-06",
+      "content": "오늘 할 일 오늘 할 일 오늘 할 일 오늘 할 일 오늘 할 일 오늘 할 일 오늘 할 일",
+      "important": false,
+      "isCheck": false
     },
     {
       "id": 3,
+      "createdAt": "2023-06-01",
+      "content": "어제 한 일",
+      "important": false,
+      "isCheck": false
+    },
+    {
+      "id": 4,
+      "createdAt": "2023-06-01",
+      "content": "어제 한 일",
+      "important": false,
+      "isCheck": false
+    },
+    {
+      "id": 5,
       "createdAt": "2023-06-10",
       "content": "내일 할 일",
-      "important": false
+      "important": false,
+      "isCheck": false
+    },
+    {
+      "id": 6,
+      "createdAt": "2023-06-10",
+      "content": "내일 할 일",
+      "important": false,
+      "isCheck": false
     }
   ]
 }
