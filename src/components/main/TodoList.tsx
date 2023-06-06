@@ -1,18 +1,19 @@
 import styled from "styled-components";
 import axios from "axios";
+import EditTodoModal from "../common/EditTodoModal";
 import { useState } from "react";
 
 import { AiFillStar, AiOutlineStar } from "react-icons/ai";
 import { BsThreeDotsVertical } from "react-icons/bs";
 
-export const TodoListContainer = styled.li`
+const TodoListContainer = styled.li`
   display: flex;
   align-items: center;
   height: 4rem;
   /* border: 1px solid red; */
 `;
 
-export const CheckboxArea = styled.div`
+const CheckboxArea = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
@@ -29,7 +30,7 @@ export const CheckboxArea = styled.div`
   }
 `;
 
-export const TextArea = styled.div`
+const TextArea = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -51,7 +52,7 @@ export const TextArea = styled.div`
   }
 `;
 
-export const BtnArea = styled.div`
+const BtnArea = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
@@ -62,7 +63,7 @@ export const BtnArea = styled.div`
   /* border: 1px solid green; */
 `;
 
-export const ImportantBtn = styled.button`
+const ImportantBtn = styled.button`
   display: flex;
   justify-content: center;
   align-items: center;
@@ -72,7 +73,7 @@ export const ImportantBtn = styled.button`
   /* border: 1px solid red; */
 `;
 
-export const EditDropdownBtn = styled.button`
+const EditDropdownBtn = styled.button`
   display: flex;
   justify-content: center;
   align-items: center;
@@ -81,7 +82,7 @@ export const EditDropdownBtn = styled.button`
   /* border: 1px solid red; */
 `;
 
-export const Dropdown = styled.ul`
+const Dropdown = styled.ul`
   display: flex;
   flex-direction: column;
   width: 6rem;
@@ -106,13 +107,14 @@ export const Dropdown = styled.ul`
   }
 `;
 
-function TodoList({ todayTodoData, getTodoData }: any) {
+function TodoList({ list, getTodoData }: any) {
   const [isOpen, setIsOpen] = useState<boolean>(false);
+  const [editModalOpen, setEditModalOpen] = useState<boolean>(false);
 
   // 완료한 todo Patch
   const changeCheck = async (todoId: number) => {
     const editCheck = {
-      isCheck: !todayTodoData.isCheck,
+      isCheck: !list.isCheck,
     };
     const res = await axios.patch(`http://localhost:3001/todos/${todoId}`, editCheck);
     getTodoData(res.data);
@@ -121,7 +123,7 @@ function TodoList({ todayTodoData, getTodoData }: any) {
   // 중요 todo Patch
   const changeImportant = async (todoId: number) => {
     const editImportant = {
-      important: !todayTodoData.important,
+      important: !list.important,
     };
     const res = await axios.patch(`http://localhost:3001/todos/${todoId}`, editImportant);
     getTodoData(res.data);
@@ -132,26 +134,27 @@ function TodoList({ todayTodoData, getTodoData }: any) {
     setIsOpen(!isOpen);
   };
 
+  // 수정 모달 오픈 이벤트 핸들러
+  const openEditModal = (e: any) => {
+    setEditModalOpen(!editModalOpen);
+  };
+
   return (
     <TodoListContainer>
       <CheckboxArea>
-        <input
-          type='checkbox'
-          checked={todayTodoData.isCheck}
-          onClick={() => changeCheck(todayTodoData.id)}
-        />
+        <input type='checkbox' checked={list.isCheck} onChange={() => changeCheck(list.id)} />
       </CheckboxArea>
       <TextArea>
-        <div className='content'>{todayTodoData.content}</div>
-        <div className='date'>{todayTodoData.createdAt}</div>
+        <div className='content'>{list.content}</div>
+        <div className='date'>{list.createdAt}</div>
       </TextArea>
       <BtnArea>
-        {todayTodoData.important === true ? (
-          <ImportantBtn onClick={() => changeImportant(todayTodoData.id)}>
+        {list.important === true ? (
+          <ImportantBtn onClick={() => changeImportant(list.id)}>
             <AiFillStar size={23} />
           </ImportantBtn>
         ) : (
-          <ImportantBtn onClick={() => changeImportant(todayTodoData.id)}>
+          <ImportantBtn onClick={() => changeImportant(list.id)}>
             <AiOutlineStar size={23} />
           </ImportantBtn>
         )}
@@ -160,7 +163,15 @@ function TodoList({ todayTodoData, getTodoData }: any) {
         </EditDropdownBtn>
         {isOpen ? (
           <Dropdown>
-            <li>Edit</li>
+            <li onClick={openEditModal}>Edit</li>
+            {editModalOpen ? (
+              <EditTodoModal
+                list={list}
+                getTodoData={getTodoData}
+                editModalOpen={editModalOpen}
+                setEditModalOpen={setEditModalOpen}
+              />
+            ) : null}
             <li>Delete</li>
           </Dropdown>
         ) : null}

@@ -1,16 +1,16 @@
 import styled from "styled-components";
+import Header from "../common/Header";
 import TodoList from "./TodoList";
-import UpComingTodoList from "./UpComingTodoList";
-import PastTodoList from "./PastTodoList";
 import { useState, useEffect } from "react";
 import axios from "axios";
+import AddTodoModal from "../common/AddTodoModal";
 
 const TodoMainContainer = styled.div`
   display: flex;
   flex-direction: column;
   width: calc(100vw - 45rem);
-  /* height: calc(100vh - 3rem); */
-  height: 100vh;
+  height: calc(100vh - 3rem);
+  /* height: 100vh; */
   font-size: 1rem;
   // flex item의 최소 크기는 자식 요소의 크기보다 더 줄어들 수 없기 때문에
   // 부모 요소인 flex item 의 최소 크기를 0 으로 변경해야 flex 상태에서 말줄임 적용됨
@@ -28,11 +28,11 @@ const TodoMainContainer = styled.div`
 
 const TodoMainArea = styled.div`
   width: 100%;
-  padding: 5rem 3rem 5rem 3rem;
+  padding: 1rem 3rem 1rem 3rem;
   /* border: 1px solid skyblue; */
 
   @media screen and (max-width: 450px) {
-    padding: 3rem 1rem 3rem 1rem;
+    padding: 1rem;
   }
 `;
 
@@ -81,10 +81,11 @@ const TodoMainList = styled.ul`
 
 function TodoMain({ currentMenu }: any) {
   const [todoData, setTodoData] = useState<any>([]);
+  const [addModalOpen, setAddModalOpen] = useState(false);
   const [currentTab, setCurrentTab] = useState<number>(0);
 
   const getTodoData = async () => {
-    const res = await axios.get("http://localhost:3001/todos");
+    const res = await axios.get("http://localhost:3001/todos?_sort=id&_order=DESC");
     setTodoData(res.data);
   };
   useEffect(() => {
@@ -122,6 +123,7 @@ function TodoMain({ currentMenu }: any) {
 
   return (
     <TodoMainContainer>
+      <Header addModalOpen={addModalOpen} setAddModalOpen={setAddModalOpen} />
       {currentMenu === 0 ? (
         <TodoMainArea>
           <TodoTitle>Today Tasks</TodoTitle>
@@ -141,19 +143,19 @@ function TodoMain({ currentMenu }: any) {
           {currentTab === 0 ? (
             <TodoMainList>
               {todayTodoData.map((value: any) => {
-                return <TodoList key={value.id} todayTodoData={value} getTodoData={getTodoData} />;
+                return <TodoList key={value.id} list={value} getTodoData={getTodoData} />;
               })}
             </TodoMainList>
           ) : currentTab === 1 ? (
             <TodoMainList>
               {todayCompleteTodo.map((value: any) => {
-                return <TodoList key={value.id} todayTodoData={value} getTodoData={getTodoData} />;
+                return <TodoList key={value.id} list={value} getTodoData={getTodoData} />;
               })}
             </TodoMainList>
           ) : (
             <TodoMainList>
               {todayInCompleteTodo.map((value: any) => {
-                return <TodoList key={value.id} todayTodoData={value} getTodoData={getTodoData} />;
+                return <TodoList key={value.id} list={value} getTodoData={getTodoData} />;
               })}
             </TodoMainList>
           )}
@@ -177,19 +179,19 @@ function TodoMain({ currentMenu }: any) {
           {currentTab === 0 ? (
             <TodoMainList>
               {upComingTodoData.map((value: any) => {
-                return <TodoList key={value.id} todayTodoData={value} getTodoData={getTodoData} />;
+                return <TodoList key={value.id} list={value} getTodoData={getTodoData} />;
               })}
             </TodoMainList>
           ) : currentTab === 1 ? (
             <TodoMainList>
               {upComingCompleteTodo.map((value: any) => {
-                return <TodoList key={value.id} todayTodoData={value} getTodoData={getTodoData} />;
+                return <TodoList key={value.id} list={value} getTodoData={getTodoData} />;
               })}
             </TodoMainList>
           ) : (
             <TodoMainList>
               {upComiingInCompleteTodo.map((value: any) => {
-                return <TodoList key={value.id} todayTodoData={value} getTodoData={getTodoData} />;
+                return <TodoList key={value.id} list={value} getTodoData={getTodoData} />;
               })}
             </TodoMainList>
           )}
@@ -213,24 +215,31 @@ function TodoMain({ currentMenu }: any) {
           {currentTab === 0 ? (
             <TodoMainList>
               {pastTodoData.map((value: any) => {
-                return <TodoList key={value.id} todayTodoData={value} getTodoData={getTodoData} />;
+                return <TodoList key={value.id} list={value} getTodoData={getTodoData} />;
               })}
             </TodoMainList>
           ) : currentTab === 1 ? (
             <TodoMainList>
               {pastCompleteTodo.map((value: any) => {
-                return <TodoList key={value.id} todayTodoData={value} getTodoData={getTodoData} />;
+                return <TodoList key={value.id} list={value} getTodoData={getTodoData} />;
               })}
             </TodoMainList>
           ) : (
             <TodoMainList>
               {pastInCompleteTodo.map((value: any) => {
-                return <TodoList key={value.id} todayTodoData={value} getTodoData={getTodoData} />;
+                return <TodoList key={value.id} list={value} getTodoData={getTodoData} />;
               })}
             </TodoMainList>
           )}
         </TodoMainArea>
       )}
+      {addModalOpen ? (
+        <AddTodoModal
+          getTodoData={getTodoData}
+          addModalOpen={addModalOpen}
+          setAddModalOpen={setAddModalOpen}
+        />
+      ) : null}
     </TodoMainContainer>
   );
 }
