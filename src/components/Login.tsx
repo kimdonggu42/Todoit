@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import { useState } from "react";
+import { useLogin } from "../hooks/useLogin";
 
 const FormContainer = styled.form`
   font-size: 1rem;
@@ -21,6 +22,7 @@ const FieldsetArea = styled.fieldset`
 function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const { error, isPending, login } = useLogin();
 
   const handleData = (e: any) => {
     if (e.target.type === "email") {
@@ -32,7 +34,7 @@ function Login() {
 
   const handleSubmit = (e: any) => {
     e.preventDefault();
-    console.log(email, password);
+    login(email, password);
   };
 
   return (
@@ -47,7 +49,8 @@ function Login() {
           onChange={handleData}
           value={password}
         />
-        <button type='submit'>로그인</button>
+        {isPending ? <strong>로그인 진행중</strong> : <button type='submit'>로그인</button>}
+        {error && <strong>{error}</strong>}
       </FieldsetArea>
     </FormContainer>
   );

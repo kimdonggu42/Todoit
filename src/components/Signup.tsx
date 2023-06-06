@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import { useState } from "react";
+import { useSignup } from "../hooks/useSignup";
 
 const FormContainer = styled.form`
   font-size: 1rem;
@@ -22,6 +23,7 @@ function Signup() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [displayName, setDisplayName] = useState("");
+  const { error, isPending, signup } = useSignup();
 
   const handleData = (e: any) => {
     if (e.target.type === "email") {
@@ -35,7 +37,7 @@ function Signup() {
 
   const handleSubmit = (e: any) => {
     e.preventDefault();
-    console.log(email, password, displayName);
+    signup(email, password, displayName);
   };
 
   return (

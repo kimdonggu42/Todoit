@@ -1,6 +1,6 @@
 import styled from "styled-components";
-
 import { FiPlus } from "react-icons/fi";
+import { useLogout } from "../../hooks/useLogout";
 
 const HeaderContainer = styled.div`
   display: flex;
@@ -24,6 +24,8 @@ const AddTodoBtn = styled.button`
 `;
 
 function Header({ addModalOpen, setAddModalOpen }: any) {
+  const { logout } = useLogout();
+
   const openAddModalHandler = () => {
     setAddModalOpen(!addModalOpen);
   };
@@ -33,6 +35,7 @@ function Header({ addModalOpen, setAddModalOpen }: any) {
       <AddTodoBtn onClick={openAddModalHandler}>
         <FiPlus size={28} />
       </AddTodoBtn>
+      <button onClick={logout}>logout</button>
     </HeaderContainer>
   );
 }
