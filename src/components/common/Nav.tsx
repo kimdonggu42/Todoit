@@ -39,7 +39,6 @@ const MenuItem = styled.li`
   }
 
   &:hover {
-    border-radius: 0.5rem;
     background-color: #e3e7f7;
   }
 `;

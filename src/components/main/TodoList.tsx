@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import axios from "axios";
 import EditTodoModal from "../common/EditTodoModal";
+import DeleteModal from "../common/DeleteModal";
 import { useState } from "react";
 
 import { AiFillStar, AiOutlineStar } from "react-icons/ai";
@@ -110,6 +111,7 @@ const Dropdown = styled.ul`
 function TodoList({ list, getTodoData }: any) {
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const [editModalOpen, setEditModalOpen] = useState<boolean>(false);
+  const [deleteModalOpen, setDeleteModalOpen] = useState<boolean>(false);
 
   // 완료한 todo Patch
   const changeCheck = async (todoId: number) => {
@@ -137,6 +139,11 @@ function TodoList({ list, getTodoData }: any) {
   // 수정 모달 오픈 이벤트 핸들러
   const openEditModal = (e: any) => {
     setEditModalOpen(!editModalOpen);
+  };
+
+  // 삭제 모달 오픈 이벤트 핸들러
+  const openDeleteModal = (e: any) => {
+    setDeleteModalOpen(!deleteModalOpen);
   };
 
   return (
@@ -172,7 +179,15 @@ function TodoList({ list, getTodoData }: any) {
                 setEditModalOpen={setEditModalOpen}
               />
             ) : null}
-            <li>Delete</li>
+            <li onClick={openDeleteModal}>Delete</li>
+            {deleteModalOpen ? (
+              <DeleteModal
+                list={list}
+                getTodoData={getTodoData}
+                deleteModalOpen={deleteModalOpen}
+                setDeleteModalOpen={setDeleteModalOpen}
+              />
+            ) : null}
           </Dropdown>
         ) : null}
       </BtnArea>

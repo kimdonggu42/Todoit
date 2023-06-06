@@ -31,7 +31,6 @@ export const AddModalView = styled.div`
     font-size: 1.2rem;
     font-weight: 600;
     color: #353535;
-    font-weight: 500;
   }
 `;
 
@@ -71,7 +70,7 @@ export const AddModalButtonArea = styled.div`
   > button {
     font-weight: 500;
     white-space: nowrap;
-    padding: 0.5rem 0.7rem 0.5rem 0.7rem;
+    padding: 0.4rem 0.7rem 0.4rem 0.7rem;
     border-radius: 0.3rem;
   }
 
