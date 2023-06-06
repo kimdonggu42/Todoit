@@ -5,7 +5,7 @@
       "createdAt": "2023-06-06",
       "content": "오늘 할 일 오늘 할 일 오늘 할 일 오늘 할 일 오늘 할 일 오늘 할 일 오늘 할 일",
       "important": false,
-      "isCheck": false
+      "isCheck": true
     },
     {
       "id": 2,
@@ -19,7 +19,7 @@
       "createdAt": "2023-06-01",
       "content": "어제 한 일",
       "important": false,
-      "isCheck": false
+      "isCheck": true
     },
     {
       "id": 4,
@@ -33,7 +33,7 @@
       "createdAt": "2023-06-10",
       "content": "내일 할 일",
       "important": false,
-      "isCheck": false
+      "isCheck": true
     },
     {
       "id": 6,

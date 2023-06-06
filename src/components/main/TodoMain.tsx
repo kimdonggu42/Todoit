@@ -43,6 +43,33 @@ const TodoTitle = styled.div`
   /* border: 1px solid lime; */
 `;
 
+const ListTab = styled.ul`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  list-style: none;
+  /* column-gap: 5rem; */
+  font-weight: 500;
+  margin: 2rem 0 2rem 0;
+  color: #8e92a4;
+  border-bottom: 1px solid #dddddd;
+  /* border: 1px solid red; */
+
+  > .tab {
+    width: 100vw;
+    max-width: 10rem;
+    padding: 0.5rem 0 0.5rem 0;
+    text-align: center;
+    cursor: pointer;
+    /* border: 1px solid blue; */
+  }
+
+  > .focused {
+    color: #e0bfe6;
+    border-bottom: 2px solid #e0bfe6;
+  }
+`;
+
 const TodoMainList = styled.ul`
   display: flex;
   flex-direction: column;
@@ -54,6 +81,7 @@ const TodoMainList = styled.ul`
 
 function TodoMain({ currentMenu }: any) {
   const [todoData, setTodoData] = useState<any>([]);
+  const [currentTab, setCurrentTab] = useState<number>(0);
 
   const getTodoData = async () => {
     const res = await axios.get("http://localhost:3001/todos");
@@ -77,42 +105,130 @@ function TodoMain({ currentMenu }: any) {
   // 투두데이터 중 오늘 이전 날짜의 투두만 보이도록 필터링한 데이터
   const pastTodoData = todoData.filter((value: any) => value.createdAt < dateFormat);
 
-  // console.log(dateFormat);
+  const tabArr = [{ name: "All" }, { name: "Complete" }, { name: "Incomplete" }];
+
+  const selectTabHandler = (index: number) => {
+    setCurrentTab(index);
+  };
+
+  const todayCompleteTodo = todayTodoData.filter((value: any) => value.isCheck === true);
+  const todayInCompleteTodo = todayTodoData.filter((value: any) => value.isCheck === false);
+
+  const upComingCompleteTodo = upComingTodoData.filter((value: any) => value.isCheck === true);
+  const upComiingInCompleteTodo = upComingTodoData.filter((value: any) => value.isCheck === false);
+
+  const pastCompleteTodo = pastTodoData.filter((value: any) => value.isCheck === true);
+  const pastInCompleteTodo = pastTodoData.filter((value: any) => value.isCheck === false);
 
   return (
     <TodoMainContainer>
       {currentMenu === 0 ? (
         <TodoMainArea>
           <TodoTitle>Today Tasks</TodoTitle>
-          <TodoMainList>
-            {todayTodoData.map((value: any) => {
-              return <TodoList key={value.id} todayTodoData={value} getTodoData={getTodoData} />;
+          <ListTab>
+            {tabArr.map((tab, index) => {
+              return (
+                <li
+                  key={index}
+                  className={currentTab === index ? "tab focused" : "tab"}
+                  onClick={() => selectTabHandler(index)}
+                >
+                  {tab.name}
+                </li>
+              );
             })}
-          </TodoMainList>
+          </ListTab>
+          {currentTab === 0 ? (
+            <TodoMainList>
+              {todayTodoData.map((value: any) => {
+                return <TodoList key={value.id} todayTodoData={value} getTodoData={getTodoData} />;
+              })}
+            </TodoMainList>
+          ) : currentTab === 1 ? (
+            <TodoMainList>
+              {todayCompleteTodo.map((value: any) => {
+                return <TodoList key={value.id} todayTodoData={value} getTodoData={getTodoData} />;
+              })}
+            </TodoMainList>
+          ) : (
+            <TodoMainList>
+              {todayInCompleteTodo.map((value: any) => {
+                return <TodoList key={value.id} todayTodoData={value} getTodoData={getTodoData} />;
+              })}
+            </TodoMainList>
+          )}
         </TodoMainArea>
       ) : currentMenu === 1 ? (
         <TodoMainArea>
           <TodoTitle>Upcoming Tasks</TodoTitle>
-          <TodoMainList>
-            {upComingTodoData.map((value: any) => {
+          <ListTab>
+            {tabArr.map((tab, index) => {
               return (
-                <UpComingTodoList
-                  key={value.id}
-                  upComingTodoData={value}
-                  getTodoData={getTodoData}
-                />
+                <li
+                  key={index}
+                  className={currentTab === index ? "tab focused" : "tab"}
+                  onClick={() => selectTabHandler(index)}
+                >
+                  {tab.name}
+                </li>
               );
             })}
-          </TodoMainList>
+          </ListTab>
+          {currentTab === 0 ? (
+            <TodoMainList>
+              {upComingTodoData.map((value: any) => {
+                return <TodoList key={value.id} todayTodoData={value} getTodoData={getTodoData} />;
+              })}
+            </TodoMainList>
+          ) : currentTab === 1 ? (
+            <TodoMainList>
+              {upComingCompleteTodo.map((value: any) => {
+                return <TodoList key={value.id} todayTodoData={value} getTodoData={getTodoData} />;
+              })}
+            </TodoMainList>
+          ) : (
+            <TodoMainList>
+              {upComiingInCompleteTodo.map((value: any) => {
+                return <TodoList key={value.id} todayTodoData={value} getTodoData={getTodoData} />;
+              })}
+            </TodoMainList>
+          )}
         </TodoMainArea>
       ) : (
         <TodoMainArea>
           <TodoTitle>Past Tasks</TodoTitle>
-          <TodoMainList>
-            {pastTodoData.map((value: any) => {
-              return <PastTodoList key={value.id} pastTodoData={value} getTodoData={getTodoData} />;
+          <ListTab>
+            {tabArr.map((tab, index) => {
+              return (
+                <li
+                  key={index}
+                  className={currentTab === index ? "tab focused" : "tab"}
+                  onClick={() => selectTabHandler(index)}
+                >
+                  {tab.name}
+                </li>
+              );
             })}
-          </TodoMainList>
+          </ListTab>
+          {currentTab === 0 ? (
+            <TodoMainList>
+              {pastTodoData.map((value: any) => {
+                return <TodoList key={value.id} todayTodoData={value} getTodoData={getTodoData} />;
+              })}
+            </TodoMainList>
+          ) : currentTab === 1 ? (
+            <TodoMainList>
+              {pastCompleteTodo.map((value: any) => {
+                return <TodoList key={value.id} todayTodoData={value} getTodoData={getTodoData} />;
+              })}
+            </TodoMainList>
+          ) : (
+            <TodoMainList>
+              {pastInCompleteTodo.map((value: any) => {
+                return <TodoList key={value.id} todayTodoData={value} getTodoData={getTodoData} />;
+              })}
+            </TodoMainList>
+          )}
         </TodoMainArea>
       )}
     </TodoMainContainer>
