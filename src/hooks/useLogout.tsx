@@ -24,19 +24,6 @@ export const useLogout = () => {
       setError(err.message);
       setIsPending(false);
     }
-
-    // signOut(appAuth)
-    //   .then(() => {
-    //     setError(null);
-    //     setIsPending(false);
-    //     localStorage.removeItem("accessToken");
-    //     localStorage.removeItem("userNickname");
-    //     navigate("/login");
-    //   })
-    //   .catch((err) => {
-    //     setError(err.message);
-    //     setIsPending(false);
-    //   });
   };
 
   return { error, isPending, logout };

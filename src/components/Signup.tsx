@@ -59,7 +59,8 @@ function Signup() {
           onChange={handleData}
           value={password}
         />
-        <button type='submit'>회원가입</button>
+        {isPending ? <strong>회원가입 진행중</strong> : <button type='submit'>회원가입</button>}
+        {error && <strong>{error}</strong>}
       </FieldsetArea>
     </FormContainer>
   );

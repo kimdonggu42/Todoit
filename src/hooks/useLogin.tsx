@@ -33,29 +33,6 @@ export const useLogin = () => {
       setError(err.message);
       setIsPending(false);
     }
-
-    // signInWithEmailAndPassword(appAuth, email, password)
-    //   .then((userCredential) => {
-    //     const user: any = userCredential.user;
-
-    //     setError(null);
-    //     setIsPending(false);
-
-    //     if (user) {
-    //       localStorage.setItem("accessToken", JSON.stringify(user.accessToken));
-    //       localStorage.setItem("userNickname", JSON.stringify(user.displayName));
-    //       navigate("/todo");
-    //     }
-
-    //     // 회원 정보를 정상적으로 받지 못하면 실패
-    //     if (!user) {
-    //       throw new Error("회원가입에 실패했습니다.");
-    //     }
-    //   })
-    //   .catch((err) => {
-    //     setError(err.message);
-    //     setIsPending(false);
-    //   });
   };
 
   return { error, isPending, login };

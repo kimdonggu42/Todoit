@@ -37,31 +37,6 @@ export const useSignup = () => {
       setError(err.message);
       setIsPending(false);
     }
-
-    // createUserWithEmailAndPassword(appAuth, email, password)
-    //   .then((userCredential) => {
-    //     const user = userCredential.user;
-
-    //     // 회원 정보를 정상적으로 받지 못하면 실패
-    //     if (!user) {
-    //       throw new Error("회원가입에 실패했습니다.");
-    //     }
-
-    //     // 회원가입이 완료되고 유저 정보에 닉네임을 업데이트
-    //     updateProfile(appAuth.currentUser, { displayName })
-    //       .then(() => {
-    //         setError(null);
-    //         setIsPending(false);
-    //       })
-    //       .catch((err) => {
-    //         setError(err.message);
-    //         setIsPending(false);
-    //       });
-    //   })
-    //   .catch((err) => {
-    //     setError(err.message);
-    //     setIsPending(false);
-    //   });
   };
 
   return { error, isPending, signup };
