@@ -4,13 +4,13 @@ import { FaRegLightbulb, FaRegStickyNote } from "react-icons/fa";
 import { BsCalendar } from "react-icons/bs";
 
 const NavContainer = styled.div`
-  background-color: #f4f8ff;
+  background-color: #f8f8f8;
   width: 100vw;
-  max-width: 20rem;
-  height: 100vh;
+  max-width: 19rem;
+  height: calc(100vh - 3rem);
   padding: 6rem 0 6rem 0;
   font-size: 1.1rem;
-  border-right: 1px solid #e3e7f7;
+  /* border-right: 1px solid #e3e7f7; */
 
   @media screen and (max-width: 750px) {
     display: none;
@@ -22,7 +22,6 @@ const MenuList = styled.ul`
   flex-direction: column;
   row-gap: 0.5rem;
   color: #353535;
-  font-weight: 500;
   /* border: 1px solid blue; */
 `;
 
@@ -39,7 +38,7 @@ const MenuItem = styled.li`
   }
 
   &:hover {
-    background-color: #e3e7f7;
+    background-color: #eeeeee;
   }
 `;
 

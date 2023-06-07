@@ -1,4 +1,4 @@
-import GlobalStyle from "./assets/globalStyle";
+import GlobalStyle from "./assets/style/globalStyle";
 import LoginPage from "./pages/LoginPage";
 import SignupPage from "./pages/SignupPage";
 import MainPage from "./pages/MainPage";
@@ -7,7 +7,7 @@ import { AuthContext } from "./context/AuthContext";
 import { useContext } from "react";
 
 function App() {
-  const { isAuthReady, user }: any = useContext(AuthContext);
+  const { user, isAuthReady }: any = useContext(AuthContext);
 
   return (
     <div className='App'>

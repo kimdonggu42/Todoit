@@ -55,8 +55,8 @@ export const SignupBtn = styled.button`
   border-radius: 0.3rem;
   margin-top: 1rem;
   color: white;
-  font-weight: 500;
-  background-color: #e0bfe6;
+  font-weight: 600;
+  background-color: #fed049;
   cursor: pointer;
 `;
 
@@ -66,7 +66,7 @@ export const MovePageButton = styled.div`
   > a > button {
     margin-left: 0.3rem;
     font-weight: 500;
-    color: #e0bfe6;
+    color: #fed049;
   }
 `;
 

@@ -2,7 +2,7 @@ import styled from "styled-components";
 import axios from "axios";
 import EditTodoModal from "../common/EditTodoModal";
 import DeleteModal from "../common/DeleteModal";
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 
 import { AiFillStar, AiOutlineStar } from "react-icons/ai";
 import { BsThreeDotsVertical } from "react-icons/bs";
@@ -19,14 +19,12 @@ const CheckboxArea = styled.div`
   justify-content: center;
   align-items: center;
   min-width: 3rem;
-  height: 100%;
   /* border: 1px solid red; */
 
   > input {
     width: 1.1rem;
     height: 1.1rem;
-    accent-color: #e0bfe6;
-
+    accent-color: #fed049;
     cursor: pointer;
   }
 `;
@@ -55,12 +53,11 @@ const TextArea = styled.div`
 
 const BtnArea = styled.div`
   display: flex;
-  justify-content: center;
   align-items: center;
   position: relative;
+  padding-left: 1rem;
   column-gap: 1rem;
   min-width: 7rem;
-  height: 100%;
   /* border: 1px solid green; */
 `;
 
@@ -86,12 +83,12 @@ const EditDropdownBtn = styled.button`
 const Dropdown = styled.ul`
   display: flex;
   flex-direction: column;
-  width: 6rem;
-  border-radius: 4px;
+  width: 7rem;
+  border-radius: 0.3rem;
   box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 8px;
   background-color: white;
   position: absolute;
-  top: 3.4rem;
+  top: 2rem;
   right: 1rem;
   list-style: none;
   z-index: 999;
@@ -102,8 +99,8 @@ const Dropdown = styled.ul`
     /* border: 1px solid red; */
 
     &:hover {
-      border-radius: 4px;
-      background-color: lightgray;
+      border-radius: 0.3rem;
+      background-color: #f7f7f7;
     }
   }
 `;
@@ -112,6 +109,8 @@ function TodoList({ list, getTodoData }: any) {
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const [editModalOpen, setEditModalOpen] = useState<boolean>(false);
   const [deleteModalOpen, setDeleteModalOpen] = useState<boolean>(false);
+
+  const dropMenuRef = useRef<HTMLDivElement | null>(null);
 
   // 완료한 todo Patch
   const changeCheck = async (todoId: number) => {
@@ -131,10 +130,20 @@ function TodoList({ list, getTodoData }: any) {
     getTodoData(res.data);
   };
 
-  // 드롬다운 오픈 이벤트 핸들러
+  // 드롬다운 오픈
   const openDropdown = (e: any) => {
+    e.stopPropagation();
     setIsOpen(!isOpen);
   };
+
+  // 드롭다운 외부 클릭 시 닫기
+  useEffect(() => {
+    const handleOutsideClose = (e: any) => {
+      if (isOpen && !dropMenuRef.current?.contains(e.target)) setIsOpen(false);
+    };
+    document.addEventListener("click", handleOutsideClose);
+    return () => document.removeEventListener("click", handleOutsideClose);
+  }, [isOpen]);
 
   // 수정 모달 오픈 이벤트 핸들러
   const openEditModal = (e: any) => {
@@ -168,28 +177,30 @@ function TodoList({ list, getTodoData }: any) {
         <EditDropdownBtn onClick={openDropdown}>
           <BsThreeDotsVertical size={17} />
         </EditDropdownBtn>
-        {isOpen ? (
-          <Dropdown>
-            <li onClick={openEditModal}>Edit</li>
-            {editModalOpen ? (
-              <EditTodoModal
-                list={list}
-                getTodoData={getTodoData}
-                editModalOpen={editModalOpen}
-                setEditModalOpen={setEditModalOpen}
-              />
-            ) : null}
-            <li onClick={openDeleteModal}>Delete</li>
-            {deleteModalOpen ? (
-              <DeleteModal
-                list={list}
-                getTodoData={getTodoData}
-                deleteModalOpen={deleteModalOpen}
-                setDeleteModalOpen={setDeleteModalOpen}
-              />
-            ) : null}
-          </Dropdown>
-        ) : null}
+        <div className='test' ref={dropMenuRef}>
+          {isOpen ? (
+            <Dropdown>
+              <li onClick={openEditModal}>Edit</li>
+              {editModalOpen ? (
+                <EditTodoModal
+                  list={list}
+                  getTodoData={getTodoData}
+                  editModalOpen={editModalOpen}
+                  setEditModalOpen={setEditModalOpen}
+                />
+              ) : null}
+              <li onClick={openDeleteModal}>Delete</li>
+              {deleteModalOpen ? (
+                <DeleteModal
+                  list={list}
+                  getTodoData={getTodoData}
+                  deleteModalOpen={deleteModalOpen}
+                  setDeleteModalOpen={setDeleteModalOpen}
+                />
+              ) : null}
+            </Dropdown>
+          ) : null}
+        </div>
       </BtnArea>
     </TodoListContainer>
   );

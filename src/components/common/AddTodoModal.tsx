@@ -76,7 +76,7 @@ export const AddModalButtonArea = styled.div`
 
   > .submit-button {
     color: white;
-    background-color: #e0bfe6;
+    background-color: #fed049;
   }
 
   > .cancel-button {

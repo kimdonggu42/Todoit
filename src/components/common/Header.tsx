@@ -1,41 +1,118 @@
 import styled from "styled-components";
-import { FiPlus } from "react-icons/fi";
 import { useLogout } from "../../hooks/useLogout";
+import { useState, useEffect, useRef } from "react";
+import todoIcon from "../../assets/images/todoIcon.png";
+
+import { FiPlus } from "react-icons/fi";
 
 const HeaderContainer = styled.div`
   display: flex;
   align-items: center;
   justify-content: flex-end;
-  width: 100%;
-  height: 4rem;
-  padding: 0 3rem 0 3rem;
   font-size: 1rem;
-  /* border: 1px solid blue; */
+  position: relative;
+  column-gap: 1.5rem;
+  width: 100%;
+  height: 3rem;
+  padding: 0 3rem 0 3rem;
+  background-color: #fed049;
 
   @media screen and (max-width: 450px) {
     padding: 0 1rem 0 1rem;
   }
 `;
 
-const AddTodoBtn = styled.button`
-  color: #353535;
+const HeaderBtn = styled.button`
   /* border: 1px solid red; */
+  color: white;
   cursor: pointer;
 `;
 
+const UserIcon = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 1.8rem;
+  height: 1.8rem;
+  background-color: #f7c04a;
+  border-radius: 5rem;
+  cursor: pointer;
+`;
+
+const UserImage = styled.img`
+  width: 1rem;
+  height: 1rem;
+`;
+
+const Dropdown = styled.ul`
+  display: flex;
+  flex-direction: column;
+  width: 9rem;
+  border-radius: 0.3rem;
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 8px;
+  background-color: white;
+  position: absolute;
+  top: 2.8rem;
+  right: 4.5rem;
+  list-style: none;
+  z-index: 999;
+  cursor: pointer;
+
+  > li {
+    padding: 0.5rem 0.8rem 0.5rem 0.8rem;
+
+    &:hover {
+      border-radius: 0.3rem;
+      background-color: #f7f7f7;
+    }
+  }
+
+  @media screen and (max-width: 450px) {
+    right: 2.5rem;
+  }
+`;
+
 function Header({ addModalOpen, setAddModalOpen }: any) {
+  const [isOpen, setIsOpen] = useState<boolean>(false);
+
+  const dropMenuRef = useRef<HTMLDivElement | null>(null);
   const { logout } = useLogout();
 
+  // task 추가 모달 오픈
   const openAddModalHandler = () => {
     setAddModalOpen(!addModalOpen);
   };
 
+  // 드론다운 오픈
+  const openDropdown = (e: any) => {
+    e.stopPropagation();
+    setIsOpen(!isOpen);
+  };
+
+  // 드롭다운 외부 클릭 시 닫기
+  useEffect(() => {
+    const handleOutsideClose = (e: any) => {
+      if (isOpen && !dropMenuRef.current?.contains(e.target)) setIsOpen(false);
+    };
+    document.addEventListener("click", handleOutsideClose);
+    return () => document.removeEventListener("click", handleOutsideClose);
+  }, [isOpen]);
+
   return (
     <HeaderContainer>
-      <AddTodoBtn onClick={openAddModalHandler}>
+      <HeaderBtn onClick={openAddModalHandler}>
         <FiPlus size={28} />
-      </AddTodoBtn>
-      <button onClick={logout}>logout</button>
+      </HeaderBtn>
+      <UserIcon onClick={openDropdown}>
+        <UserImage src={todoIcon} alt='userimage' />
+      </UserIcon>
+      <div ref={dropMenuRef}>
+        {isOpen ? (
+          <Dropdown>
+            <li onClick={logout}>Logout</li>
+          </Dropdown>
+        ) : null}
+      </div>
     </HeaderContainer>
   );
 }
