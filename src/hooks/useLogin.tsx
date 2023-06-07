@@ -2,28 +2,27 @@ import { useState } from "react";
 import { appAuth } from "../firebase/config";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { useNavigate } from "react-router-dom";
+import { AuthContext } from "../context/AuthContext";
+import { useContext } from "react";
 
 export const useLogin = () => {
   const [error, setError] = useState(null);
   const [isPending, setIsPending] = useState(false);
 
   const navigate = useNavigate();
+  const { dispatch }: any = useContext(AuthContext);
 
   const login = async (email: string, password: string) => {
-    setError(null); // 아직 에러가 없으니 null
-    setIsPending(true); // 통신중이므로 true
+    setError(null);
+    setIsPending(true);
 
     try {
       const userCredential = await signInWithEmailAndPassword(appAuth, email, password);
-      const user: any = userCredential.user;
+      const user = userCredential.user;
+      dispatch({ type: "login", payload: user });
       setError(null);
       setIsPending(false);
-
-      if (user) {
-        localStorage.setItem("accessToken", JSON.stringify(user.accessToken));
-        localStorage.setItem("userNickname", JSON.stringify(user.displayName));
-        navigate("/todo");
-      }
+      navigate("/");
 
       // 회원 정보를 정상적으로 받지 못하면 실패
       if (!user) {

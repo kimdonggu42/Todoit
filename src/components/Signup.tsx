@@ -1,21 +1,72 @@
 import styled from "styled-components";
 import { useState } from "react";
 import { useSignup } from "../hooks/useSignup";
+import { Link } from "react-router-dom";
 
-const FormContainer = styled.form`
+export const SignupContainer = styled.div`
   font-size: 1rem;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
 `;
 
-const FieldsetArea = styled.fieldset`
-  border: 1px solid gray;
+export const Logo = styled.div`
+  font-size: 2rem;
+  font-weight: 500;
+  color: #353535;
+  margin-bottom: 1rem;
+  /* border: 1px solid red; */
+`;
 
-  > input {
-    border: 1px solid gray;
+export const FormArea = styled.form`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  row-gap: 1rem;
+  width: 90vw;
+  max-width: 25rem;
+  padding: 2rem;
+  border-radius: 0.3rem;
+  border: none;
+  border: 1px solid #dddddd;
+`;
+
+export const Input = styled.input`
+  width: 100%;
+  height: 3rem;
+  border-radius: 0.3rem;
+  padding: 0.5rem 0.7rem 0.5rem 0.7rem;
+  color: #353535;
+  border: none;
+  border: 1px solid #dddddd;
+
+  &:focus {
+    outline: none;
   }
+`;
 
-  > button {
-    margin-left: 1rem;
-    border: 1px solid gray;
+export const SignupBtn = styled.button`
+  width: 100%;
+  height: 3rem;
+  border: none;
+  border-radius: 0.3rem;
+  margin-top: 1rem;
+  color: white;
+  font-weight: 500;
+  background-color: #e0bfe6;
+  cursor: pointer;
+`;
+
+export const MovePageButton = styled.div`
+  margin-top: 1rem;
+
+  > a > button {
+    margin-left: 0.3rem;
+    font-weight: 500;
+    color: #e0bfe6;
   }
 `;
 
@@ -41,28 +92,34 @@ function Signup() {
   };
 
   return (
-    <FormContainer onSubmit={handleSubmit}>
-      <FieldsetArea>
-        <legend>회원가입</legend>
-        <input
+    <SignupContainer>
+      <Logo>회원가입</Logo>
+      <FormArea onSubmit={handleSubmit}>
+        <Input
           type='text'
           placeholder='nickname'
           required
           onChange={handleData}
           value={displayName}
         />
-        <input type='email' placeholder='email' required onChange={handleData} value={email} />
-        <input
+        <Input type='email' placeholder='email' required onChange={handleData} value={email} />
+        <Input
           type='password'
           placeholder='password'
           required
           onChange={handleData}
           value={password}
         />
-        {isPending ? <strong>회원가입 진행중</strong> : <button type='submit'>회원가입</button>}
+        <SignupBtn type='submit'>{isPending ? "회원가입 진행중" : "회원가입"}</SignupBtn>
         {error && <strong>{error}</strong>}
-      </FieldsetArea>
-    </FormContainer>
+      </FormArea>
+      <MovePageButton>
+        이미 계정이 있으신가요?
+        <Link to='/login'>
+          <button>로그인</button>
+        </Link>
+      </MovePageButton>
+    </SignupContainer>
   );
 }
 

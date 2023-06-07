@@ -2,12 +2,15 @@ import { useState } from "react";
 import { signOut } from "firebase/auth";
 import { appAuth } from "../firebase/config";
 import { useNavigate } from "react-router-dom";
+import { AuthContext } from "../context/AuthContext";
+import { useContext } from "react";
 
 export const useLogout = () => {
   const [error, setError] = useState(null);
   const [isPending, setIsPending] = useState(false);
 
   const navigate = useNavigate();
+  const { dispatch }: any = useContext(AuthContext);
 
   const logout = async () => {
     setError(null);
@@ -15,10 +18,9 @@ export const useLogout = () => {
 
     try {
       await signOut(appAuth);
+      dispatch({ type: "logout" });
       setError(null);
       setIsPending(false);
-      localStorage.removeItem("accessToken");
-      localStorage.removeItem("userNickname");
       navigate("/login");
     } catch (err: any) {
       setError(err.message);
