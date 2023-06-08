@@ -1,4 +1,4 @@
-import { addDoc, collection } from "firebase/firestore";
+import { addDoc, updateDoc, collection, doc } from "firebase/firestore";
 import { useReducer } from "react";
 import { appFireStore, timestamp } from "../firebase/config";
 
@@ -15,6 +15,8 @@ const storeReducer = (state: any, action: any) => {
       return { isPending: true, document: null, success: false, error: null };
     case "addDoc":
       return { isPending: false, document: action.payload, success: true, error: null };
+    case "updateDoc":
+      return { isPending: false, document: action.payload, success: true, error: null };
     case "error":
       return { isPending: false, document: null, success: false, error: action.payload };
     default:
@@ -25,13 +27,26 @@ const storeReducer = (state: any, action: any) => {
 export const useFireStore = (transaction: any) => {
   const [response, dispatch] = useReducer(storeReducer, initState);
 
-  const addDocument = async (doc: any) => {
+  const addDocument = async (addDocument: any) => {
     dispatch({ type: "isPending" });
     try {
       const createdTime = timestamp.fromDate(new Date());
-      const docRef = await addDoc(collection(appFireStore, transaction), { ...doc, createdTime });
-      console.log(docRef);
+      const docRef = await addDoc(collection(appFireStore, transaction), {
+        ...addDocument,
+        createdTime,
+      });
       dispatch({ type: "addDoc", payload: docRef });
+    } catch (err: any) {
+      dispatch({ type: "error", payload: err.message });
+    }
+  };
+
+  const updateDocument = async (id: string, updatedFields: any) => {
+    dispatch({ type: "isPending" });
+    try {
+      const docRef = doc(appFireStore, transaction, id);
+      await updateDoc(docRef, updatedFields);
+      dispatch({ type: "updateDoc", payload: docRef });
     } catch (err: any) {
       dispatch({ type: "error", payload: err.message });
     }
@@ -39,5 +54,5 @@ export const useFireStore = (transaction: any) => {
 
   const deleteDocunemt = (id: any) => {};
 
-  return { addDocument, deleteDocunemt, response };
+  return { addDocument, updateDocument, deleteDocunemt, response };
 };

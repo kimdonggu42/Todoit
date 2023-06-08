@@ -85,18 +85,16 @@ const TodoMainList = styled.ul`
 `;
 
 function TodoMain({ currentMenu, addModalOpen, setAddModalOpen }: any) {
-  const [todoData, setTodoData] = useState<any>([]);
   const [currentTab, setCurrentTab] = useState<number>(0);
 
   const { documents, error } = useCollection("todo");
+  const { user }: any = useContext(AuthContext);
 
-  const getTodoData = async () => {
-    const res = await axios.get("http://localhost:3001/todos?_sort=id&_order=DESC");
-    setTodoData(res.data);
+  const tabArr = [{ name: "All" }, { name: "Complete" }, { name: "Incomplete" }];
+
+  const selectTabHandler = (index: number) => {
+    setCurrentTab(index);
   };
-  useEffect(() => {
-    getTodoData();
-  }, []);
 
   const today = new Date();
   const year = today.getFullYear();
@@ -105,31 +103,22 @@ function TodoMain({ currentMenu, addModalOpen, setAddModalOpen }: any) {
   const dateFormat =
     year + "-" + ("00" + month.toString()).slice(-2) + "-" + ("00" + day.toString()).slice(-2);
 
-  // 투두데이터 중 오늘 날짜의 투두만 보이도록 필터링한 데이터
-  const todayTodoData = todoData.filter((value: any) => value.createdAt === dateFormat);
-  // 투두데이터 중 오늘 이후 날짜의 투두만 보이도록 필터링한 데이터
-  const upComingTodoData = todoData.filter((value: any) => value.createdAt > dateFormat);
-  // 투두데이터 중 오늘 이전 날짜의 투두만 보이도록 필터링한 데이터
-  const pastTodoData = todoData.filter((value: any) => value.createdAt < dateFormat);
-
-  const tabArr = [{ name: "All" }, { name: "Complete" }, { name: "Incomplete" }];
-
-  const selectTabHandler = (index: number) => {
-    setCurrentTab(index);
-  };
-
-  const todayCompleteTodo = todayTodoData.filter((value: any) => value.isCheck === true);
+  // today todo
+  const todayTodoData = documents.filter((value: any) => value.todoDate === dateFormat);
+  const todayCompleteTodo = todayTodoData.filter((value: any) => value.isCheck);
   const todayInCompleteTodo = todayTodoData.filter((value: any) => value.isCheck === false);
 
-  const upComingCompleteTodo = upComingTodoData.filter((value: any) => value.isCheck === true);
-  const upComiingInCompleteTodo = upComingTodoData.filter((value: any) => value.isCheck === false);
+  // tomorrow todo
+  const upComingTodoData = documents.filter((value: any) => value.todoDate > dateFormat);
+  const upComingCompleteTodo = upComingTodoData.filter((value: any) => value.isCheck);
+  const upComingInCompleteTodo = upComingTodoData.filter((value: any) => value.isCheck === false);
 
-  const pastCompleteTodo = pastTodoData.filter((value: any) => value.isCheck === true);
+  // yesterday todo
+  const pastTodoData = documents.filter((value: any) => value.todoDate < dateFormat);
+  const pastCompleteTodo = pastTodoData.filter((value: any) => value.isCheck);
   const pastInCompleteTodo = pastTodoData.filter((value: any) => value.isCheck === false);
 
-  const { user }: any = useContext(AuthContext);
-
-  console.log(documents);
+  // console.log(documents);
 
   return (
     <>
@@ -151,27 +140,25 @@ function TodoMain({ currentMenu, addModalOpen, setAddModalOpen }: any) {
               })}
             </ListTab>
             {currentTab === 0 ? (
-              // <TodoMainList>
-              //   {todayTodoData.map((value: any) => {
-              //     return <TodoList key={value.id} list={value} getTodoData={getTodoData} />;
-              //   })}
-              // </TodoMainList>
               <TodoMainList>
-                {documents.map((value: any) => {
-                  return <TodoList key={value.id} list={value} getTodoData={getTodoData} />;
+                {todayTodoData.map((value: any) => {
+                  return <TodoList key={value.id} list={value} />;
                 })}
+                {error && <strong>{error}</strong>}
               </TodoMainList>
             ) : currentTab === 1 ? (
               <TodoMainList>
                 {todayCompleteTodo.map((value: any) => {
-                  return <TodoList key={value.id} list={value} getTodoData={getTodoData} />;
+                  return <TodoList key={value.id} list={value} />;
                 })}
+                {error && <strong>{error}</strong>}
               </TodoMainList>
             ) : (
               <TodoMainList>
                 {todayInCompleteTodo.map((value: any) => {
-                  return <TodoList key={value.id} list={value} getTodoData={getTodoData} />;
+                  return <TodoList key={value.id} list={value} />;
                 })}
+                {error && <strong>{error}</strong>}
               </TodoMainList>
             )}
           </TodoMainArea>
@@ -194,20 +181,23 @@ function TodoMain({ currentMenu, addModalOpen, setAddModalOpen }: any) {
             {currentTab === 0 ? (
               <TodoMainList>
                 {upComingTodoData.map((value: any) => {
-                  return <TodoList key={value.id} list={value} getTodoData={getTodoData} />;
+                  return <TodoList key={value.id} list={value} />;
                 })}
+                {error && <strong>{error}</strong>}
               </TodoMainList>
             ) : currentTab === 1 ? (
               <TodoMainList>
                 {upComingCompleteTodo.map((value: any) => {
-                  return <TodoList key={value.id} list={value} getTodoData={getTodoData} />;
+                  return <TodoList key={value.id} list={value} />;
                 })}
+                {error && <strong>{error}</strong>}
               </TodoMainList>
             ) : (
               <TodoMainList>
-                {upComiingInCompleteTodo.map((value: any) => {
-                  return <TodoList key={value.id} list={value} getTodoData={getTodoData} />;
+                {upComingInCompleteTodo.map((value: any) => {
+                  return <TodoList key={value.id} list={value} />;
                 })}
+                {error && <strong>{error}</strong>}
               </TodoMainList>
             )}
           </TodoMainArea>
@@ -230,27 +220,30 @@ function TodoMain({ currentMenu, addModalOpen, setAddModalOpen }: any) {
             {currentTab === 0 ? (
               <TodoMainList>
                 {pastTodoData.map((value: any) => {
-                  return <TodoList key={value.id} list={value} getTodoData={getTodoData} />;
+                  return <TodoList key={value.id} list={value} />;
                 })}
+                {error && <strong>{error}</strong>}
               </TodoMainList>
             ) : currentTab === 1 ? (
               <TodoMainList>
                 {pastCompleteTodo.map((value: any) => {
-                  return <TodoList key={value.id} list={value} getTodoData={getTodoData} />;
+                  return <TodoList key={value.id} list={value} />;
                 })}
+                {error && <strong>{error}</strong>}
               </TodoMainList>
             ) : (
               <TodoMainList>
                 {pastInCompleteTodo.map((value: any) => {
-                  return <TodoList key={value.id} list={value} getTodoData={getTodoData} />;
+                  return <TodoList key={value.id} list={value} />;
                 })}
+                {error && <strong>{error}</strong>}
               </TodoMainList>
             )}
           </TodoMainArea>
         )}
         {addModalOpen ? (
           <AddTodoModal
-            uid={user.uid}
+            userId={user.uid}
             addModalOpen={addModalOpen}
             setAddModalOpen={setAddModalOpen}
           />

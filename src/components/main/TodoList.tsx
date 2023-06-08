@@ -3,6 +3,7 @@ import axios from "axios";
 import EditTodoModal from "../common/EditTodoModal";
 import DeleteModal from "../common/DeleteModal";
 import { useState, useEffect, useRef } from "react";
+import { useFireStore } from "../../hooks/useFirestore";
 
 import { AiFillStar, AiOutlineStar } from "react-icons/ai";
 import { BsThreeDotsVertical } from "react-icons/bs";
@@ -105,29 +106,28 @@ const Dropdown = styled.ul`
   }
 `;
 
-function TodoList({ list, getTodoData }: any) {
+function TodoList({ list }: any) {
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const [editModalOpen, setEditModalOpen] = useState<boolean>(false);
   const [deleteModalOpen, setDeleteModalOpen] = useState<boolean>(false);
 
   const dropMenuRef = useRef<HTMLDivElement | null>(null);
+  const { updateDocument, response } = useFireStore("todo");
 
-  // 완료한 todo Patch
-  const changeCheck = async (todoId: number) => {
-    const editCheck = {
+  // 완료한 todo 체크
+  const changeCheck = async (id: string) => {
+    const updatedFields = {
       isCheck: !list.isCheck,
     };
-    const res = await axios.patch(`http://localhost:3001/todos/${todoId}`, editCheck);
-    getTodoData(res.data);
+    updateDocument(id, updatedFields);
   };
 
-  // 중요 todo Patch
-  const changeImportant = async (todoId: number) => {
-    const editImportant = {
-      important: !list.important,
+  // 중요한 todo 체크
+  const changeImportant = async (id: string) => {
+    const updatedFields = {
+      isImportant: !list.isImportant,
     };
-    const res = await axios.patch(`http://localhost:3001/todos/${todoId}`, editImportant);
-    getTodoData(res.data);
+    updateDocument(id, updatedFields);
   };
 
   // 드롬다운 오픈
@@ -167,7 +167,7 @@ function TodoList({ list, getTodoData }: any) {
         <div className='date'>{list.todoDate}</div>
       </TextArea>
       <BtnArea>
-        {list.important === true ? (
+        {list.isImportant === true ? (
           <ImportantBtn onClick={() => changeImportant(list.id)}>
             <AiFillStar size={23} />
           </ImportantBtn>
@@ -186,7 +186,6 @@ function TodoList({ list, getTodoData }: any) {
               {editModalOpen ? (
                 <EditTodoModal
                   list={list}
-                  getTodoData={getTodoData}
                   editModalOpen={editModalOpen}
                   setEditModalOpen={setEditModalOpen}
                 />
@@ -195,7 +194,6 @@ function TodoList({ list, getTodoData }: any) {
               {deleteModalOpen ? (
                 <DeleteModal
                   list={list}
-                  getTodoData={getTodoData}
                   deleteModalOpen={deleteModalOpen}
                   setDeleteModalOpen={setDeleteModalOpen}
                 />

@@ -1,6 +1,5 @@
 import styled from "styled-components";
-import axios from "axios";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useFireStore } from "../../hooks/useFirestore";
 
 export const AddModalBackdrop = styled.div`
@@ -87,7 +86,7 @@ export const AddModalButtonArea = styled.div`
   }
 `;
 
-function AddTodoModal({ addModalOpen, setAddModalOpen, uid }: any) {
+function AddTodoModal({ addModalOpen, setAddModalOpen, userId }: any) {
   const [todoBody, setTodoBody] = useState(""); // 작성한 텍스트 값이 담긴 변수
   const [todoDate, setTodoDate] = useState(""); // 선택한 날짜 값이 담긴 변수
 
@@ -95,7 +94,7 @@ function AddTodoModal({ addModalOpen, setAddModalOpen, uid }: any) {
 
   // firestore에 데이터 추가
   const addTodoSubmit = () => {
-    addDocument({ uid, todoBody, todoDate });
+    addDocument({ userId, todoBody, todoDate, isCheck: false, isImportant: false });
   };
 
   const changeAddContent = (e: any) => {

@@ -1,19 +1,20 @@
-import axios from "axios";
 import * as AddTodoModal from "./AddTodoModal";
 import { useState } from "react";
+import { useFireStore } from "../../hooks/useFirestore";
 
-function EditTodoModal({ list, getTodoData, editModalOpen, setEditModalOpen }: any) {
-  const [editTodoContent, setEditTodoContent] = useState(list.content);
-  const [editTodoCreatedAt, setEditTodoCreatedAt] = useState(list.createdAt);
+function EditTodoModal({ list, editModalOpen, setEditModalOpen }: any) {
+  const [editTodoContent, setEditTodoContent] = useState(list.todoBody);
+  const [editTodoCreatedAt, setEditTodoCreatedAt] = useState(list.todoDate);
 
-  // Patch
-  const editTodoPatch = async (patchId: any) => {
-    const editTodo = {
-      createdAt: editTodoCreatedAt,
-      content: editTodoContent,
+  const { updateDocument, response } = useFireStore("todo");
+
+  // firestore 데이터 수정
+  const editTodoPatch = async (id: string) => {
+    const updatedFields = {
+      todoBody: editTodoContent,
+      todoDate: editTodoCreatedAt,
     };
-    const res = await axios.patch(`http://localhost:3001/todos/${patchId}`, editTodo);
-    getTodoData(res.data);
+    updateDocument(id, updatedFields);
   };
 
   const changeEditContent = (e: any) => {

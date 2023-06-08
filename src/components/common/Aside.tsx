@@ -53,12 +53,12 @@ function Aside({ todayTodoData }: any) {
       <AsideTitle>Today Important</AsideTitle>
       <AsideList>
         {todayTodoData
-          .filter((value: any) => value.important === true)
+          .filter((value: any) => value.isImportant)
           .map((value: any, index: number) => {
             return (
               <AsideItem key={index}>
-                <div>{value.content}</div>
-                <div>{value.createdAt}</div>
+                <div>{value.todoContent}</div>
+                <div>{value.todoDate}</div>
               </AsideItem>
             );
           })}
