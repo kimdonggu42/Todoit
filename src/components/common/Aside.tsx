@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-const AsideContainer = styled.div`
+const AsideContainer = styled.aside`
   width: 25rem;
   height: calc(100vh - 3rem);
   font-size: 1rem;

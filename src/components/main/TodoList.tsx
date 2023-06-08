@@ -146,14 +146,16 @@ function TodoList({ list, getTodoData }: any) {
   }, [isOpen]);
 
   // 수정 모달 오픈 이벤트 핸들러
-  const openEditModal = (e: any) => {
+  const openEditModal = () => {
     setEditModalOpen(!editModalOpen);
   };
 
   // 삭제 모달 오픈 이벤트 핸들러
-  const openDeleteModal = (e: any) => {
+  const openDeleteModal = () => {
     setDeleteModalOpen(!deleteModalOpen);
   };
+
+  // console.log(list);
 
   return (
     <TodoListContainer>
@@ -161,8 +163,8 @@ function TodoList({ list, getTodoData }: any) {
         <input type='checkbox' checked={list.isCheck} onChange={() => changeCheck(list.id)} />
       </CheckboxArea>
       <TextArea>
-        <div className='content'>{list.content}</div>
-        <div className='date'>{list.createdAt}</div>
+        <div className='content'>{list.todoBody}</div>
+        <div className='date'>{list.todoDate}</div>
       </TextArea>
       <BtnArea>
         {list.important === true ? (

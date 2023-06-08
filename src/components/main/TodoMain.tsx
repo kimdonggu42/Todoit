@@ -4,8 +4,11 @@ import Aside from "../common/Aside";
 import { useState, useEffect } from "react";
 import axios from "axios";
 import AddTodoModal from "../common/AddTodoModal";
+import { AuthContext } from "../../context/AuthContext";
+import { useContext } from "react";
+import { useCollection } from "../../hooks/useCollection";
 
-const TodoMainContainer = styled.div`
+const TodoMainContainer = styled.main`
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -85,6 +88,8 @@ function TodoMain({ currentMenu, addModalOpen, setAddModalOpen }: any) {
   const [todoData, setTodoData] = useState<any>([]);
   const [currentTab, setCurrentTab] = useState<number>(0);
 
+  const { documents, error } = useCollection("todo");
+
   const getTodoData = async () => {
     const res = await axios.get("http://localhost:3001/todos?_sort=id&_order=DESC");
     setTodoData(res.data);
@@ -122,6 +127,10 @@ function TodoMain({ currentMenu, addModalOpen, setAddModalOpen }: any) {
   const pastCompleteTodo = pastTodoData.filter((value: any) => value.isCheck === true);
   const pastInCompleteTodo = pastTodoData.filter((value: any) => value.isCheck === false);
 
+  const { user }: any = useContext(AuthContext);
+
+  console.log(documents);
+
   return (
     <>
       <TodoMainContainer>
@@ -142,8 +151,13 @@ function TodoMain({ currentMenu, addModalOpen, setAddModalOpen }: any) {
               })}
             </ListTab>
             {currentTab === 0 ? (
+              // <TodoMainList>
+              //   {todayTodoData.map((value: any) => {
+              //     return <TodoList key={value.id} list={value} getTodoData={getTodoData} />;
+              //   })}
+              // </TodoMainList>
               <TodoMainList>
-                {todayTodoData.map((value: any) => {
+                {documents.map((value: any) => {
                   return <TodoList key={value.id} list={value} getTodoData={getTodoData} />;
                 })}
               </TodoMainList>
@@ -236,7 +250,7 @@ function TodoMain({ currentMenu, addModalOpen, setAddModalOpen }: any) {
         )}
         {addModalOpen ? (
           <AddTodoModal
-            getTodoData={getTodoData}
+            uid={user.uid}
             addModalOpen={addModalOpen}
             setAddModalOpen={setAddModalOpen}
           />

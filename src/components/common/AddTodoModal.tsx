@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import axios from "axios";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useFireStore } from "../../hooks/useFirestore";
 
 export const AddModalBackdrop = styled.div`
   position: fixed;
@@ -86,30 +87,23 @@ export const AddModalButtonArea = styled.div`
   }
 `;
 
-function AddTodoModal({ getTodoData, addModalOpen, setAddModalOpen }: any) {
-  const [addTodoContent, setAddTodoContent] = useState(""); // 작성한 텍스트 값이 담긴 변수
-  const [addTodoCreatedAt, setAddTodoCreatedAt] = useState(""); // 선택한 날짜 값이 담긴 변수
+function AddTodoModal({ addModalOpen, setAddModalOpen, uid }: any) {
+  const [todoBody, setTodoBody] = useState(""); // 작성한 텍스트 값이 담긴 변수
+  const [todoDate, setTodoDate] = useState(""); // 선택한 날짜 값이 담긴 변수
 
-  // Post
-  const addTodoPost = async () => {
-    const newTodo = {
-      createdAt: addTodoCreatedAt,
-      content: addTodoContent,
-      important: false,
-      isCheck: false,
-    };
-    if (addTodoContent) {
-      const res = await axios.post("http://localhost:3001/todos", newTodo);
-      getTodoData(res.data);
-    }
+  const { addDocument, response } = useFireStore("todo");
+
+  // firestore에 데이터 추가
+  const addTodoSubmit = () => {
+    addDocument({ uid, todoBody, todoDate });
   };
 
   const changeAddContent = (e: any) => {
-    setAddTodoContent(e.target.value);
+    setTodoBody(e.target.value);
   };
 
   const changeAddCreatedAt = (e: any) => {
-    setAddTodoCreatedAt(e.target.value);
+    setTodoDate(e.target.value);
   };
 
   const openAddModal = () => {
@@ -131,7 +125,7 @@ function AddTodoModal({ getTodoData, addModalOpen, setAddModalOpen }: any) {
           <button
             className='submit-button'
             onClick={() => {
-              addTodoPost();
+              addTodoSubmit();
               openAddModal();
             }}
           >
