@@ -106,7 +106,7 @@ const Dropdown = styled.ul`
   }
 `;
 
-function TodoList({ list }: any) {
+function TodoList({ list, index }: any) {
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const [editModalOpen, setEditModalOpen] = useState<boolean>(false);
   const [deleteModalOpen, setDeleteModalOpen] = useState<boolean>(false);
@@ -155,7 +155,7 @@ function TodoList({ list }: any) {
     setDeleteModalOpen(!deleteModalOpen);
   };
 
-  // console.log(list);
+  console.log(list);
 
   return (
     <TodoListContainer>

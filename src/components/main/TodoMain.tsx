@@ -118,8 +118,6 @@ function TodoMain({ currentMenu, addModalOpen, setAddModalOpen }: any) {
   const pastCompleteTodo = pastTodoData.filter((value: any) => value.isCheck);
   const pastInCompleteTodo = pastTodoData.filter((value: any) => value.isCheck === false);
 
-  // console.log(documents);
-
   return (
     <>
       <TodoMainContainer>
