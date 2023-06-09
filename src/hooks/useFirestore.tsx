@@ -1,4 +1,4 @@
-import { addDoc, updateDoc, collection, doc } from "firebase/firestore";
+import { addDoc, updateDoc, deleteDoc, collection, doc } from "firebase/firestore";
 import { useReducer } from "react";
 import { appFireStore, timestamp } from "../firebase/config";
 
@@ -16,6 +16,8 @@ const storeReducer = (state: any, action: any) => {
     case "addDoc":
       return { isPending: false, document: action.payload, success: true, error: null };
     case "updateDoc":
+      return { isPending: false, document: action.payload, success: true, error: null };
+    case "deleteDoc":
       return { isPending: false, document: action.payload, success: true, error: null };
     case "error":
       return { isPending: false, document: null, success: false, error: action.payload };
@@ -52,7 +54,15 @@ export const useFireStore = (transaction: any) => {
     }
   };
 
-  const deleteDocunemt = (id: any) => {};
+  const deleteDocument = async (id: string) => {
+    dispatch({ type: "isPending" });
+    try {
+      const docRef = await deleteDoc(doc(collection(appFireStore, transaction), id));
+      dispatch({ type: "deleteDoc", payload: docRef });
+    } catch (err: any) {
+      dispatch({ type: "error", payload: err.message });
+    }
+  };
 
-  return { addDocument, updateDocument, deleteDocunemt, response };
+  return { addDocument, updateDocument, deleteDocument, response };
 };

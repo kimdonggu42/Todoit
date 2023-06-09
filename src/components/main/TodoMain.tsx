@@ -87,8 +87,8 @@ const TodoMainList = styled.ul`
 function TodoMain({ currentMenu, addModalOpen, setAddModalOpen }: any) {
   const [currentTab, setCurrentTab] = useState<number>(0);
 
-  const { documents, error } = useCollection("todo");
   const { user }: any = useContext(AuthContext);
+  const { documents, error } = useCollection("todo", ["uid", "==", user.uid]);
 
   const tabArr = [{ name: "All" }, { name: "Complete" }, { name: "Incomplete" }];
 
@@ -243,7 +243,7 @@ function TodoMain({ currentMenu, addModalOpen, setAddModalOpen }: any) {
         )}
         {addModalOpen ? (
           <AddTodoModal
-            userId={user.uid}
+            uid={user.uid}
             addModalOpen={addModalOpen}
             setAddModalOpen={setAddModalOpen}
           />

@@ -86,7 +86,7 @@ export const AddModalButtonArea = styled.div`
   }
 `;
 
-function AddTodoModal({ addModalOpen, setAddModalOpen, userId }: any) {
+function AddTodoModal({ addModalOpen, setAddModalOpen, uid }: any) {
   const [todoBody, setTodoBody] = useState(""); // 작성한 텍스트 값이 담긴 변수
   const [todoDate, setTodoDate] = useState(""); // 선택한 날짜 값이 담긴 변수
 
@@ -94,7 +94,7 @@ function AddTodoModal({ addModalOpen, setAddModalOpen, userId }: any) {
 
   // firestore에 데이터 추가
   const addTodoSubmit = () => {
-    addDocument({ userId, todoBody, todoDate, isCheck: false, isImportant: false });
+    addDocument({ uid, todoBody, todoDate, isCheck: false, isImportant: false });
   };
 
   const changeAddContent = (e: any) => {

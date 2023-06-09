@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import axios from "axios";
+import { useFireStore } from "../../hooks/useFirestore";
 
 const DeleteModalBackdrop = styled.div`
   position: fixed;
@@ -62,11 +63,12 @@ const DeleteModalButtonArea = styled.div`
   }
 `;
 
-function DeleteModal({ list, getTodoData, deleteModalOpen, setDeleteModalOpen }: any) {
-  // Delete
-  const deleteTodo = async (deleteId: any) => {
-    const res = await axios.delete(`http://localhost:3001/todos/${deleteId}`);
-    getTodoData(res);
+function DeleteModal({ list, deleteModalOpen, setDeleteModalOpen }: any) {
+  const { deleteDocument, response } = useFireStore("todo");
+
+  // firestore 데이터 삭제
+  const deleteTodo = async (id: string) => {
+    deleteDocument(id);
   };
 
   const openDeleteModal = () => {
