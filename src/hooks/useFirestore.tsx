@@ -2,13 +2,6 @@ import { addDoc, updateDoc, deleteDoc, collection, doc } from "firebase/firestor
 import { useReducer } from "react";
 import { appFireStore, timestamp } from "../firebase/config";
 
-const initState = {
-  document: null,
-  isPending: false,
-  error: null,
-  success: false,
-};
-
 const storeReducer = (state: any, action: any) => {
   switch (action.type) {
     case "isPending":
@@ -26,8 +19,15 @@ const storeReducer = (state: any, action: any) => {
   }
 };
 
+const initialState = {
+  document: null,
+  isPending: false,
+  success: false,
+  error: null,
+};
+
 export const useFireStore = (transaction: any) => {
-  const [response, dispatch] = useReducer(storeReducer, initState);
+  const [response, dispatch] = useReducer(storeReducer, initialState);
 
   const addDocument = async (addDocument: any) => {
     dispatch({ type: "isPending" });

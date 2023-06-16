@@ -1,8 +1,7 @@
 import styled from "styled-components";
 import TodoList from "./TodoList";
 import Aside from "../common/Aside";
-import { useState, useEffect } from "react";
-import axios from "axios";
+import { useState } from "react";
 import AddTodoModal from "../common/AddTodoModal";
 import { AuthContext } from "../../context/AuthContext";
 import { useContext } from "react";
@@ -117,6 +116,8 @@ function TodoMain({ currentMenu, addModalOpen, setAddModalOpen }: any) {
   const pastTodoData = documents.filter((value: any) => value.todoDate < dateFormat);
   const pastCompleteTodo = pastTodoData.filter((value: any) => value.isCheck);
   const pastInCompleteTodo = pastTodoData.filter((value: any) => value.isCheck === false);
+
+  // console.log(documents);
 
   return (
     <>

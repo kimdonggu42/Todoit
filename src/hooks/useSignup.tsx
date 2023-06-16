@@ -29,7 +29,7 @@ export const useSignup = () => {
 
       try {
         await updateProfile(appAuth.currentUser, { displayName });
-        dispatch({ type: "login", payload: user });
+        dispatch({ type: "signup", payload: user });
         setError(null);
         setIsPending(false);
         navigate("/login");

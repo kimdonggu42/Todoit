@@ -1,5 +1,4 @@
 import styled from "styled-components";
-import axios from "axios";
 import EditTodoModal from "../common/EditTodoModal";
 import DeleteModal from "../common/DeleteModal";
 import { useState, useEffect, useRef } from "react";
@@ -106,7 +105,7 @@ const Dropdown = styled.ul`
   }
 `;
 
-function TodoList({ list, index }: any) {
+function TodoList({ list }: any) {
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const [editModalOpen, setEditModalOpen] = useState<boolean>(false);
   const [deleteModalOpen, setDeleteModalOpen] = useState<boolean>(false);
@@ -155,7 +154,7 @@ function TodoList({ list, index }: any) {
     setDeleteModalOpen(!deleteModalOpen);
   };
 
-  console.log(list);
+  // console.log(list);
 
   return (
     <TodoListContainer>
