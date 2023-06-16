@@ -11,21 +11,27 @@ const HeaderContainer = styled.div`
   justify-content: flex-end;
   font-size: 1rem;
   position: relative;
-  column-gap: 1.5rem;
   width: 100%;
   height: 3rem;
   padding: 0 3rem 0 3rem;
   background-color: #fed049;
 
   @media screen and (max-width: 450px) {
-    padding: 0 1rem 0 1rem;
+    padding: 0 1.5rem 0 1.5rem;
   }
 `;
 
 const HeaderBtn = styled.button`
-  /* border: 1px solid red; */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 2rem;
+  height: 2rem;
+  background-color: transparent;
+  border: none;
   color: white;
-  cursor: pointer;
+  margin-right: 1.2rem;
+  /* border: 1px solid red; */
 `;
 
 const UserIcon = styled.div`

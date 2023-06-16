@@ -53,6 +53,7 @@ const TextArea = styled.div`
 
 const BtnArea = styled.div`
   display: flex;
+  justify-content: center;
   align-items: center;
   position: relative;
   padding-left: 1rem;
@@ -65,9 +66,11 @@ const ImportantBtn = styled.button`
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 2rem;
-  height: 2rem;
+  width: 1.5rem;
+  height: 1.5rem;
   color: #faae05;
+  background-color: transparent;
+  border: none;
   /* border: 1px solid red; */
 `;
 
@@ -75,8 +78,10 @@ const EditDropdownBtn = styled.button`
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 2rem;
-  height: 2rem;
+  width: 1.5rem;
+  height: 1.5rem;
+  background-color: transparent;
+  border: none;
   /* border: 1px solid red; */
 `;
 
@@ -168,11 +173,11 @@ function TodoList({ list }: any) {
       <BtnArea>
         {list.isImportant === true ? (
           <ImportantBtn onClick={() => changeImportant(list.id)}>
-            <AiFillStar size={23} />
+            <AiFillStar size={22} />
           </ImportantBtn>
         ) : (
           <ImportantBtn onClick={() => changeImportant(list.id)}>
-            <AiOutlineStar size={23} />
+            <AiOutlineStar size={22} />
           </ImportantBtn>
         )}
         <EditDropdownBtn onClick={openDropdown}>
