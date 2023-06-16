@@ -1,6 +1,6 @@
 import styled from "styled-components";
-import EditTodoModal from "../common/EditTodoModal";
-import DeleteModal from "../common/DeleteModal";
+import EditTodoModal from "../../components/common/EditTodoModal";
+import DeleteModal from "../../components/common/DeleteModal";
 import { useState, useEffect, useRef } from "react";
 import { useFireStore } from "../../hooks/useFirestore";
 

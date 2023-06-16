@@ -114,7 +114,7 @@ function Signup() {
         {error && <strong>{error}</strong>}
       </FormArea>
       <MovePageButton>
-        이미 계정이 있으신가요?
+        <span>이미 계정이 있으신가요?</span>
         <Link to='/login'>
           <button>로그인</button>
         </Link>

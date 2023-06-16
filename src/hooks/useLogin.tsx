@@ -11,8 +11,8 @@ export const useLogin = () => {
   const { dispatch }: any = useContext(AuthContext);
 
   const login = async (email: string, password: string) => {
-    setError(null);
     setIsPending(true);
+    setError(null);
 
     try {
       const userCredential = await signInWithEmailAndPassword(appAuth, email, password);
@@ -31,5 +31,5 @@ export const useLogin = () => {
     }
   };
 
-  return { error, isPending, login };
+  return { login, isPending, error };
 };

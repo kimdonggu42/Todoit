@@ -1,8 +1,8 @@
 import styled from "styled-components";
-import Nav from "../components/common/Nav";
-import TodoMain from "../components/main/TodoMain";
+import Nav from "../../components/common/Nav";
+import TodoMain from "./TodoMain";
 import { useState } from "react";
-import Header from "../components/common/Header";
+import Header from "../../components/common/Header";
 
 const MainPageContainer = styled.div`
   display: flex;

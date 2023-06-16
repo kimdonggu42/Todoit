@@ -1,8 +1,8 @@
 import styled from "styled-components";
 import TodoList from "./TodoList";
-import Aside from "../common/Aside";
+import Aside from "../../components/common/Aside";
 import { useState } from "react";
-import AddTodoModal from "../common/AddTodoModal";
+import AddTodoModal from "../../components/common/AddTodoModal";
 import { AuthContext } from "../../context/AuthContext";
 import { useContext } from "react";
 import { useCollection } from "../../hooks/useCollection";

@@ -11,8 +11,8 @@ export const useSignup = () => {
   const { dispatch }: any = useContext(AuthContext);
 
   const signup = async (email: string, password: string, displayName: string) => {
-    setError(null);
     setIsPending(true);
+    setError(null);
 
     try {
       const userCredential = await createUserWithEmailAndPassword(appAuth, email, password);
@@ -26,17 +26,17 @@ export const useSignup = () => {
       try {
         await updateProfile(appAuth.currentUser, { displayName });
         dispatch({ type: "signup", payload: user });
+        setIsPending(false);
         setError(null);
-        setIsPending(false);
       } catch (err: any) {
-        setError(err.message);
         setIsPending(false);
+        setError(err.message);
       }
     } catch (err: any) {
-      setError(err.message);
       setIsPending(false);
+      setError(err.message);
     }
   };
 
-  return { error, isPending, signup };
+  return { signup, isPending, error };
 };

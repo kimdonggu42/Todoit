@@ -43,7 +43,7 @@ function Login() {
         {error && <strong>{error}</strong>}
       </Signup.FormArea>
       <Signup.MovePageButton>
-        Todo!t이 처음이신가요?
+        <span>Todo!t이 처음이신가요?</span>
         <Link to='/signup'>
           <button>회원가입</button>
         </Link>

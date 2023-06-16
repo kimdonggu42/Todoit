@@ -11,8 +11,8 @@ export const useLogout = () => {
   const { dispatch }: any = useContext(AuthContext);
 
   const logout = async () => {
-    setError(null);
     setIsPending(true);
+    setError(null);
 
     try {
       await signOut(appAuth);
@@ -24,6 +24,5 @@ export const useLogout = () => {
       setError(err.message);
     }
   };
-  console.log(isPending);
-  return { error, isPending, logout };
+  return { logout, isPending, error };
 };
