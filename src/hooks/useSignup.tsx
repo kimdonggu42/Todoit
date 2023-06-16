@@ -1,18 +1,14 @@
 import { useState } from "react";
 import { appAuth } from "../firebase/config";
 import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
-import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../context/AuthContext";
 import { useContext } from "react";
 
 export const useSignup = () => {
-  // 에러 정보
-  const [error, setError] = useState(null);
-  // 현재 서버와 통신중인 상태
   const [isPending, setIsPending] = useState(false);
-  const { dispatch }: any = useContext(AuthContext);
+  const [error, setError] = useState(null);
 
-  const navigate = useNavigate();
+  const { dispatch }: any = useContext(AuthContext);
 
   const signup = async (email: string, password: string, displayName: string) => {
     setError(null);
@@ -32,7 +28,6 @@ export const useSignup = () => {
         dispatch({ type: "signup", payload: user });
         setError(null);
         setIsPending(false);
-        navigate("/login");
       } catch (err: any) {
         setError(err.message);
         setIsPending(false);

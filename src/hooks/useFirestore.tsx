@@ -5,15 +5,15 @@ import { appFireStore, timestamp } from "../firebase/config";
 const storeReducer = (state: any, action: any) => {
   switch (action.type) {
     case "isPending":
-      return { isPending: true, document: null, success: false, error: null };
+      return { document: null, isPending: true, error: null };
     case "addDoc":
-      return { isPending: false, document: action.payload, success: true, error: null };
+      return { document: action.payload, isPending: false, error: null };
     case "updateDoc":
-      return { isPending: false, document: action.payload, success: true, error: null };
+      return { document: action.payload, isPending: false, error: null };
     case "deleteDoc":
-      return { isPending: false, document: action.payload, success: true, error: null };
+      return { document: action.payload, isPending: false, error: null };
     case "error":
-      return { isPending: false, document: null, success: false, error: action.payload };
+      return { document: null, isPending: false, error: action.payload };
     default:
       return state;
   }
@@ -22,7 +22,6 @@ const storeReducer = (state: any, action: any) => {
 const initialState = {
   document: null,
   isPending: false,
-  success: false,
   error: null,
 };
 
