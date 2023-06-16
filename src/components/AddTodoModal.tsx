@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import { useState } from "react";
-import { useFireStore } from "../../hooks/useFirestore";
+import { useFireStore } from "../hooks/useFirestore";
 
 export const AddModalBackdrop = styled.div`
   position: fixed;

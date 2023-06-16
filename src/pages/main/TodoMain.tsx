@@ -1,8 +1,8 @@
 import styled from "styled-components";
 import TodoList from "./TodoList";
-import Aside from "../../components/common/Aside";
+import Aside from "../../components/Aside";
 import { useState } from "react";
-import AddTodoModal from "../../components/common/AddTodoModal";
+import AddTodoModal from "../../components/AddTodoModal";
 import { AuthContext } from "../../context/AuthContext";
 import { useContext } from "react";
 import { useCollection } from "../../hooks/useCollection";
@@ -17,8 +17,8 @@ const TodoMainContainer = styled.main`
   // flex item의 최소 크기는 자식 요소의 크기보다 더 줄어들 수 없기 때문에
   // 부모 요소인 flex item 의 최소 크기를 0 으로 변경해야 flex 상태에서 말줄임 적용됨
   min-width: 30rem;
-  overflow-y: scroll;
   padding: 2rem;
+  overflow-y: auto;
   /* border: 1px solid red; */
 
   @media screen and (max-width: 1300px) {

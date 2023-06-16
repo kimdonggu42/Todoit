@@ -1,6 +1,6 @@
 import styled from "styled-components";
-import EditTodoModal from "../../components/common/EditTodoModal";
-import DeleteModal from "../../components/common/DeleteModal";
+import EditTodoModal from "../../components/EditTodoModal";
+import DeleteModal from "../../components/DeleteModal";
 import { useState, useEffect, useRef } from "react";
 import { useFireStore } from "../../hooks/useFirestore";
 
@@ -10,7 +10,7 @@ import { BsThreeDotsVertical } from "react-icons/bs";
 const TodoListContainer = styled.li`
   display: flex;
   align-items: center;
-  height: 4rem;
+  min-height: 4rem;
   /* border: 1px solid red; */
 `;
 

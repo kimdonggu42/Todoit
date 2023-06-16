@@ -1,6 +1,6 @@
 import * as AddTodoModal from "./AddTodoModal";
 import { useState } from "react";
-import { useFireStore } from "../../hooks/useFirestore";
+import { useFireStore } from "../hooks/useFirestore";
 
 function EditTodoModal({ list, editModalOpen, setEditModalOpen }: any) {
   const [editTodoContent, setEditTodoContent] = useState(list.todoBody);

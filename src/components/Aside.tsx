@@ -6,7 +6,7 @@ const AsideContainer = styled.aside`
   font-size: 1rem;
   padding: 3rem 2rem 3rem 2rem;
   border-left: 1px solid #e3e7f7;
-  overflow-y: scroll;
+  overflow-y: auto;
 
   @media screen and (max-width: 1300px) {
     display: none;

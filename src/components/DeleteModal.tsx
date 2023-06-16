@@ -1,6 +1,5 @@
 import styled from "styled-components";
-import axios from "axios";
-import { useFireStore } from "../../hooks/useFirestore";
+import { useFireStore } from "../hooks/useFirestore";
 
 const DeleteModalBackdrop = styled.div`
   position: fixed;

@@ -1,7 +1,7 @@
 import styled from "styled-components";
-import { useLogout } from "../../hooks/useLogout";
+import { useLogout } from "../hooks/useLogout";
 import { useState, useEffect, useRef } from "react";
-import todoIcon from "../../assets/images/todoIcon.png";
+import todoIcon from "../../src/assets/images/todoIcon.png";
 
 import { FiPlus } from "react-icons/fi";
 
