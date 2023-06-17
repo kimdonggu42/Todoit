@@ -13,8 +13,8 @@ const AsideContainer = styled.aside`
 `;
 
 const AsideTitle = styled.div`
-  font-size: 1.7rem;
-  font-weight: 500;
+  font-size: 1.6rem;
+  font-weight: 600;
   color: #5d616b;
   margin-bottom: 2.5rem;
   /* border: 1px solid lime; */
@@ -50,7 +50,7 @@ const AsideItem = styled.li`
 function Aside({ importantTodoData }: any) {
   return (
     <AsideContainer>
-      <AsideTitle>Important</AsideTitle>
+      <AsideTitle>중요한 할 일</AsideTitle>
       <AsideList>
         {importantTodoData
           .filter((value: any) => value.isImportant)

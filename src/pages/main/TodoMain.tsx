@@ -44,8 +44,8 @@ const TodoMainArea = styled.div`
 `;
 
 const TodoTitle = styled.div`
-  font-size: 2rem;
-  font-weight: 500;
+  font-size: 1.8rem;
+  font-weight: 600;
   color: #353535;
   /* border: 1px solid lime; */
 
@@ -98,7 +98,7 @@ function TodoMain() {
   const { user }: any = useContext(AuthContext);
   const { documents, error } = useCollection("todo", ["uid", "==", user.uid]);
 
-  const tabArr = [{ name: "All" }, { name: "Complete" }, { name: "Incomplete" }];
+  const tabArr = [{ name: "전체" }, { name: "완료" }, { name: "미완료" }];
 
   const selectTabHandler = (index: number) => {
     setCurrentTab(index);
@@ -142,7 +142,7 @@ function TodoMain() {
         />
         {currentMenu === 0 ? (
           <TodoMainArea>
-            <TodoTitle>Today Tasks</TodoTitle>
+            <TodoTitle>오늘 할 일</TodoTitle>
             <ListTab>
               {tabArr.map((tab, index) => {
                 return (
@@ -181,7 +181,7 @@ function TodoMain() {
           </TodoMainArea>
         ) : currentMenu === 1 ? (
           <TodoMainArea>
-            <TodoTitle>Upcoming Tasks</TodoTitle>
+            <TodoTitle>해야 할 일</TodoTitle>
             <ListTab>
               {tabArr.map((tab, index) => {
                 return (
@@ -220,7 +220,7 @@ function TodoMain() {
           </TodoMainArea>
         ) : (
           <TodoMainArea>
-            <TodoTitle>Past Tasks</TodoTitle>
+            <TodoTitle>지나간 할 일</TodoTitle>
             <ListTab>
               {tabArr.map((tab, index) => {
                 return (

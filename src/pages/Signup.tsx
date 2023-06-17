@@ -4,7 +4,6 @@ import { useSignup } from "../hooks/useSignup";
 import { Link } from "react-router-dom";
 
 export const SignupContainer = styled.div`
-  font-size: 1rem;
   height: 100vh;
   display: flex;
   justify-content: center;
@@ -35,6 +34,7 @@ export const FormArea = styled.form`
 `;
 
 export const Input = styled.input`
+  font-size: 1rem;
   width: 100%;
   height: 3rem;
   border-radius: 0.3rem;
@@ -49,6 +49,7 @@ export const Input = styled.input`
 `;
 
 export const SignupBtn = styled.button`
+  font-size: 1rem;
   width: 100%;
   height: 3rem;
   border: none;
@@ -56,19 +57,20 @@ export const SignupBtn = styled.button`
   margin-top: 1rem;
   color: white;
   font-weight: 600;
-  background-color: #fed049;
+  background-color: #1b9c85;
   cursor: pointer;
 `;
 
 export const MovePageButton = styled.div`
+  font-size: 1rem;
   margin-top: 1rem;
 
   > a > button {
     font-size: 1rem;
     margin-left: 0.3rem;
-    font-weight: 500;
+    font-weight: 600;
     border: none;
-    color: #fed049;
+    color: #1b9c85;
     background-color: transparent;
   }
 `;
