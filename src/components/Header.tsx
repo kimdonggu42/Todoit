@@ -12,13 +12,9 @@ const HeaderContainer = styled.div`
   font-size: 1rem;
   position: relative;
   width: 100%;
-  height: 3rem;
-  padding: 0 3rem 0 3rem;
-  background-color: #fed049;
-
-  @media screen and (max-width: 450px) {
-    padding: 0 1.5rem 0 1.5rem;
-  }
+  height: 2rem;
+  background-color: transparent;
+  /* border: 1px solid red; */
 `;
 
 const HeaderBtn = styled.button`
@@ -29,7 +25,7 @@ const HeaderBtn = styled.button`
   height: 2rem;
   background-color: transparent;
   border: none;
-  color: white;
+  color: black;
   margin-right: 1.2rem;
   /* border: 1px solid red; */
 `;
@@ -59,7 +55,7 @@ const Dropdown = styled.ul`
   background-color: white;
   position: absolute;
   top: 2.8rem;
-  right: 4.5rem;
+  right: 0.1rem;
   list-style: none;
   z-index: 999;
   cursor: pointer;

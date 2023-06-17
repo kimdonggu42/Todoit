@@ -24,7 +24,7 @@ const CheckboxArea = styled.div`
   > input {
     width: 1.1rem;
     height: 1.1rem;
-    accent-color: #fed049;
+    accent-color: #019e91;
     cursor: pointer;
   }
 `;
@@ -33,6 +33,7 @@ const TextArea = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
+  row-gap: 0.5rem;
   width: calc(100% - 10rem);
   max-height: 4rem;
   padding: 0 1rem 0 1rem;

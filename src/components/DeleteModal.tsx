@@ -48,11 +48,12 @@ const DeleteModalButtonArea = styled.div`
     white-space: nowrap;
     padding: 0.4rem 0.7rem 0.4rem 0.7rem;
     border-radius: 0.3rem;
+    border: none;
   }
 
   > .submit-button {
     color: white;
-    background-color: #e0bfe6;
+    background-color: #fed049;
   }
 
   > .cancel-button {

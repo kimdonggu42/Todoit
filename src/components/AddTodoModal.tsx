@@ -35,7 +35,9 @@ export const AddModalView = styled.div`
 `;
 
 export const ContentInput = styled.input`
+  font-size: 1rem;
   width: 100%;
+  height: 3rem;
   padding: 0.5rem 0.7rem 0.5rem 0.7rem;
   border: 1px solid #dddddd;
   border-radius: 0.3rem;
@@ -72,6 +74,7 @@ export const AddModalButtonArea = styled.div`
     white-space: nowrap;
     padding: 0.4rem 0.7rem 0.4rem 0.7rem;
     border-radius: 0.3rem;
+    border: none;
   }
 
   > .submit-button {

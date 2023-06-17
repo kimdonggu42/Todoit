@@ -6,18 +6,24 @@ import AddTodoModal from "../../components/AddTodoModal";
 import { AuthContext } from "../../context/AuthContext";
 import { useContext } from "react";
 import { useCollection } from "../../hooks/useCollection";
+import Nav from "../../components/Nav";
+import Header from "../../components/Header";
 
-const TodoMainContainer = styled.main`
+const TodoMainContainer = styled.div`
+  display: flex;
+  height: 100vh;
+`;
+
+const TodoMainContent = styled.main`
   display: flex;
   flex-direction: column;
   align-items: center;
   width: calc(100vw - 44rem);
-  height: calc(100vh - 3rem);
   font-size: 1rem;
   // flex item의 최소 크기는 자식 요소의 크기보다 더 줄어들 수 없기 때문에
   // 부모 요소인 flex item 의 최소 크기를 0 으로 변경해야 flex 상태에서 말줄임 적용됨
   min-width: 30rem;
-  padding: 2rem;
+  padding: 1rem 2rem 2rem 2rem;
   overflow-y: auto;
   /* border: 1px solid red; */
 
@@ -27,7 +33,7 @@ const TodoMainContainer = styled.main`
 
   @media screen and (max-width: 450px) {
     min-width: 0;
-    padding: 2rem 1rem 2rem 1rem;
+    padding: 1rem 1rem 2rem 1rem;
   }
 `;
 
@@ -69,22 +75,24 @@ const ListTab = styled.ul`
   }
 
   > .focused {
-    color: #f7d060;
-    border-bottom: 2px solid #fed049;
+    color: #1b9c85;
+    border-bottom: 2px solid #1b9c85;
   }
 `;
 
 const TodoMainList = styled.ul`
   display: flex;
   flex-direction: column;
-  row-gap: 1rem;
+  row-gap: 0.5rem;
   width: 100%;
   list-style: none;
   /* border: 1px solid blue; */
 `;
 
-function TodoMain({ currentMenu, addModalOpen, setAddModalOpen }: any) {
+function TodoMain() {
   const [currentTab, setCurrentTab] = useState<number>(0);
+  const [addModalOpen, setAddModalOpen] = useState(false);
+  const [currentMenu, setCurrentMenu] = useState<number>(0);
 
   const { user }: any = useContext(AuthContext);
   const { documents, error } = useCollection("todo", ["uid", "==", user.uid]);
@@ -120,8 +128,10 @@ function TodoMain({ currentMenu, addModalOpen, setAddModalOpen }: any) {
   // console.log(documents);
 
   return (
-    <>
-      <TodoMainContainer>
+    <TodoMainContainer>
+      <Nav setCurrentMenu={setCurrentMenu} />
+      <TodoMainContent>
+        <Header addModalOpen={addModalOpen} setAddModalOpen={setAddModalOpen} />
         {currentMenu === 0 ? (
           <TodoMainArea>
             <TodoTitle>Today Tasks</TodoTitle>
@@ -247,9 +257,10 @@ function TodoMain({ currentMenu, addModalOpen, setAddModalOpen }: any) {
             setAddModalOpen={setAddModalOpen}
           />
         ) : null}
-      </TodoMainContainer>
+      </TodoMainContent>
+
       <Aside todayTodoData={todayTodoData} />
-    </>
+    </TodoMainContainer>
   );
 }
 

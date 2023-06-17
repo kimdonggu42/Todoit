@@ -4,7 +4,7 @@ const AsideContainer = styled.aside`
   width: 25rem;
   height: calc(100vh - 3rem);
   font-size: 1rem;
-  padding: 3rem 2rem 3rem 2rem;
+  padding: 4rem 2rem 4rem 2rem;
   border-left: 1px solid #e3e7f7;
   overflow-y: auto;
 
@@ -34,7 +34,8 @@ const AsideList = styled.ul`
 const AsideItem = styled.li`
   display: flex;
   flex-direction: column;
-  width: 19rem;
+  row-gap: 0.5rem;
+  width: 21rem;
   height: 9rem;
   padding: 1.5rem;
   background-color: #ffeeaf;
@@ -57,7 +58,7 @@ function Aside({ todayTodoData }: any) {
           .map((value: any, index: number) => {
             return (
               <AsideItem key={index}>
-                <div>{value.todoContent}</div>
+                <div>{value.todoBody}</div>
                 <div>{value.todoDate}</div>
               </AsideItem>
             );
