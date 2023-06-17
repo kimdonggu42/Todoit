@@ -10,8 +10,8 @@ import { BsThreeDotsVertical } from "react-icons/bs";
 const TodoListContainer = styled.li`
   display: flex;
   align-items: center;
-  min-height: 4rem;
-  /* border: 1px solid red; */
+  min-height: 4.5rem;
+  border-bottom: 1px solid #f0f0f0;
 `;
 
 const CheckboxArea = styled.div`

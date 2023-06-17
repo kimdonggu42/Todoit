@@ -44,22 +44,23 @@ const DeleteModalButtonArea = styled.div`
   /* border: 1px solid red; */
 
   > button {
+    font-size: 1rem;
     font-weight: 500;
     white-space: nowrap;
-    padding: 0.4rem 0.7rem 0.4rem 0.7rem;
+    padding: 0.5rem 0.7rem 0.5rem 0.7rem;
     border-radius: 0.3rem;
     border: none;
   }
 
   > .submit-button {
     color: white;
-    background-color: #fed049;
+    background-color: #1b9c85;
   }
 
   > .cancel-button {
-    color: #353535;
-    border: 1px solid #dddddd;
-    background-color: white;
+    color: #1b9c85;
+    border: 1px solid #1b9c85;
+    background-color: transparent;
   }
 `;
 

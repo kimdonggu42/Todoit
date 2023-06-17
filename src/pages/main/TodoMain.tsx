@@ -81,12 +81,13 @@ const ListTab = styled.ul`
 `;
 
 const TodoMainList = styled.ul`
-  display: flex;
-  flex-direction: column;
-  row-gap: 0.5rem;
   width: 100%;
   list-style: none;
   /* border: 1px solid blue; */
+
+  li:last-child {
+    border: none;
+  }
 `;
 
 function TodoMain() {
