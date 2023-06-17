@@ -9,7 +9,7 @@ const NavContainer = styled.div`
   width: 100vw;
   max-width: 19rem;
   padding: 6rem 0 1rem 0;
-  font-size: 1.1rem;
+  font-size: 1rem;
   font-weight: 500;
   background-color: #f4f8ff;
   border-right: 1px solid #e3e7f7;
@@ -53,7 +53,7 @@ const MenuItem = styled.li`
 `;
 
 const Logout = styled.button`
-  font-size: 1.1rem;
+  font-size: 1rem;
   font-weight: 500;
   display: flex;
   align-items: center;

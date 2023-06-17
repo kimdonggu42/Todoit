@@ -75,6 +75,7 @@ const ListTab = styled.ul`
   }
 
   > .focused {
+    font-weight: 600;
     color: #1b9c85;
     border-bottom: 2px solid #1b9c85;
   }
@@ -127,7 +128,9 @@ function TodoMain() {
   const pastInCompleteTodo = pastTodoData.filter((value: any) => value.isCheck === false);
 
   // important todo
-  const importantTodoData = documents.filter((value: any) => value.isImportant);
+  const importantTodoData = documents.filter(
+    (value: any) => value.isImportant && value.isCheck === false
+  );
 
   // console.log(documents);
 

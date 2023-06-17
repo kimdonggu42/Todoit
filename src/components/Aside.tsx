@@ -50,7 +50,7 @@ const AsideItem = styled.li`
 function Aside({ importantTodoData }: any) {
   return (
     <AsideContainer>
-      <AsideTitle>중요한 할 일</AsideTitle>
+      <AsideTitle>중요한 일</AsideTitle>
       <AsideList>
         {importantTodoData
           .filter((value: any) => value.isImportant)

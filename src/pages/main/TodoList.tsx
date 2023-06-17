@@ -24,7 +24,7 @@ const CheckboxArea = styled.div`
   > input {
     width: 1.1rem;
     height: 1.1rem;
-    accent-color: #019e91;
+    accent-color: #1b9c85;
     cursor: pointer;
   }
 `;
@@ -69,7 +69,7 @@ const ImportantBtn = styled.button`
   align-items: center;
   width: 1.5rem;
   height: 1.5rem;
-  color: #faae05;
+  color: #ffe79b;
   background-color: transparent;
   border: none;
   /* border: 1px solid red; */
