@@ -14,12 +14,12 @@ const HeaderContainer = styled.div`
   /* border: 1px solid red; */
 `;
 
-const HeaderBtn = styled.button`
+const AddTodoBtn = styled.button`
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 2rem;
-  height: 2rem;
+  width: 1.8rem;
+  height: 1.8rem;
   background-color: transparent;
   border: none;
   color: black;
@@ -27,7 +27,13 @@ const HeaderBtn = styled.button`
   /* border: 1px solid red; */
 `;
 
-function Header({ addModalOpen, setAddModalOpen }: any) {
+const Nickname = styled.div`
+  font-size: 1.1rem;
+  font-weight: 500;
+  /* border: 1px solid red; */
+`;
+
+function Header({ addModalOpen, setAddModalOpen, displayName }: any) {
   // task 추가 모달 오픈
   const openAddModalHandler = () => {
     setAddModalOpen(!addModalOpen);
@@ -35,9 +41,10 @@ function Header({ addModalOpen, setAddModalOpen }: any) {
 
   return (
     <HeaderContainer>
-      <HeaderBtn onClick={openAddModalHandler}>
-        <FiPlus size={28} />
-      </HeaderBtn>
+      <AddTodoBtn onClick={openAddModalHandler}>
+        <FiPlus size={25} />
+      </AddTodoBtn>
+      <Nickname>{`${displayName} 님`}</Nickname>
     </HeaderContainer>
   );
 }

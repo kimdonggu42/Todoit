@@ -134,7 +134,11 @@ function TodoMain() {
     <TodoMainContainer>
       <Nav setCurrentMenu={setCurrentMenu} />
       <TodoMainContent>
-        <Header addModalOpen={addModalOpen} setAddModalOpen={setAddModalOpen} />
+        <Header
+          addModalOpen={addModalOpen}
+          setAddModalOpen={setAddModalOpen}
+          displayName={user.displayName}
+        />
         {currentMenu === 0 ? (
           <TodoMainArea>
             <TodoTitle>Today Tasks</TodoTitle>

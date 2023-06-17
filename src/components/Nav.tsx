@@ -52,12 +52,11 @@ const MenuItem = styled.li`
 `;
 
 const Logout = styled.button`
-  width: 8rem;
+  font-size: 1.1rem;
   display: flex;
-  justify-content: center;
   align-items: center;
   height: 3rem;
-  font-size: 1rem;
+  padding: 0 3rem 0 3rem;
   border: none;
   background-color: transparent;
   cursor: pointer;
@@ -65,6 +64,10 @@ const Logout = styled.button`
 
   > .nav-name {
     margin-left: 1rem;
+  }
+
+  &:hover {
+    background-color: #e3e7f7;
   }
 `;
 
@@ -93,7 +96,7 @@ function Nav({ setCurrentMenu }: any) {
           </MenuItem>
         </MenuList>
         <Logout onClick={logout}>
-          <BiLogOut size={18} />
+          <BiLogOut />
           <span className='nav-name'>Logout</span>
         </Logout>
       </MenuListArea>
