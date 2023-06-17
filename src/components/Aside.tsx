@@ -34,10 +34,10 @@ const AsideItem = styled.li`
   display: flex;
   flex-direction: column;
   row-gap: 0.5rem;
-  width: 21rem;
-  min-height: 9rem;
+  width: 20rem;
+  min-height: 10rem;
   padding: 1.5rem;
-  background-color: #ffeeaf;
+  background-color: #fff0d6;
   border-radius: 1rem;
   box-shadow: 2px 2px 4px 0px rgba(235, 235, 235, 1);
   transition: 0.2s ease-in-out;

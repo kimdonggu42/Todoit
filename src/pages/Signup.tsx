@@ -64,9 +64,12 @@ export const MovePageButton = styled.div`
   margin-top: 1rem;
 
   > a > button {
+    font-size: 1rem;
     margin-left: 0.3rem;
     font-weight: 500;
+    border: none;
     color: #fed049;
+    background-color: transparent;
   }
 `;
 
