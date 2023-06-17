@@ -6,7 +6,6 @@ import { BsCalendar } from "react-icons/bs";
 const NavContainer = styled.div`
   width: 100vw;
   max-width: 19rem;
-  height: calc(100vh - 3rem);
   padding: 6rem 0 6rem 0;
   font-size: 1.1rem;
   background-color: #f4f8ff;

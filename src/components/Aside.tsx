@@ -2,7 +2,6 @@ import styled from "styled-components";
 
 const AsideContainer = styled.aside`
   width: 25rem;
-  height: calc(100vh - 3rem);
   font-size: 1rem;
   padding: 4rem 2rem 4rem 2rem;
   border-left: 1px solid #e3e7f7;
@@ -36,7 +35,7 @@ const AsideItem = styled.li`
   flex-direction: column;
   row-gap: 0.5rem;
   width: 21rem;
-  height: 9rem;
+  min-height: 9rem;
   padding: 1.5rem;
   background-color: #ffeeaf;
   border-radius: 1rem;
@@ -48,12 +47,12 @@ const AsideItem = styled.li`
   }
 `;
 
-function Aside({ todayTodoData }: any) {
+function Aside({ importantTodoData }: any) {
   return (
     <AsideContainer>
-      <AsideTitle>Today Important</AsideTitle>
+      <AsideTitle>Important</AsideTitle>
       <AsideList>
-        {todayTodoData
+        {importantTodoData
           .filter((value: any) => value.isImportant)
           .map((value: any, index: number) => {
             return (

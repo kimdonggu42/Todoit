@@ -125,6 +125,9 @@ function TodoMain() {
   const pastCompleteTodo = pastTodoData.filter((value: any) => value.isCheck);
   const pastInCompleteTodo = pastTodoData.filter((value: any) => value.isCheck === false);
 
+  // important todo
+  const importantTodoData = documents.filter((value: any) => value.isImportant);
+
   // console.log(documents);
 
   return (
@@ -258,8 +261,7 @@ function TodoMain() {
           />
         ) : null}
       </TodoMainContent>
-
-      <Aside todayTodoData={todayTodoData} />
+      <Aside importantTodoData={importantTodoData} />
     </TodoMainContainer>
   );
 }
