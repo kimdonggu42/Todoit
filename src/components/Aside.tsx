@@ -3,8 +3,8 @@ import styled from "styled-components";
 const AsideContainer = styled.aside`
   width: 25rem;
   font-size: 1rem;
-  padding: 4rem 2rem 4rem 2rem;
-  border-left: 1px solid #e3e7f7;
+  padding: 3rem 2rem 3rem 2rem;
+  border-left: 1px solid #dddddd;
   overflow-y: auto;
 
   @media screen and (max-width: 1300px) {
@@ -13,11 +13,19 @@ const AsideContainer = styled.aside`
 `;
 
 const AsideTitle = styled.div`
+  display: flex;
+  align-items: center;
+  column-gap: 0.5rem;
   font-size: 1.6rem;
   font-weight: 600;
-  color: #5d616b;
+  color: #353535;
   margin-bottom: 2.5rem;
   /* border: 1px solid lime; */
+
+  > .importantCount {
+    font-size: 1.4rem;
+    color: #878787;
+  }
 `;
 
 const AsideList = styled.ul`
@@ -42,6 +50,10 @@ const AsideItem = styled.li`
   box-shadow: 2px 2px 4px 0px rgba(235, 235, 235, 1);
   transition: 0.2s ease-in-out;
 
+  > .importantDate {
+    font-size: 0.8rem;
+  }
+
   &:hover {
     transform: scale(1.02);
   }
@@ -50,7 +62,10 @@ const AsideItem = styled.li`
 function Aside({ importantTodoData }: any) {
   return (
     <AsideContainer>
-      <AsideTitle>중요한 일</AsideTitle>
+      <AsideTitle>
+        <div>중요한 일</div>
+        <div className='importantCount'>{importantTodoData.length}</div>
+      </AsideTitle>
       <AsideList>
         {importantTodoData
           .filter((value: any) => value.isImportant)
@@ -58,7 +73,7 @@ function Aside({ importantTodoData }: any) {
             return (
               <AsideItem key={index}>
                 <div>{value.todoBody}</div>
-                <div>{value.todoDate}</div>
+                <div className='importantDate'>{value.todoDate}</div>
               </AsideItem>
             );
           })}

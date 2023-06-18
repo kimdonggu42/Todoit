@@ -44,14 +44,13 @@ const TodoMainArea = styled.div`
 `;
 
 const TodoTitle = styled.div`
-  font-size: 1.8rem;
+  display: flex;
+  align-items: center;
+  column-gap: 0.5rem;
+  font-size: 1.6rem;
   font-weight: 600;
   color: #353535;
   /* border: 1px solid lime; */
-
-  @media screen and (max-width: 450px) {
-    font-size: 1.7rem;
-  }
 `;
 
 const ListTab = styled.ul`
@@ -61,7 +60,7 @@ const ListTab = styled.ul`
   list-style: none;
   column-gap: 1rem;
   font-weight: 500;
-  margin: 1.5rem 0 1.5rem 0;
+  margin: 1.5rem 0 1rem 0;
   color: #8e92a4;
   border-bottom: 1px solid #dddddd;
   /* border: 1px solid red; */
@@ -136,7 +135,13 @@ function TodoMain() {
 
   return (
     <TodoMainContainer>
-      <Nav setCurrentMenu={setCurrentMenu} />
+      <Nav
+        currentMenu={currentMenu}
+        setCurrentMenu={setCurrentMenu}
+        todayCount={todayTodoData.length}
+        upComingCount={upComingTodoData.length}
+        pastCount={pastTodoData.length}
+      />
       <TodoMainContent>
         <Header
           addModalOpen={addModalOpen}

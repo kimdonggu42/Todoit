@@ -11,8 +11,7 @@ const NavContainer = styled.div`
   padding: 6rem 0 1rem 0;
   font-size: 1rem;
   font-weight: 500;
-  background-color: #f4f8ff;
-  border-right: 1px solid #e3e7f7;
+  background-color: #f7f9fb;
 
   @media screen and (max-width: 750px) {
     display: none;
@@ -29,26 +28,39 @@ const MenuListArea = styled.div`
 `;
 
 const MenuList = styled.ul`
-  display: flex;
-  flex-direction: column;
-  row-gap: 0.5rem;
+  list-style: none;
   /* border: 1px solid blue; */
-`;
 
-const MenuItem = styled.li`
-  display: flex;
-  align-items: center;
-  height: 3rem;
-  padding: 0 3rem 0 3rem;
-  cursor: pointer;
-  /* border: 1px solid green; */
+  > .menu {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 3rem;
+    padding: 0 2rem 0 2rem;
+    cursor: pointer;
+    /* border: 1px solid blue; */
 
-  > .nav-name {
-    margin-left: 1rem;
+    > .menutext {
+      display: flex;
+      align-items: center;
+      column-gap: 1rem;
+    }
+
+    > .todocount {
+      color: #878787;
+    }
+
+    &:hover {
+      background-color: #eeeeee;
+    }
   }
 
-  &:hover {
-    background-color: #e3e7f7;
+  > .focused {
+    background-color: #eeeeee;
+
+    > .todocount {
+      color: #1b9c85;
+    }
   }
 `;
 
@@ -58,7 +70,7 @@ const Logout = styled.button`
   display: flex;
   align-items: center;
   height: 3rem;
-  padding: 0 3rem 0 3rem;
+  padding: 0 2rem 0 2rem;
   border: none;
   background-color: transparent;
   cursor: pointer;
@@ -69,11 +81,11 @@ const Logout = styled.button`
   }
 
   &:hover {
-    background-color: #e3e7f7;
+    background-color: #eeeeee;
   }
 `;
 
-function Nav({ setCurrentMenu }: any) {
+function Nav({ currentMenu, setCurrentMenu, todayCount, upComingCount, pastCount }: any) {
   const { logout } = useLogout();
 
   const selectMenuHandler = (index: number) => {
@@ -84,18 +96,36 @@ function Nav({ setCurrentMenu }: any) {
     <NavContainer>
       <MenuListArea>
         <MenuList>
-          <MenuItem onClick={() => selectMenuHandler(0)}>
-            <FaRegLightbulb />
-            <span className='nav-name'>오늘 할 일</span>
-          </MenuItem>
-          <MenuItem onClick={() => selectMenuHandler(1)}>
-            <BsCalendar />
-            <span className='nav-name'>해야 할 일</span>
-          </MenuItem>
-          <MenuItem onClick={() => selectMenuHandler(2)}>
-            <FaRegStickyNote />
-            <span className='nav-name'>지나간 할 일</span>
-          </MenuItem>
+          <li
+            className={currentMenu === 0 ? "menu focused" : "menu"}
+            onClick={() => selectMenuHandler(0)}
+          >
+            <div className='menutext'>
+              <FaRegLightbulb />
+              <div>오늘 할 일</div>
+            </div>
+            <div className='todocount'>{todayCount}</div>
+          </li>
+          <li
+            className={currentMenu === 1 ? "menu focused" : "menu"}
+            onClick={() => selectMenuHandler(1)}
+          >
+            <div className='menutext'>
+              <BsCalendar />
+              <div>해야 할 일</div>
+            </div>
+            <div className='todocount'>{upComingCount}</div>
+          </li>
+          <li
+            className={currentMenu === 2 ? "menu focused" : "menu"}
+            onClick={() => selectMenuHandler(2)}
+          >
+            <div className='menutext'>
+              <FaRegStickyNote />
+              <div>지나간 할 일</div>
+            </div>
+            <div className='todocount'>{pastCount}</div>
+          </li>
         </MenuList>
         <Logout onClick={logout}>
           <BiLogOut />
