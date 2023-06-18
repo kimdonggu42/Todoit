@@ -94,8 +94,8 @@ export const AddModalButtonArea = styled.div`
 `;
 
 function AddTodoModal({ addModalOpen, setAddModalOpen, uid }: any) {
-  const [todoBody, setTodoBody] = useState(""); // 작성한 텍스트 값이 담긴 변수
-  const [todoDate, setTodoDate] = useState(""); // 선택한 날짜 값이 담긴 변수
+  const [todoBody, setTodoBody] = useState<string>(""); // 작성한 텍스트 값이 담긴 변수
+  const [todoDate, setTodoDate] = useState<string>(""); // 선택한 날짜 값이 담긴 변수
 
   const { addDocument } = useFireStore("todo");
 
@@ -104,11 +104,11 @@ function AddTodoModal({ addModalOpen, setAddModalOpen, uid }: any) {
     addDocument({ uid, todoBody, todoDate, isCheck: false, isImportant: false });
   };
 
-  const changeAddContent = (e: any) => {
+  const changeAddContent = (e: React.ChangeEvent<HTMLInputElement>) => {
     setTodoBody(e.target.value);
   };
 
-  const changeAddCreatedAt = (e: any) => {
+  const changeAddCreatedAt = (e: React.ChangeEvent<HTMLInputElement>) => {
     setTodoDate(e.target.value);
   };
 

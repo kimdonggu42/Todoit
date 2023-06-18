@@ -8,6 +8,7 @@ import { useContext } from "react";
 import { useCollection } from "../../hooks/useCollection";
 import Nav from "../../components/Nav";
 import Header from "../../components/Header";
+import { MainTabArrInterface } from "../../util/type";
 
 const TodoMainContainer = styled.div`
   display: flex;
@@ -93,13 +94,13 @@ const TodoMainList = styled.ul`
 
 function TodoMain() {
   const [currentTab, setCurrentTab] = useState<number>(0);
-  const [addModalOpen, setAddModalOpen] = useState(false);
+  const [addModalOpen, setAddModalOpen] = useState<boolean>(false);
   const [currentMenu, setCurrentMenu] = useState<number>(0);
 
   const { user }: any = useContext(AuthContext);
   const { documents, error } = useCollection("todo", ["uid", "==", user.uid]);
 
-  const tabArr = [{ name: "전체" }, { name: "완료" }, { name: "미완료" }];
+  const tabArr: MainTabArrInterface[] = [{ name: "전체" }, { name: "완료" }, { name: "미완료" }];
 
   const selectTabHandler = (index: number) => {
     setCurrentTab(index);
@@ -109,7 +110,7 @@ function TodoMain() {
   const year = today.getFullYear();
   const month = today.getMonth() + 1;
   const day = today.getDate();
-  const dateFormat =
+  const dateFormat: string =
     year + "-" + ("00" + month.toString()).slice(-2) + "-" + ("00" + day.toString()).slice(-2);
 
   // today todo

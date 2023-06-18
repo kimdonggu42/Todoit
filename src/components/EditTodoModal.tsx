@@ -3,8 +3,8 @@ import { useState } from "react";
 import { useFireStore } from "../hooks/useFirestore";
 
 function EditTodoModal({ list, editModalOpen, setEditModalOpen }: any) {
-  const [editTodoContent, setEditTodoContent] = useState(list.todoBody);
-  const [editTodoCreatedAt, setEditTodoCreatedAt] = useState(list.todoDate);
+  const [editTodoContent, setEditTodoContent] = useState<string>(list.todoBody);
+  const [editTodoCreatedAt, setEditTodoCreatedAt] = useState<string>(list.todoDate);
 
   const { updateDocument } = useFireStore("todo");
 
@@ -17,11 +17,11 @@ function EditTodoModal({ list, editModalOpen, setEditModalOpen }: any) {
     updateDocument(id, updatedFields);
   };
 
-  const changeEditContent = (e: any) => {
+  const changeEditContent = (e: React.ChangeEvent<HTMLInputElement>) => {
     setEditTodoContent(e.target.value);
   };
 
-  const changeEditCreatedAt = (e: any) => {
+  const changeEditCreatedAt = (e: React.ChangeEvent<HTMLInputElement>) => {
     setEditTodoCreatedAt(e.target.value);
   };
 
@@ -57,7 +57,7 @@ function EditTodoModal({ list, editModalOpen, setEditModalOpen }: any) {
             수정
           </button>
           <button className='cancel-button' onClick={openEditModal}>
-            삭제
+            취소
           </button>
         </AddTodoModal.AddModalButtonArea>
       </AddTodoModal.AddModalView>

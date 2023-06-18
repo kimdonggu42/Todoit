@@ -118,7 +118,7 @@ function TodoList({ list }: any) {
   const [deleteModalOpen, setDeleteModalOpen] = useState<boolean>(false);
 
   const dropMenuRef = useRef<HTMLDivElement | null>(null);
-  const { updateDocument, response } = useFireStore("todo");
+  const { updateDocument } = useFireStore("todo");
 
   // 완료한 todo 체크
   const changeCheck = async (id: string) => {
@@ -137,15 +137,15 @@ function TodoList({ list }: any) {
   };
 
   // 드롬다운 오픈
-  const openDropdown = (e: any) => {
+  const openDropdown = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     e.stopPropagation();
     setIsOpen(!isOpen);
   };
 
   // 드롭다운 외부 클릭 시 닫기
   useEffect(() => {
-    const handleOutsideClose = (e: any) => {
-      if (isOpen && !dropMenuRef.current?.contains(e.target)) setIsOpen(false);
+    const handleOutsideClose = (e: MouseEvent) => {
+      if (isOpen && !dropMenuRef.current?.contains(e.target as HTMLElement)) setIsOpen(false);
     };
     document.addEventListener("click", handleOutsideClose);
     return () => document.removeEventListener("click", handleOutsideClose);

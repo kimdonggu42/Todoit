@@ -5,7 +5,7 @@ import { AuthContext } from "../context/AuthContext";
 import { useContext } from "react";
 
 export const useLogin = () => {
-  const [isPending, setIsPending] = useState(false);
+  const [isPending, setIsPending] = useState<boolean>(false);
   const [error, setError] = useState(null);
 
   const { dispatch }: any = useContext(AuthContext);

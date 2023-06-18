@@ -25,10 +25,10 @@ const initialState = {
   error: null,
 };
 
-export const useFireStore = (transaction: any) => {
+export const useFireStore = (transaction: string) => {
   const [response, dispatch] = useReducer(storeReducer, initialState);
 
-  const addDocument = async (addDocument: any) => {
+  const addDocument = async (addDocument: object) => {
     dispatch({ type: "isPending" });
     try {
       const createdTime = timestamp.fromDate(new Date());
@@ -42,7 +42,7 @@ export const useFireStore = (transaction: any) => {
     }
   };
 
-  const updateDocument = async (id: string, updatedFields: any) => {
+  const updateDocument = async (id: string, updatedFields: object) => {
     dispatch({ type: "isPending" });
     try {
       const docRef = doc(appFireStore, transaction, id);

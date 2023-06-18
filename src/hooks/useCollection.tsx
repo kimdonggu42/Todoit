@@ -6,11 +6,12 @@ import {
   where,
   CollectionReference,
   Query,
+  WhereFilterOp,
 } from "firebase/firestore";
 import { useEffect, useState } from "react";
 import { appFireStore } from "../firebase/config";
 
-export const useCollection = (transaction: any, myQuery: any) => {
+export const useCollection = (transaction: string, myQuery: [string, WhereFilterOp, string]) => {
   const [documents, setDocuments] = useState<any>([]);
   const [error, setError] = useState(null);
 

@@ -1,8 +1,9 @@
-import { createContext, useReducer } from "react";
+import { createContext, useReducer, ReactNode } from "react";
 import { useEffect } from "react";
 import { appAuth } from "../firebase/config";
+import { AuthReducerActionInterface } from "../util/type";
 
-const authReducer = (state: object, action: any) => {
+const authReducer = (state: object, action: AuthReducerActionInterface) => {
   switch (action.type) {
     case "signup":
       return { ...state, user: action.payload };
@@ -25,7 +26,7 @@ const initialState = {
 };
 
 // context를 객체를 구독할 컴포넌트의 묶음 범위를 설정
-const AuthContextProvider = ({ children }: any) => {
+const AuthContextProvider = ({ children }: { children: ReactNode }) => {
   const [state, dispatch] = useReducer(authReducer, initialState);
 
   useEffect(() => {
