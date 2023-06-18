@@ -89,13 +89,13 @@ const EditDropdownBtn = styled.button`
 const Dropdown = styled.ul`
   display: flex;
   flex-direction: column;
-  width: 7rem;
   border-radius: 0.3rem;
+  width: 6rem;
   box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 8px;
   background-color: white;
   position: absolute;
   top: 2rem;
-  right: 1rem;
+  right: 1.5rem;
   list-style: none;
   z-index: 999;
   cursor: pointer;
@@ -187,7 +187,7 @@ function TodoList({ list }: any) {
         <div ref={dropMenuRef}>
           {isOpen ? (
             <Dropdown>
-              <li onClick={openEditModal}>Edit</li>
+              <li onClick={openEditModal}>수정</li>
               {editModalOpen ? (
                 <EditTodoModal
                   list={list}
@@ -195,7 +195,7 @@ function TodoList({ list }: any) {
                   setEditModalOpen={setEditModalOpen}
                 />
               ) : null}
-              <li onClick={openDeleteModal}>Delete</li>
+              <li onClick={openDeleteModal}>삭제</li>
               {deleteModalOpen ? (
                 <DeleteModal
                   list={list}

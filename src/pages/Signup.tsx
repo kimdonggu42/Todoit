@@ -59,6 +59,10 @@ export const SignupBtn = styled.button`
   font-weight: 600;
   background-color: #1b9c85;
   cursor: pointer;
+
+  &:hover {
+    opacity: 0.8;
+  }
 `;
 
 export const MovePageButton = styled.div`
@@ -100,17 +104,11 @@ function Signup() {
     <SignupContainer>
       <Logo>회원가입</Logo>
       <FormArea onSubmit={handleSubmit}>
-        <Input
-          type='text'
-          placeholder='nickname'
-          required
-          onChange={handleData}
-          value={displayName}
-        />
-        <Input type='email' placeholder='email' required onChange={handleData} value={email} />
+        <Input type='text' placeholder='이름' required onChange={handleData} value={displayName} />
+        <Input type='email' placeholder='이메일' required onChange={handleData} value={email} />
         <Input
           type='password'
-          placeholder='password'
+          placeholder='비밀번호'
           required
           onChange={handleData}
           value={password}

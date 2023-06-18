@@ -2,6 +2,7 @@ import GlobalStyle from "./assets/style/globalStyle";
 import Login from "./pages/Login";
 import Signup from "./pages/Signup";
 import TodoMain from "./pages/main/TodoMain";
+import Spinner from "./components/Spinner";
 import { Routes, Route, Navigate } from "react-router-dom";
 import { AuthContext } from "./context/AuthContext";
 import { useContext } from "react";
@@ -21,7 +22,7 @@ function App() {
           <Route path='/signup' element={user ? <Navigate to='/' replace={true} /> : <Signup />} />
         </Routes>
       ) : (
-        "Loading..."
+        <Spinner />
       )}
     </div>
   );

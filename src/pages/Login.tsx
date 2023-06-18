@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useLogin } from "../hooks/useLogin";
 import { Link } from "react-router-dom";
+import authspinner from "../assets/images/auth-spinner.gif";
 import * as Signup from "./Signup";
 
 function Login() {
@@ -27,19 +28,21 @@ function Login() {
       <Signup.FormArea onSubmit={handleSubmit}>
         <Signup.Input
           type='email'
-          placeholder='email'
+          placeholder='이메일'
           required
           onChange={handleData}
           value={email}
         />
         <Signup.Input
           type='password'
-          placeholder='password'
+          placeholder='비밀번호'
           required
           onChange={handleData}
           value={password}
         />
-        <Signup.SignupBtn type='submit'>{isPending ? "로그인 진행중" : "로그인"}</Signup.SignupBtn>
+        <Signup.SignupBtn type='submit'>
+          {isPending ? <img src={authspinner} alt='authspinner' /> : "로그인"}
+        </Signup.SignupBtn>
         {error && <strong>{error}</strong>}
       </Signup.FormArea>
       <Signup.MovePageButton>
