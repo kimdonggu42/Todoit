@@ -2,6 +2,8 @@ import styled from "styled-components";
 import { useState } from "react";
 import { useSignup } from "../hooks/useSignup";
 import { Link } from "react-router-dom";
+import authspinner from "../assets/images/auth-spinner.gif";
+import { SignupFormValueInterface } from "../util/type";
 
 export const SignupContainer = styled.div`
   height: 100vh;
@@ -49,6 +51,9 @@ export const Input = styled.input`
 `;
 
 export const SignupBtn = styled.button`
+  display: flex;
+  justify-content: center;
+  align-items: center;
   font-size: 1rem;
   width: 100%;
   height: 3rem;
@@ -80,40 +85,57 @@ export const MovePageButton = styled.div`
 `;
 
 function Signup() {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [displayName, setDisplayName] = useState("");
+  const [formValue, setFormValue] = useState<SignupFormValueInterface>({
+    email: "",
+    password: "",
+    displayName: "",
+  });
+
   const { error, isPending, signup } = useSignup();
 
-  const handleData = (e: any) => {
+  const handleData = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.type === "email") {
-      setEmail(e.target.value);
+      setFormValue({ ...formValue, email: e.target.value });
     } else if (e.target.type === "password") {
-      setPassword(e.target.value);
+      setFormValue({ ...formValue, password: e.target.value });
     } else if (e.target.type === "text") {
-      setDisplayName(e.target.value);
+      setFormValue({ ...formValue, displayName: e.target.value });
     }
   };
 
-  const handleSubmit = (e: any) => {
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    signup(email, password, displayName);
+    signup(formValue.email, formValue.password, formValue.displayName);
   };
 
   return (
     <SignupContainer>
       <Logo>회원가입</Logo>
       <FormArea onSubmit={handleSubmit}>
-        <Input type='text' placeholder='이름' required onChange={handleData} value={displayName} />
-        <Input type='email' placeholder='이메일' required onChange={handleData} value={email} />
+        <Input
+          type='text'
+          placeholder='이름'
+          required
+          onChange={handleData}
+          value={formValue.displayName}
+        />
+        <Input
+          type='email'
+          placeholder='이메일'
+          required
+          onChange={handleData}
+          value={formValue.email}
+        />
         <Input
           type='password'
           placeholder='비밀번호'
           required
           onChange={handleData}
-          value={password}
+          value={formValue.password}
         />
-        <SignupBtn type='submit'>{isPending ? "회원가입 진행중" : "회원가입"}</SignupBtn>
+        <SignupBtn type='submit'>
+          {isPending ? <img src={authspinner} alt='authspinner' /> : "회원가입"}
+        </SignupBtn>
         {error && <strong>{error}</strong>}
       </FormArea>
       <MovePageButton>

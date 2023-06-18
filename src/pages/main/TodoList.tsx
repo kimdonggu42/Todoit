@@ -90,7 +90,8 @@ const Dropdown = styled.ul`
   display: flex;
   flex-direction: column;
   border-radius: 0.3rem;
-  width: 6rem;
+  width: 5rem;
+  font-size: 0.9rem;
   box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 8px;
   background-color: white;
   position: absolute;

@@ -6,7 +6,7 @@ function EditTodoModal({ list, editModalOpen, setEditModalOpen }: any) {
   const [editTodoContent, setEditTodoContent] = useState(list.todoBody);
   const [editTodoCreatedAt, setEditTodoCreatedAt] = useState(list.todoDate);
 
-  const { updateDocument, response } = useFireStore("todo");
+  const { updateDocument } = useFireStore("todo");
 
   // firestore 데이터 수정
   const editTodoPatch = async (id: string) => {
@@ -32,7 +32,7 @@ function EditTodoModal({ list, editModalOpen, setEditModalOpen }: any) {
   return (
     <AddTodoModal.AddModalBackdrop>
       <AddTodoModal.AddModalView>
-        <div className='modal-title'>Edit Task</div>
+        <div className='modal-title'>할 일 수정</div>
         <AddTodoModal.ContentInput
           className='content-input'
           type='text'
@@ -54,10 +54,10 @@ function EditTodoModal({ list, editModalOpen, setEditModalOpen }: any) {
               openEditModal();
             }}
           >
-            Edit Task
+            수정
           </button>
           <button className='cancel-button' onClick={openEditModal}>
-            Cancel
+            삭제
           </button>
         </AddTodoModal.AddModalButtonArea>
       </AddTodoModal.AddModalView>

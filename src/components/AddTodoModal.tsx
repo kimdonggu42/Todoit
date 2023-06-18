@@ -65,7 +65,7 @@ export const DateInput = styled.input`
 export const AddModalButtonArea = styled.div`
   display: flex;
   justify-content: flex-end;
-  column-gap: 0.8rem;
+  column-gap: 0.5rem;
   /* border: 1px solid red; */
 
   > button {
@@ -75,6 +75,10 @@ export const AddModalButtonArea = styled.div`
     padding: 0.5rem 0.7rem 0.5rem 0.7rem;
     border-radius: 0.3rem;
     border: none;
+
+    &:hover {
+      opacity: 0.8;
+    }
   }
 
   > .submit-button {
@@ -93,7 +97,7 @@ function AddTodoModal({ addModalOpen, setAddModalOpen, uid }: any) {
   const [todoBody, setTodoBody] = useState(""); // 작성한 텍스트 값이 담긴 변수
   const [todoDate, setTodoDate] = useState(""); // 선택한 날짜 값이 담긴 변수
 
-  const { addDocument, response } = useFireStore("todo");
+  const { addDocument } = useFireStore("todo");
 
   // firestore에 데이터 추가
   const addTodoSubmit = () => {
@@ -115,7 +119,7 @@ function AddTodoModal({ addModalOpen, setAddModalOpen, uid }: any) {
   return (
     <AddModalBackdrop>
       <AddModalView>
-        <div className='modal-title'>Add Task</div>
+        <div className='modal-title'>할 일 등록</div>
         <ContentInput
           className='content-input'
           type='text'
@@ -131,10 +135,10 @@ function AddTodoModal({ addModalOpen, setAddModalOpen, uid }: any) {
               openAddModal();
             }}
           >
-            Add Task
+            등록
           </button>
           <button className='cancel-button' onClick={openAddModal}>
-            Cancel
+            취소
           </button>
         </AddModalButtonArea>
       </AddModalView>

@@ -2,24 +2,27 @@ import { useState } from "react";
 import { useLogin } from "../hooks/useLogin";
 import { Link } from "react-router-dom";
 import authspinner from "../assets/images/auth-spinner.gif";
+import { LoginFormValueInterface } from "../util/type";
 import * as Signup from "./Signup";
 
 function Login() {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [formValue, setFormValue] = useState<LoginFormValueInterface>({
+    email: "",
+    password: "",
+  });
   const { error, isPending, login } = useLogin();
 
-  const handleData = (e: any) => {
+  const handleData = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.type === "email") {
-      setEmail(e.target.value);
+      setFormValue({ ...formValue, email: e.target.value });
     } else if (e.target.type === "password") {
-      setPassword(e.target.value);
+      setFormValue({ ...formValue, password: e.target.value });
     }
   };
 
-  const handleSubmit = (e: any) => {
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    login(email, password);
+    login(formValue.email, formValue.password);
   };
 
   return (
@@ -31,14 +34,14 @@ function Login() {
           placeholder='이메일'
           required
           onChange={handleData}
-          value={email}
+          value={formValue.email}
         />
         <Signup.Input
           type='password'
           placeholder='비밀번호'
           required
           onChange={handleData}
-          value={password}
+          value={formValue.password}
         />
         <Signup.SignupBtn type='submit'>
           {isPending ? <img src={authspinner} alt='authspinner' /> : "로그인"}

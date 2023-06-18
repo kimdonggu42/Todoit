@@ -40,7 +40,7 @@ const DeleteModalView = styled.div`
 const DeleteModalButtonArea = styled.div`
   display: flex;
   justify-content: flex-end;
-  column-gap: 0.8rem;
+  column-gap: 0.5rem;
   /* border: 1px solid red; */
 
   > button {
@@ -50,6 +50,10 @@ const DeleteModalButtonArea = styled.div`
     padding: 0.5rem 0.7rem 0.5rem 0.7rem;
     border-radius: 0.3rem;
     border: none;
+
+    &:hover {
+      opacity: 0.8;
+    }
   }
 
   > .submit-button {
@@ -65,7 +69,7 @@ const DeleteModalButtonArea = styled.div`
 `;
 
 function DeleteModal({ list, deleteModalOpen, setDeleteModalOpen }: any) {
-  const { deleteDocument, response } = useFireStore("todo");
+  const { deleteDocument } = useFireStore("todo");
 
   // firestore 데이터 삭제
   const deleteTodo = async (id: string) => {
@@ -79,7 +83,7 @@ function DeleteModal({ list, deleteModalOpen, setDeleteModalOpen }: any) {
   return (
     <DeleteModalBackdrop>
       <DeleteModalView>
-        <div className='modal-title'>Delete Task</div>
+        <div className='modal-title'>할 일 삭제</div>
         <div className='warning-text'>정말 삭제하시겠습니까?</div>
         <DeleteModalButtonArea>
           <button
@@ -89,10 +93,10 @@ function DeleteModal({ list, deleteModalOpen, setDeleteModalOpen }: any) {
               openDeleteModal();
             }}
           >
-            Delete Task
+            삭제
           </button>
           <button className='cancel-button' onClick={openDeleteModal}>
-            Cancel
+            취소
           </button>
         </DeleteModalButtonArea>
       </DeleteModalView>
