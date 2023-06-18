@@ -36,7 +36,7 @@ const TextArea = styled.div`
   row-gap: 0.5rem;
   width: calc(100% - 10rem);
   max-height: 4rem;
-  padding: 0 1rem 0 1rem;
+  padding: 0 0.5rem 0 0.5rem;
   /* border: 1px solid orange; */
 
   > .content {
@@ -184,7 +184,7 @@ function TodoList({ list }: any) {
         <EditDropdownBtn onClick={openDropdown}>
           <BsThreeDotsVertical size={17} />
         </EditDropdownBtn>
-        <div className='test' ref={dropMenuRef}>
+        <div ref={dropMenuRef}>
           {isOpen ? (
             <Dropdown>
               <li onClick={openEditModal}>Edit</li>

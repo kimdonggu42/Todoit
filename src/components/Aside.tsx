@@ -19,7 +19,7 @@ const AsideTitle = styled.div`
   font-size: 1.6rem;
   font-weight: 600;
   color: #353535;
-  margin-bottom: 2.5rem;
+  margin: 0.5rem 0 2rem 0;
   /* border: 1px solid lime; */
 
   > .importantCount {

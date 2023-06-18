@@ -31,15 +31,15 @@ const TodoMainContent = styled.main`
     width: 100vw;
   }
 
-  @media screen and (max-width: 450px) {
-    min-width: 0;
+  @media screen and (max-width: 480px) {
+    min-width: 10rem;
     padding: 1rem 1rem 2rem 1rem;
   }
 `;
 
 const TodoMainArea = styled.div`
   width: 100%;
-  max-width: 50rem;
+  max-width: 60rem;
   /* border: 1px solid skyblue; */
 `;
 
@@ -50,6 +50,7 @@ const TodoTitle = styled.div`
   font-size: 1.6rem;
   font-weight: 600;
   color: #353535;
+  margin-top: 1.5rem;
   /* border: 1px solid lime; */
 `;
 
@@ -60,7 +61,7 @@ const ListTab = styled.ul`
   list-style: none;
   column-gap: 1rem;
   font-weight: 500;
-  margin: 1.5rem 0 1rem 0;
+  margin: 1rem 0 1rem 0;
   color: #8e92a4;
   border-bottom: 1px solid #dddddd;
   /* border: 1px solid red; */
@@ -147,6 +148,11 @@ function TodoMain() {
           addModalOpen={addModalOpen}
           setAddModalOpen={setAddModalOpen}
           displayName={user.displayName}
+          currentMenu={currentMenu}
+          setCurrentMenu={setCurrentMenu}
+          todayCount={todayTodoData.length}
+          upComingCount={upComingTodoData.length}
+          pastCount={pastTodoData.length}
         />
         {currentMenu === 0 ? (
           <TodoMainArea>

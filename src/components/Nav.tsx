@@ -13,7 +13,7 @@ const NavContainer = styled.div`
   font-weight: 500;
   background-color: #f7f9fb;
 
-  @media screen and (max-width: 750px) {
+  @media screen and (max-width: 740px) {
     display: none;
   }
 `;
