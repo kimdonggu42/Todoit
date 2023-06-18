@@ -10,7 +10,7 @@ function Login() {
     email: "",
     password: "",
   });
-  const { error, isPending, login } = useLogin();
+  const { isPending, login } = useLogin();
 
   const handleData = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.type === "email") {
@@ -46,7 +46,6 @@ function Login() {
         <Signup.SignupBtn type='submit'>
           {isPending ? <img src={authspinner} alt='authspinner' /> : "로그인"}
         </Signup.SignupBtn>
-        {error && <strong>{error}</strong>}
       </Signup.FormArea>
       <Signup.MovePageButton>
         <span>Todo!t이 처음이신가요?</span>

@@ -25,7 +25,6 @@ const initialState = {
   isAuthReady: false,
 };
 
-// context를 객체를 구독할 컴포넌트의 묶음 범위를 설정
 const AuthContextProvider = ({ children }: { children: ReactNode }) => {
   const [state, dispatch] = useReducer(authReducer, initialState);
 

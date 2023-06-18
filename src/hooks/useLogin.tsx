@@ -3,6 +3,7 @@ import { appAuth } from "../firebase/config";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { AuthContext } from "../context/AuthContext";
 import { useContext } from "react";
+import { toast } from "react-toastify";
 
 export const useLogin = () => {
   const [isPending, setIsPending] = useState<boolean>(false);
@@ -28,6 +29,13 @@ export const useLogin = () => {
     } catch (err: any) {
       setIsPending(false);
       setError(err.message);
+      if (String(err).includes("auth/user-not-found")) {
+        toast.error("회원가입되어 있지 않은 이메일입니다.");
+      } else if (String(err).includes("auth/wrong-password")) {
+        toast.error("비밀번호를 다시 확인해 주세요.");
+      } else if (String(err).includes("auth/too-many-requests")) {
+        toast.error("잠시 후 다시 로그인해 주세요.");
+      }
     }
   };
 

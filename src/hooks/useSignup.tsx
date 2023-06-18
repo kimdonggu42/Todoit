@@ -3,6 +3,7 @@ import { appAuth } from "../firebase/config";
 import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
 import { AuthContext } from "../context/AuthContext";
 import { useContext } from "react";
+import { toast } from "react-toastify";
 
 export const useSignup = () => {
   const [isPending, setIsPending] = useState<boolean>(false);
@@ -32,9 +33,13 @@ export const useSignup = () => {
         setIsPending(false);
         setError(err.message);
       }
+      toast.success(`${user.displayName} 님 환영합니다.`);
     } catch (err: any) {
       setIsPending(false);
       setError(err.message);
+      if (String(err).includes("auth/email-already-in-use")) {
+        toast.error("이미 사용중인 이메일입니다.");
+      }
     }
   };
 

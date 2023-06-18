@@ -6,6 +6,39 @@ import Spinner from "./components/Spinner";
 import { Routes, Route, Navigate } from "react-router-dom";
 import { AuthContext } from "./context/AuthContext";
 import { useContext } from "react";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import styled from "styled-components";
+
+const ToastAlert = styled(ToastContainer)`
+  .Toastify__toast--success {
+    color: white;
+    font-size: 1rem;
+    background-color: #00bc06;
+  }
+
+  .Toastify__progress-bar--success {
+    background-color: #c4ebc0;
+  }
+
+  .Toastify__toast--error {
+    color: white;
+    font-size: 1rem;
+    background-color: #e74d3e;
+  }
+
+  .Toastify__progress-bar--error {
+    background-color: #faccc6;
+  }
+
+  .Toastify__toast-icon {
+    display: none;
+  }
+
+  .Toastify__close-button {
+    color: white;
+  }
+`;
 
 function App() {
   const { user, isAuthReady }: any = useContext(AuthContext);
@@ -22,6 +55,7 @@ function App() {
       ) : (
         <Spinner />
       )}
+      <ToastAlert hideProgressBar={false} autoClose={2000} pauseOnFocusLoss={true} />
     </div>
   );
 }

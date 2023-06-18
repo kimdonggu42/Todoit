@@ -15,13 +15,3 @@ export interface AuthReducerActionInterface {
   type: string;
   payload: object;
 }
-
-export interface Test {
-  createdTime: object;
-  id: string;
-  isCheck: boolean;
-  isImportant: boolean;
-  todoBody: string;
-  todoDate: string;
-  uid: string;
-}

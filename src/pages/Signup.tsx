@@ -91,7 +91,7 @@ function Signup() {
     displayName: "",
   });
 
-  const { error, isPending, signup } = useSignup();
+  const { isPending, signup } = useSignup();
 
   const handleData = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.type === "email") {
@@ -136,7 +136,6 @@ function Signup() {
         <SignupBtn type='submit'>
           {isPending ? <img src={authspinner} alt='authspinner' /> : "회원가입"}
         </SignupBtn>
-        {error && <strong>{error}</strong>}
       </FormArea>
       <MovePageButton>
         <span>이미 계정이 있으신가요?</span>
