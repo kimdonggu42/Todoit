@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import { useState } from "react";
 import { useFireStore } from "../hooks/useFirestore";
+import { toast } from "react-toastify";
 
 export const AddModalBackdrop = styled.div`
   position: fixed;
@@ -101,7 +102,15 @@ function AddTodoModal({ addModalOpen, setAddModalOpen, uid }: any) {
 
   // firestore에 데이터 추가
   const addTodoSubmit = () => {
-    addDocument({ uid, todoBody, todoDate, isCheck: false, isImportant: false });
+    if (todoBody && todoDate) {
+      addDocument({ uid, todoBody, todoDate, isCheck: false, isImportant: false });
+      toast.success("새로운 할 일이 등록되었습니다.");
+      setAddModalOpen(!addModalOpen);
+    } else if (todoBody.length === 0) {
+      toast.error("할 일을 입력해주세요.");
+    } else if (todoDate.length === 0) {
+      toast.error("완료 기한을 선택해주세요.");
+    }
   };
 
   const changeAddContent = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -128,13 +137,7 @@ function AddTodoModal({ addModalOpen, setAddModalOpen, uid }: any) {
         />
         <DateInput className='createdAt-input' type='date' onChange={changeAddCreatedAt} />
         <AddModalButtonArea>
-          <button
-            className='submit-button'
-            onClick={() => {
-              addTodoSubmit();
-              openAddModal();
-            }}
-          >
+          <button className='submit-button' onClick={addTodoSubmit}>
             등록
           </button>
           <button className='cancel-button' onClick={openAddModal}>
