@@ -1,10 +1,8 @@
 import styled from "styled-components";
 import { useLogout } from "../hooks/useLogout";
 
-import { FaRegLightbulb, FaRegStickyNote } from "react-icons/fa";
-import { BsCalendar } from "react-icons/bs";
-import { BiLogOut } from "react-icons/bi";
 import { IoClose } from "react-icons/io5";
+import { FcPlanner, FcIdea, FcOpenedFolder, FcLeft } from "react-icons/fc";
 
 const BackDrop = styled.div`
   display: flex;
@@ -18,8 +16,8 @@ const BackDrop = styled.div`
   background-color: rgba(0, 0, 0, 0.2);
 
   > .displayNone {
-    z-index: 5;
-    background-color: white;
+    z-index: 999;
+    background-color: #f7f9fb;
     height: 100%;
     width: 17rem;
     left: -200px;
@@ -37,22 +35,32 @@ const BackDrop = styled.div`
   }
 `;
 
+const SideHeader = styled.div`
+  display: flex;
+  align-items: center;
+  height: 2.5rem;
+  background-color: #1b9c85;
+`;
+
 const CloseButton = styled.button`
   display: flex;
   justify-content: center;
   align-items: center;
   width: 1.8rem;
   height: 1.8rem;
+  margin-left: 1rem;
   border: none;
+  border-radius: 0.3rem;
+  color: white;
   background-color: transparent;
-  margin: 1rem 2rem 1rem 2rem;
+  /* margin: 1rem 2rem 1rem 2rem; */
 
   &:hover {
-    opacity: 0.5;
+    background-color: #56b09e;
   }
 
   @media screen and (max-width: 450px) {
-    margin: 1rem;
+    /* margin: 0.5rem 1rem 0.5rem 1rem; */
   }
 `;
 
@@ -60,8 +68,9 @@ const MenuListArea = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  height: calc(100% - 4.8rem);
+  height: calc(100% - 2.5rem);
   color: #353535;
+  padding: 3rem 1rem 1rem 1rem;
   /* border: 1px solid red; */
 `;
 
@@ -74,7 +83,8 @@ const MenuList = styled.ul`
     justify-content: space-between;
     align-items: center;
     height: 3rem;
-    padding: 0 2rem 0 2rem;
+    padding: 0 1rem 0 1rem;
+    border-radius: 0.5rem;
     cursor: pointer;
     /* border: 1px solid blue; */
 
@@ -108,7 +118,7 @@ const Logout = styled.button`
   display: flex;
   align-items: center;
   height: 3rem;
-  padding: 0 2rem 0 2rem;
+  padding: 0 1rem 0 1rem;
   border: none;
   background-color: transparent;
   cursor: pointer;
@@ -150,9 +160,11 @@ function SideBar({
   return (
     <BackDrop>
       <div className={`displayNone ${isOpen ? "open" : null}`}>
-        <CloseButton onClick={sideBarCloseHandle}>
-          <IoClose size={23} />
-        </CloseButton>
+        <SideHeader>
+          <CloseButton onClick={sideBarCloseHandle}>
+            <IoClose size={24} />
+          </CloseButton>
+        </SideHeader>
         <MenuListArea>
           <MenuList>
             <li
@@ -160,7 +172,7 @@ function SideBar({
               onClick={() => selectMenuHandler(0)}
             >
               <div className='menutext'>
-                <FaRegLightbulb />
+                <FcPlanner size={22} />
                 <div>오늘 할 일</div>
               </div>
               <div className='todocount'>{todayCount}</div>
@@ -170,7 +182,7 @@ function SideBar({
               onClick={() => selectMenuHandler(1)}
             >
               <div className='menutext'>
-                <BsCalendar />
+                <FcIdea size={22} />
                 <div>해야 할 일</div>
               </div>
               <div className='todocount'>{upComingCount}</div>
@@ -180,14 +192,14 @@ function SideBar({
               onClick={() => selectMenuHandler(2)}
             >
               <div className='menutext'>
-                <FaRegStickyNote />
+                <FcOpenedFolder size={22} />
                 <div>지나간 할 일</div>
               </div>
               <div className='todocount'>{pastCount}</div>
             </li>
           </MenuList>
           <Logout onClick={logout}>
-            <BiLogOut />
+            <FcLeft size={22} />
             <span className='nav-name'>로그아웃</span>
           </Logout>
         </MenuListArea>

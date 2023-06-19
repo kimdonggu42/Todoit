@@ -3,7 +3,7 @@ import styled from "styled-components";
 const AsideContainer = styled.aside`
   width: 25rem;
   font-size: 1rem;
-  padding: 3rem 2rem 3rem 2rem;
+  padding: 1rem 2rem 1rem 2rem;
   border-left: 1px solid #dddddd;
   overflow-y: auto;
 
@@ -23,6 +23,7 @@ const AsideTitle = styled.div`
   /* border: 1px solid lime; */
 
   > .importantCount {
+    font-weight: 500;
     font-size: 1.4rem;
     color: #878787;
   }

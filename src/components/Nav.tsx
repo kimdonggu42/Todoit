@@ -34,7 +34,7 @@ const MenuList = styled.ul`
     justify-content: space-between;
     align-items: center;
     height: 3rem;
-    padding: 0 2rem 0 2rem;
+    padding: 0 1rem 0 1rem;
     border-radius: 0.5rem;
     cursor: pointer;
     /* border: 1px solid blue; */
@@ -69,7 +69,7 @@ const Logout = styled.button`
   display: flex;
   align-items: center;
   height: 3rem;
-  padding: 0 2rem 0 2rem;
+  padding: 0 1rem 0 1rem;
   border-radius: 0.5rem;
   border: none;
   background-color: transparent;

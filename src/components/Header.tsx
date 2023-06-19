@@ -6,18 +6,28 @@ import { FiPlus, FiMenu } from "react-icons/fi";
 
 const HeaderContainer = styled.div`
   display: flex;
-  justify-content: flex-end;
+  justify-content: space-between;
   align-items: center;
   font-size: 1rem;
   width: 100%;
   height: 2.5rem;
-  padding: 0 3rem 0 3rem;
+  padding: 0 2.5rem 0 2.5rem;
   background-color: #1b9c85;
   /* border: 1px solid red; */
 
   @media screen and (max-width: 740px) {
-    justify-content: space-between;
     padding: 0 1rem 0 1rem;
+  }
+`;
+
+const Logo = styled.div`
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: white;
+  /* border: 1px solid red; */
+
+  @media screen and (max-width: 740px) {
+    display: none;
   }
 `;
 
@@ -100,6 +110,7 @@ function Header({
 
   return (
     <HeaderContainer>
+      <Logo>Todo!t</Logo>
       <SidebarOpenBtn onClick={sidebarOpen}>
         <FiMenu size={24} />
       </SidebarOpenBtn>

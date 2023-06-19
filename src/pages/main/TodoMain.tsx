@@ -40,7 +40,7 @@ const TodoMainContent = styled.main`
 
 const TodoMainArea = styled.div`
   width: 100%;
-  max-width: 60rem;
+  max-width: 50rem;
   /* border: 1px solid skyblue; */
 `;
 
@@ -53,6 +53,12 @@ const TodoTitle = styled.div`
   color: #353535;
   margin-top: 1rem;
   /* border: 1px solid lime; */
+
+  > .todaydate {
+    font-weight: 500;
+    font-size: 1rem;
+    color: #878787;
+  }
 `;
 
 const ListTab = styled.ul`
@@ -68,11 +74,19 @@ const ListTab = styled.ul`
   /* border: 1px solid red; */
 
   > .tab {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    column-gap: 0.2rem;
     width: 100vw;
     padding: 0.5rem 0 0.5rem 0;
     text-align: center;
     cursor: pointer;
     /* border: 1px solid blue; */
+
+    > .todocount {
+      font-size: 0.8rem;
+    }
   }
 
   > .focused {
@@ -93,9 +107,9 @@ const TodoMainList = styled.ul`
 `;
 
 function TodoMain() {
+  const [currentMenu, setCurrentMenu] = useState<number>(0);
   const [currentTab, setCurrentTab] = useState<number>(0);
   const [addModalOpen, setAddModalOpen] = useState<boolean>(false);
-  const [currentMenu, setCurrentMenu] = useState<number>(0);
 
   const { user }: any = useContext(AuthContext);
   const { documents, error } = useCollection("todo", ["uid", "==", user.uid]);
@@ -115,13 +129,9 @@ function TodoMain() {
   const dateFormat: string =
     year + "-" + ("00" + month.toString()).slice(-2) + "-" + ("00" + day.toString()).slice(-2);
 
-  const todayFormat: string =
-    ("00" + month.toString()).slice(-2) +
-    "월" +
-    ("00" + day.toString()).slice(-2) +
-    "일" +
-    dayOfWeek[week] +
-    "요일";
+  const todayFormat: string = `${("00" + month.toString()).slice(-2)}월 ${(
+    "00" + day.toString()
+  ).slice(-2)}일 ${dayOfWeek[week]}요일`;
 
   // today todo
   const todayTodoData = documents.filter((value: any) => value.todoDate === dateFormat);
@@ -168,7 +178,10 @@ function TodoMain() {
         <TodoMainContent>
           {currentMenu === 0 ? (
             <TodoMainArea>
-              <TodoTitle>오늘 할 일{todayFormat}</TodoTitle>
+              <TodoTitle>
+                <div>오늘 할 일</div>
+                <div className='todaydate'>{todayFormat}</div>
+              </TodoTitle>
               <ListTab>
                 {tabArr.map((tab, index) => {
                   return (
