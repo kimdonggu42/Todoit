@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import { useFireStore } from "../hooks/useFirestore";
+import { toast } from "react-toastify";
 
 const DeleteModalBackdrop = styled.div`
   position: fixed;
@@ -74,6 +75,7 @@ function DeleteModal({ list, deleteModalOpen, setDeleteModalOpen }: any) {
   // firestore 데이터 삭제
   const deleteTodo = async (id: string) => {
     deleteDocument(id);
+    toast.success("선택한 할 일을 삭제했습니다.");
   };
 
   const openDeleteModal = () => {
