@@ -9,14 +9,15 @@ const HeaderContainer = styled.div`
   justify-content: flex-end;
   align-items: center;
   font-size: 1rem;
-  position: relative;
   width: 100%;
-  height: 2rem;
-  background-color: transparent;
+  height: 2.5rem;
+  padding: 0 3rem 0 3rem;
+  background-color: #1b9c85;
   /* border: 1px solid red; */
 
   @media screen and (max-width: 740px) {
     justify-content: space-between;
+    padding: 0 1rem 0 1rem;
   }
 `;
 
@@ -27,10 +28,12 @@ const SidebarOpenBtn = styled.button`
   width: 1.8rem;
   height: 1.8rem;
   border: none;
+  border-radius: 0.3rem;
+  color: white;
   background-color: transparent;
 
   &:hover {
-    opacity: 0.5;
+    background-color: #56b09e;
   }
 
   @media screen and (min-width: 741px) {
@@ -50,20 +53,21 @@ const AddTodoBtn = styled.button`
   align-items: center;
   width: 1.8rem;
   height: 1.8rem;
-  background-color: transparent;
   border: none;
-  color: black;
+  border-radius: 0.3rem;
+  color: white;
+  background-color: transparent;
   margin-right: 1.2rem;
-  /* border: 1px solid red; */
 
   &:hover {
-    opacity: 0.5;
+    background-color: #56b09e;
   }
 `;
 
 const Nickname = styled.div`
   font-size: 1.1rem;
   font-weight: 500;
+  color: white;
   /* border: 1px solid red; */
 `;
 
@@ -97,7 +101,7 @@ function Header({
   return (
     <HeaderContainer>
       <SidebarOpenBtn onClick={sidebarOpen}>
-        <FiMenu size={23} />
+        <FiMenu size={24} />
       </SidebarOpenBtn>
       {isOpen ? (
         <Sidebar
@@ -112,7 +116,7 @@ function Header({
       ) : null}
       <BtnArea>
         <AddTodoBtn onClick={openAddModalHandler}>
-          <FiPlus size={23} />
+          <FiPlus size={25} />
         </AddTodoBtn>
         <Nickname>{`${displayName} 님`}</Nickname>
       </BtnArea>

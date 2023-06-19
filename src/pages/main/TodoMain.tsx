@@ -12,7 +12,7 @@ import { MainTabArrInterface } from "../../util/type";
 
 const TodoMainContainer = styled.div`
   display: flex;
-  height: 100vh;
+  height: calc(100vh - 2.5rem);
 `;
 
 const TodoMainContent = styled.main`
@@ -51,7 +51,7 @@ const TodoTitle = styled.div`
   font-size: 1.6rem;
   font-weight: 600;
   color: #353535;
-  margin-top: 1.5rem;
+  margin-top: 1rem;
   /* border: 1px solid lime; */
 `;
 
@@ -106,12 +106,22 @@ function TodoMain() {
     setCurrentTab(index);
   };
 
+  let dayOfWeek = ["일", "월", "화", "수", "목", "금", "토"];
   const today = new Date();
   const year = today.getFullYear();
   const month = today.getMonth() + 1;
   const day = today.getDate();
+  const week = today.getDay();
   const dateFormat: string =
     year + "-" + ("00" + month.toString()).slice(-2) + "-" + ("00" + day.toString()).slice(-2);
+
+  const todayFormat: string =
+    ("00" + month.toString()).slice(-2) +
+    "월" +
+    ("00" + day.toString()).slice(-2) +
+    "일" +
+    dayOfWeek[week] +
+    "요일";
 
   // today todo
   const todayTodoData = documents.filter((value: any) => value.todoDate === dateFormat);
@@ -136,153 +146,155 @@ function TodoMain() {
   // console.log(documents);
 
   return (
-    <TodoMainContainer>
-      <Nav
+    <>
+      <Header
+        addModalOpen={addModalOpen}
+        setAddModalOpen={setAddModalOpen}
+        displayName={user.displayName}
         currentMenu={currentMenu}
         setCurrentMenu={setCurrentMenu}
         todayCount={todayTodoData.length}
         upComingCount={upComingTodoData.length}
         pastCount={pastTodoData.length}
       />
-      <TodoMainContent>
-        <Header
-          addModalOpen={addModalOpen}
-          setAddModalOpen={setAddModalOpen}
-          displayName={user.displayName}
+      <TodoMainContainer>
+        <Nav
           currentMenu={currentMenu}
           setCurrentMenu={setCurrentMenu}
           todayCount={todayTodoData.length}
           upComingCount={upComingTodoData.length}
           pastCount={pastTodoData.length}
         />
-        {currentMenu === 0 ? (
-          <TodoMainArea>
-            <TodoTitle>오늘 할 일</TodoTitle>
-            <ListTab>
-              {tabArr.map((tab, index) => {
-                return (
-                  <li
-                    key={index}
-                    className={currentTab === index ? "tab focused" : "tab"}
-                    onClick={() => selectTabHandler(index)}
-                  >
-                    {tab.name}
-                  </li>
-                );
-              })}
-            </ListTab>
-            {currentTab === 0 ? (
-              <TodoMainList>
-                {todayTodoData.map((value: any) => {
-                  return <TodoList key={value.id} list={value} />;
+        <TodoMainContent>
+          {currentMenu === 0 ? (
+            <TodoMainArea>
+              <TodoTitle>오늘 할 일{todayFormat}</TodoTitle>
+              <ListTab>
+                {tabArr.map((tab, index) => {
+                  return (
+                    <li
+                      key={index}
+                      className={currentTab === index ? "tab focused" : "tab"}
+                      onClick={() => selectTabHandler(index)}
+                    >
+                      {tab.name}
+                    </li>
+                  );
                 })}
-                {error && <strong>{error}</strong>}
-              </TodoMainList>
-            ) : currentTab === 1 ? (
-              <TodoMainList>
-                {todayCompleteTodo.map((value: any) => {
-                  return <TodoList key={value.id} list={value} />;
+              </ListTab>
+              {currentTab === 0 ? (
+                <TodoMainList>
+                  {todayTodoData.map((value: any) => {
+                    return <TodoList key={value.id} list={value} />;
+                  })}
+                  {error && <strong>{error}</strong>}
+                </TodoMainList>
+              ) : currentTab === 1 ? (
+                <TodoMainList>
+                  {todayCompleteTodo.map((value: any) => {
+                    return <TodoList key={value.id} list={value} />;
+                  })}
+                  {error && <strong>{error}</strong>}
+                </TodoMainList>
+              ) : (
+                <TodoMainList>
+                  {todayInCompleteTodo.map((value: any) => {
+                    return <TodoList key={value.id} list={value} />;
+                  })}
+                  {error && <strong>{error}</strong>}
+                </TodoMainList>
+              )}
+            </TodoMainArea>
+          ) : currentMenu === 1 ? (
+            <TodoMainArea>
+              <TodoTitle>해야 할 일</TodoTitle>
+              <ListTab>
+                {tabArr.map((tab, index) => {
+                  return (
+                    <li
+                      key={index}
+                      className={currentTab === index ? "tab focused" : "tab"}
+                      onClick={() => selectTabHandler(index)}
+                    >
+                      {tab.name}
+                    </li>
+                  );
                 })}
-                {error && <strong>{error}</strong>}
-              </TodoMainList>
-            ) : (
-              <TodoMainList>
-                {todayInCompleteTodo.map((value: any) => {
-                  return <TodoList key={value.id} list={value} />;
+              </ListTab>
+              {currentTab === 0 ? (
+                <TodoMainList>
+                  {upComingTodoData.map((value: any) => {
+                    return <TodoList key={value.id} list={value} />;
+                  })}
+                  {error && <strong>{error}</strong>}
+                </TodoMainList>
+              ) : currentTab === 1 ? (
+                <TodoMainList>
+                  {upComingCompleteTodo.map((value: any) => {
+                    return <TodoList key={value.id} list={value} />;
+                  })}
+                  {error && <strong>{error}</strong>}
+                </TodoMainList>
+              ) : (
+                <TodoMainList>
+                  {upComingInCompleteTodo.map((value: any) => {
+                    return <TodoList key={value.id} list={value} />;
+                  })}
+                  {error && <strong>{error}</strong>}
+                </TodoMainList>
+              )}
+            </TodoMainArea>
+          ) : (
+            <TodoMainArea>
+              <TodoTitle>지나간 할 일</TodoTitle>
+              <ListTab>
+                {tabArr.map((tab, index) => {
+                  return (
+                    <li
+                      key={index}
+                      className={currentTab === index ? "tab focused" : "tab"}
+                      onClick={() => selectTabHandler(index)}
+                    >
+                      {tab.name}
+                    </li>
+                  );
                 })}
-                {error && <strong>{error}</strong>}
-              </TodoMainList>
-            )}
-          </TodoMainArea>
-        ) : currentMenu === 1 ? (
-          <TodoMainArea>
-            <TodoTitle>해야 할 일</TodoTitle>
-            <ListTab>
-              {tabArr.map((tab, index) => {
-                return (
-                  <li
-                    key={index}
-                    className={currentTab === index ? "tab focused" : "tab"}
-                    onClick={() => selectTabHandler(index)}
-                  >
-                    {tab.name}
-                  </li>
-                );
-              })}
-            </ListTab>
-            {currentTab === 0 ? (
-              <TodoMainList>
-                {upComingTodoData.map((value: any) => {
-                  return <TodoList key={value.id} list={value} />;
-                })}
-                {error && <strong>{error}</strong>}
-              </TodoMainList>
-            ) : currentTab === 1 ? (
-              <TodoMainList>
-                {upComingCompleteTodo.map((value: any) => {
-                  return <TodoList key={value.id} list={value} />;
-                })}
-                {error && <strong>{error}</strong>}
-              </TodoMainList>
-            ) : (
-              <TodoMainList>
-                {upComingInCompleteTodo.map((value: any) => {
-                  return <TodoList key={value.id} list={value} />;
-                })}
-                {error && <strong>{error}</strong>}
-              </TodoMainList>
-            )}
-          </TodoMainArea>
-        ) : (
-          <TodoMainArea>
-            <TodoTitle>지나간 할 일</TodoTitle>
-            <ListTab>
-              {tabArr.map((tab, index) => {
-                return (
-                  <li
-                    key={index}
-                    className={currentTab === index ? "tab focused" : "tab"}
-                    onClick={() => selectTabHandler(index)}
-                  >
-                    {tab.name}
-                  </li>
-                );
-              })}
-            </ListTab>
-            {currentTab === 0 ? (
-              <TodoMainList>
-                {pastTodoData.map((value: any) => {
-                  return <TodoList key={value.id} list={value} />;
-                })}
-                {error && <strong>{error}</strong>}
-              </TodoMainList>
-            ) : currentTab === 1 ? (
-              <TodoMainList>
-                {pastCompleteTodo.map((value: any) => {
-                  return <TodoList key={value.id} list={value} />;
-                })}
-                {error && <strong>{error}</strong>}
-              </TodoMainList>
-            ) : (
-              <TodoMainList>
-                {pastInCompleteTodo.map((value: any) => {
-                  return <TodoList key={value.id} list={value} />;
-                })}
-                {error && <strong>{error}</strong>}
-              </TodoMainList>
-            )}
-          </TodoMainArea>
-        )}
-        {addModalOpen ? (
-          <AddTodoModal
-            uid={user.uid}
-            addModalOpen={addModalOpen}
-            setAddModalOpen={setAddModalOpen}
-          />
-        ) : null}
-      </TodoMainContent>
-      <Aside importantTodoData={importantTodoData} />
-    </TodoMainContainer>
+              </ListTab>
+              {currentTab === 0 ? (
+                <TodoMainList>
+                  {pastTodoData.map((value: any) => {
+                    return <TodoList key={value.id} list={value} />;
+                  })}
+                  {error && <strong>{error}</strong>}
+                </TodoMainList>
+              ) : currentTab === 1 ? (
+                <TodoMainList>
+                  {pastCompleteTodo.map((value: any) => {
+                    return <TodoList key={value.id} list={value} />;
+                  })}
+                  {error && <strong>{error}</strong>}
+                </TodoMainList>
+              ) : (
+                <TodoMainList>
+                  {pastInCompleteTodo.map((value: any) => {
+                    return <TodoList key={value.id} list={value} />;
+                  })}
+                  {error && <strong>{error}</strong>}
+                </TodoMainList>
+              )}
+            </TodoMainArea>
+          )}
+          {addModalOpen ? (
+            <AddTodoModal
+              uid={user.uid}
+              addModalOpen={addModalOpen}
+              setAddModalOpen={setAddModalOpen}
+            />
+          ) : null}
+        </TodoMainContent>
+        <Aside importantTodoData={importantTodoData} />
+      </TodoMainContainer>
+    </>
   );
 }
 

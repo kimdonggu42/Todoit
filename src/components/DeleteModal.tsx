@@ -19,7 +19,7 @@ const DeleteModalView = styled.div`
   justify-content: center;
   row-gap: 0.8rem;
   font-size: 1rem;
-  border-radius: 0.3rem;
+  border-radius: 0.5rem;
   background-color: white;
   width: 90vw;
   max-width: 30rem;
@@ -47,7 +47,7 @@ const DeleteModalButtonArea = styled.div`
     font-size: 1rem;
     font-weight: 500;
     white-space: nowrap;
-    padding: 0.5rem 0.7rem 0.5rem 0.7rem;
+    padding: 0.5rem 1rem 0.5rem 1rem;
     border-radius: 0.3rem;
     border: none;
 

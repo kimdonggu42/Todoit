@@ -1,14 +1,12 @@
 import styled from "styled-components";
 import { useLogout } from "../hooks/useLogout";
 
-import { FaRegLightbulb, FaRegStickyNote } from "react-icons/fa";
-import { BsCalendar } from "react-icons/bs";
-import { BiLogOut } from "react-icons/bi";
+import { FcPlanner, FcIdea, FcOpenedFolder, FcLeft } from "react-icons/fc";
 
 const NavContainer = styled.div`
   width: 100vw;
   max-width: 19rem;
-  padding: 6rem 0 1rem 0;
+  padding: 3rem 1rem 1rem 1rem;
   font-size: 1rem;
   font-weight: 500;
   background-color: #f7f9fb;
@@ -37,6 +35,7 @@ const MenuList = styled.ul`
     align-items: center;
     height: 3rem;
     padding: 0 2rem 0 2rem;
+    border-radius: 0.5rem;
     cursor: pointer;
     /* border: 1px solid blue; */
 
@@ -71,6 +70,7 @@ const Logout = styled.button`
   align-items: center;
   height: 3rem;
   padding: 0 2rem 0 2rem;
+  border-radius: 0.5rem;
   border: none;
   background-color: transparent;
   cursor: pointer;
@@ -101,7 +101,7 @@ function Nav({ currentMenu, setCurrentMenu, todayCount, upComingCount, pastCount
             onClick={() => selectMenuHandler(0)}
           >
             <div className='menutext'>
-              <FaRegLightbulb />
+              <FcPlanner size={22} />
               <div>오늘 할 일</div>
             </div>
             <div className='todocount'>{todayCount}</div>
@@ -111,7 +111,7 @@ function Nav({ currentMenu, setCurrentMenu, todayCount, upComingCount, pastCount
             onClick={() => selectMenuHandler(1)}
           >
             <div className='menutext'>
-              <BsCalendar />
+              <FcIdea size={22} />
               <div>해야 할 일</div>
             </div>
             <div className='todocount'>{upComingCount}</div>
@@ -121,14 +121,14 @@ function Nav({ currentMenu, setCurrentMenu, todayCount, upComingCount, pastCount
             onClick={() => selectMenuHandler(2)}
           >
             <div className='menutext'>
-              <FaRegStickyNote />
+              <FcOpenedFolder size={22} />
               <div>지나간 할 일</div>
             </div>
             <div className='todocount'>{pastCount}</div>
           </li>
         </MenuList>
         <Logout onClick={logout}>
-          <BiLogOut />
+          <FcLeft size={22} />
           <span className='nav-name'>로그아웃</span>
         </Logout>
       </MenuListArea>
