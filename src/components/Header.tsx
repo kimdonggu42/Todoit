@@ -22,7 +22,7 @@ const HeaderContainer = styled.div`
 `;
 
 const Logo = styled.img`
-  width: 90px;
+  width: 5rem;
 
   @media screen and (max-width: 740px) {
     display: none;
