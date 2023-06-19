@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import Sidebar from "./Sidebar";
 import { useState } from "react";
+import logo from "../assets/images/logo.png";
 
 import { FiPlus, FiMenu } from "react-icons/fi";
 
@@ -20,11 +21,8 @@ const HeaderContainer = styled.div`
   }
 `;
 
-const Logo = styled.div`
-  font-size: 1.5rem;
-  font-weight: 600;
-  color: white;
-  /* border: 1px solid red; */
+const Logo = styled.img`
+  width: 90px;
 
   @media screen and (max-width: 740px) {
     display: none;
@@ -110,7 +108,7 @@ function Header({
 
   return (
     <HeaderContainer>
-      <Logo>Todo!t</Logo>
+      <Logo src={logo} alt='logo' />
       <SidebarOpenBtn onClick={sidebarOpen}>
         <FiMenu size={24} />
       </SidebarOpenBtn>
