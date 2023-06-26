@@ -19,12 +19,10 @@ export const useCollection = (transaction: string, myQuery: [string, WhereFilter
     const todosRef: CollectionReference = collection(appFireStore, transaction);
 
     let q: Query = todosRef;
+    const [fieldName, operator, fieldValue] = myQuery;
 
-    if (myQuery) {
-      const [fieldName, operator, fieldValue] = myQuery;
-      if (fieldValue !== undefined) {
-        q = query(todosRef, where(fieldName, operator, fieldValue), orderBy("createdTime", "desc"));
-      }
+    if (myQuery && fieldValue !== undefined) {
+      q = query(todosRef, where(fieldName, operator, fieldValue), orderBy("createdTime", "desc"));
     } else {
       q = query(todosRef, orderBy("createdTime", "desc"));
     }
@@ -36,7 +34,6 @@ export const useCollection = (transaction: string, myQuery: [string, WhereFilter
           id: doc.id,
           ...doc.data(),
         }));
-
         setDocuments(updatedDocuments);
         setError(null);
       },
