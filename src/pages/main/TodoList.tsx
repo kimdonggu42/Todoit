@@ -12,6 +12,14 @@ const TodoListContainer = styled.li`
   align-items: center;
   min-height: 4.5rem;
   border-bottom: 1px solid #f0f0f0;
+
+  &.clearTodo {
+    color: gray;
+
+    .content {
+      text-decoration: line-through;
+    }
+  }
 `;
 
 const CheckboxArea = styled.div`
@@ -164,7 +172,7 @@ function TodoList({ list }: any) {
   // console.log(list);
 
   return (
-    <TodoListContainer>
+    <TodoListContainer className={`${list.isCheck ? "clearTodo" : null}`}>
       <CheckboxArea>
         <input type='checkbox' checked={list.isCheck} onChange={() => changeCheck(list.id)} />
       </CheckboxArea>

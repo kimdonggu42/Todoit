@@ -126,7 +126,7 @@ function TodoMain() {
   const month = today.getMonth() + 1;
   const day = today.getDate();
   const week = today.getDay();
-  const dateFormat: string =
+  const dateFormat =
     year + "-" + ("00" + month.toString()).slice(-2) + "-" + ("00" + day.toString()).slice(-2);
 
   const todayFormat: string = `${("00" + month.toString()).slice(-2)}월 ${(
