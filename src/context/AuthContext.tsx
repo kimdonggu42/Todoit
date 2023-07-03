@@ -1,7 +1,7 @@
 import { createContext, useReducer, ReactNode } from "react";
 import { useEffect } from "react";
 import { appAuth } from "../firebase/config";
-import { AuthReducerActionInterface } from "../util/type";
+import { AuthReducerActionInterface } from "../util/interface";
 
 const authReducer = (state: object, action: AuthReducerActionInterface) => {
   switch (action.type) {

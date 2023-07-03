@@ -8,7 +8,7 @@ import { useContext } from "react";
 import { useCollection } from "../../hooks/useCollection";
 import Nav from "../../components/Nav";
 import Header from "../../components/Header";
-import { MainTabArrInterface } from "../../util/type";
+import { MainTabArrInterface } from "../../util/interface";
 
 const TodoMainContainer = styled.div`
   display: flex;
@@ -110,6 +110,13 @@ function TodoMain() {
   const [currentMenu, setCurrentMenu] = useState<number>(0);
   const [currentTab, setCurrentTab] = useState<number>(0);
   const [addModalOpen, setAddModalOpen] = useState<boolean>(false);
+
+  interface Developer {
+    name: string;
+    skill: string;
+  }
+
+  let capt: Developer;
 
   const { user }: any = useContext(AuthContext);
   const { documents, error } = useCollection("todo", ["uid", "==", user.uid]);
