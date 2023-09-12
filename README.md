@@ -75,10 +75,10 @@ $ npm start
 
 ## 시연 영상
 
-|                                                      **회원가입**                                                      |                                                  **로그인/로그아웃**                                                   |
-| :--------------------------------------------------------------------------------------------------------------------: | :--------------------------------------------------------------------------------------------------------------------: |
-| <img width="360px" src="https://github.com/kimdonggu42/Todoit/assets/115632555/41dd4611-0445-440a-b618-54a13e844ca6"/> | <img width="360px" src="https://github.com/kimdonggu42/Todoit/assets/115632555/2b9ab6f2-01d3-403f-ae04-1fd4c5f765f4"/> |
-|                                                **할 일 등록/수정/삭제**                                                |                                                 **중요한 할 일 등록**                                                  |
-| <img width="360px" src="https://github.com/kimdonggu42/Todoit/assets/115632555/40198d29-4ce3-46a6-9033-9c6a5c117484"/> | <img width="360px" src="https://github.com/kimdonggu42/Todoit/assets/115632555/652cc8b5-6362-44ca-92d5-2238a02df62b"/> |
-|                                                  **할 일 완료 처리**                                                   |                                                       **반응형**                                                       |
-| <img width="360px" src="https://github.com/kimdonggu42/Todoit/assets/115632555/f75fd720-d5f9-48fa-b58e-00e84585e8f0"/> | <img width="360px" src="https://github.com/kimdonggu42/Todoit/assets/115632555/666a4368-d3f7-4353-8594-120839823852"/> |
+|                                                     **회원가입**                                                      |                                                  **로그인/로그아웃**                                                  |
+| :-------------------------------------------------------------------------------------------------------------------: | :-------------------------------------------------------------------------------------------------------------------: |
+| <img width="100%" src="https://github.com/kimdonggu42/Todoit/assets/115632555/41dd4611-0445-440a-b618-54a13e844ca6"/> | <img width="100%" src="https://github.com/kimdonggu42/Todoit/assets/115632555/2b9ab6f2-01d3-403f-ae04-1fd4c5f765f4"/> |
+|                                               **할 일 등록/수정/삭제**                                                |                                                 **중요한 할 일 등록**                                                 |
+| <img width="100%" src="https://github.com/kimdonggu42/Todoit/assets/115632555/40198d29-4ce3-46a6-9033-9c6a5c117484"/> | <img width="100%" src="https://github.com/kimdonggu42/Todoit/assets/115632555/652cc8b5-6362-44ca-92d5-2238a02df62b"/> |
+|                                                  **할 일 완료 처리**                                                  |                                                      **반응형**                                                       |
+| <img width="100%" src="https://github.com/kimdonggu42/Todoit/assets/115632555/f75fd720-d5f9-48fa-b58e-00e84585e8f0"/> | <img width="100%" src="https://github.com/kimdonggu42/Todoit/assets/115632555/666a4368-d3f7-4353-8594-120839823852"/> |
