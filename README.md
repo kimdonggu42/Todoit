@@ -6,6 +6,7 @@
 <div  align="center">
   <img width="60%" src="https://github.com/kimdonggu42/Todoit/assets/115632555/73bd5562-b80d-4b59-bf03-ce3951ed70437" alt="ipillu-logo">
 </div>
+
 </br>
 
 ## 프로젝트 소개
@@ -16,6 +17,8 @@
 
 - 배포 링크 : [https://todoit-35f1e.web.app/](https://todoit-35f1e.web.app/)
 
+<br>
+
 ## 개발 환경
 
 ### Developement
@@ -25,6 +28,8 @@
 ### Styling
 
 <img src="https://img.shields.io/badge/styled components-DB7093?style=for-the-badge&logo=styled-components&logoColor=white">
+
+<br>
 
 ## 실행 방법
 
@@ -37,6 +42,8 @@ $ npm install
 
 $ npm start
 ```
+
+<br>
 
 ## 디렉토리 구조
 
@@ -57,6 +64,8 @@ $ npm start
  ┗ 📜 index.tsx
 ```
 
+<br>
+
 ## 개발 내용
 
 ### 1. Firebase를 사용하여 프로젝트 리팩토링
@@ -72,6 +81,8 @@ $ npm start
 ### 3. 서버 통신 로직 분리
 
 - 서버와 통신하는 로직을 custom hook으로 만들어 UI 컴포넌트로부터 분리 및 반복되는 로직 최소화 했습니다.
+
+<br>
 
 ## 시연 영상
 
