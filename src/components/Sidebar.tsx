@@ -1,139 +1,9 @@
 import styled from "styled-components";
 import { useLogout } from "../hooks/useLogout";
-
 import { IoClose } from "react-icons/io5";
 import { FcPlanner, FcIdea, FcOpenedFolder, FcLeft } from "react-icons/fc";
 
-const BackDrop = styled.div`
-  display: flex;
-  justify-content: center;
-  position: fixed;
-  z-index: 999;
-  top: 0;
-  left: 0;
-  bottom: 0;
-  right: 0;
-  background-color: rgba(0, 0, 0, 0.2);
-
-  > .displayNone {
-    z-index: 999;
-    background-color: #f7f9fb;
-    height: 100%;
-    width: 17rem;
-    left: -200px;
-    position: fixed;
-    transition: 0.2s ease;
-    box-shadow: 0 0 20px rgba(0, 0, 0, 0.19), 0 10px 10px rgba(0, 0, 0, 0.1);
-  }
-
-  > .open {
-    left: 0;
-  }
-
-  @media screen and (min-width: 741px) {
-    display: none;
-  }
-`;
-
-const SideHeader = styled.div`
-  display: flex;
-  align-items: center;
-  height: 2.5rem;
-  background-color: #1b9c85;
-`;
-
-const CloseButton = styled.button`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 1.8rem;
-  height: 1.8rem;
-  margin-left: 1rem;
-  border: none;
-  border-radius: 0.3rem;
-  color: white;
-  background-color: transparent;
-  /* margin: 1rem 2rem 1rem 2rem; */
-
-  &:hover {
-    background-color: #56b09e;
-  }
-
-  @media screen and (max-width: 450px) {
-    /* margin: 0.5rem 1rem 0.5rem 1rem; */
-  }
-`;
-
-const MenuListArea = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  height: calc(100% - 2.5rem);
-  color: #353535;
-  padding: 3rem 1rem 1rem 1rem;
-  /* border: 1px solid red; */
-`;
-
-const MenuList = styled.ul`
-  list-style: none;
-  /* border: 1px solid blue; */
-
-  > .menu {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    height: 3rem;
-    padding: 0 1rem 0 1rem;
-    border-radius: 0.5rem;
-    cursor: pointer;
-    /* border: 1px solid blue; */
-
-    > .menutext {
-      display: flex;
-      align-items: center;
-      column-gap: 1rem;
-    }
-
-    > .todocount {
-      color: #878787;
-    }
-
-    &:hover {
-      background-color: #eeeeee;
-    }
-  }
-
-  > .focused {
-    background-color: #eeeeee;
-
-    > .todocount {
-      color: #1b9c85;
-    }
-  }
-`;
-
-const Logout = styled.button`
-  font-size: 1rem;
-  font-weight: 500;
-  display: flex;
-  align-items: center;
-  height: 3rem;
-  padding: 0 1rem 0 1rem;
-  border: none;
-  background-color: transparent;
-  cursor: pointer;
-  /* border: 1px solid green; */
-
-  > .nav-name {
-    margin-left: 1rem;
-  }
-
-  &:hover {
-    background-color: #eeeeee;
-  }
-`;
-
-function SideBar({
+export default function SideBar({
   isOpen,
   setIsOpen,
   currentMenu,
@@ -208,4 +78,122 @@ function SideBar({
   );
 }
 
-export default SideBar;
+const BackDrop = styled.div`
+  display: flex;
+  justify-content: center;
+  position: fixed;
+  z-index: 999;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  background-color: rgba(0, 0, 0, 0.2);
+
+  > .displayNone {
+    z-index: 999;
+    background-color: #f7f9fb;
+    height: 100%;
+    width: 17rem;
+    left: -200px;
+    position: fixed;
+    transition: 0.2s ease;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.19), 0 10px 10px rgba(0, 0, 0, 0.1);
+  }
+
+  > .open {
+    left: 0;
+  }
+
+  @media screen and (min-width: 741px) {
+    display: none;
+  }
+`;
+
+const SideHeader = styled.div`
+  display: flex;
+  align-items: center;
+  height: 2.5rem;
+  background-color: #1b9c85;
+`;
+
+const CloseButton = styled.button`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 1.8rem;
+  height: 1.8rem;
+  margin-left: 1rem;
+  border: none;
+  border-radius: 0.3rem;
+  color: white;
+  background-color: transparent;
+
+  &:hover {
+    background-color: #56b09e;
+  }
+`;
+
+const MenuListArea = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: calc(100% - 2.5rem);
+  color: #353535;
+  padding: 3rem 1rem 1rem 1rem;
+`;
+
+const MenuList = styled.ul`
+  list-style: none;
+
+  > .menu {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 3rem;
+    padding: 0 1rem 0 1rem;
+    border-radius: 0.5rem;
+    cursor: pointer;
+
+    > .menutext {
+      display: flex;
+      align-items: center;
+      column-gap: 1rem;
+    }
+
+    > .todocount {
+      color: #878787;
+    }
+
+    &:hover {
+      background-color: #eeeeee;
+    }
+  }
+
+  > .focused {
+    background-color: #eeeeee;
+
+    > .todocount {
+      color: #1b9c85;
+    }
+  }
+`;
+
+const Logout = styled.button`
+  font-size: 1rem;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  height: 3rem;
+  padding: 0 1rem 0 1rem;
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+
+  > .nav-name {
+    margin-left: 1rem;
+  }
+
+  &:hover {
+    background-color: #eeeeee;
+  }
+`;

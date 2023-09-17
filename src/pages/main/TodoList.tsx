@@ -3,124 +3,10 @@ import EditTodoModal from "../../components/EditTodoModal";
 import DeleteModal from "../../components/DeleteModal";
 import { useState, useEffect, useRef } from "react";
 import { useFireStore } from "../../hooks/useFirestore";
-
 import { AiFillStar, AiOutlineStar } from "react-icons/ai";
 import { BsThreeDotsVertical } from "react-icons/bs";
 
-const TodoListContainer = styled.li`
-  display: flex;
-  align-items: center;
-  min-height: 4.5rem;
-  border-bottom: 1px solid #f0f0f0;
-
-  &.clearTodo {
-    color: gray;
-
-    .content {
-      text-decoration: line-through;
-    }
-  }
-`;
-
-const CheckboxArea = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  min-width: 3rem;
-  /* border: 1px solid red; */
-
-  > input {
-    width: 1.1rem;
-    height: 1.1rem;
-    accent-color: #1b9c85;
-    cursor: pointer;
-  }
-`;
-
-const TextArea = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  row-gap: 0.5rem;
-  width: calc(100% - 10rem);
-  max-height: 4rem;
-  padding: 0 0.5rem 0 0.5rem;
-  /* border: 1px solid orange; */
-
-  > .content {
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    /* border: 1px solid red; */
-  }
-
-  > .date {
-    font-size: 0.8rem;
-    /* border: 1px solid red; */
-  }
-`;
-
-const BtnArea = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  position: relative;
-  padding-left: 1rem;
-  column-gap: 1rem;
-  min-width: 7rem;
-  /* border: 1px solid green; */
-`;
-
-const ImportantBtn = styled.button`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 1.5rem;
-  height: 1.5rem;
-  color: #ffe79b;
-  background-color: transparent;
-  border: none;
-  /* border: 1px solid red; */
-`;
-
-const EditDropdownBtn = styled.button`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 1.5rem;
-  height: 1.5rem;
-  background-color: transparent;
-  border: none;
-  /* border: 1px solid red; */
-`;
-
-const Dropdown = styled.ul`
-  display: flex;
-  flex-direction: column;
-  border-radius: 0.3rem;
-  width: 5rem;
-  font-size: 0.9rem;
-  box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 8px;
-  background-color: white;
-  position: absolute;
-  top: 2rem;
-  right: 1.5rem;
-  list-style: none;
-  z-index: 999;
-  cursor: pointer;
-
-  > li {
-    padding: 0.5rem 0.8rem 0.5rem 0.8rem;
-    /* border: 1px solid red; */
-
-    &:hover {
-      border-radius: 0.3rem;
-      background-color: #f7f7f7;
-    }
-  }
-`;
-
-function TodoList({ list }: any) {
+export default function TodoList({ list }: any) {
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const [editModalOpen, setEditModalOpen] = useState<boolean>(false);
   const [deleteModalOpen, setDeleteModalOpen] = useState<boolean>(false);
@@ -168,8 +54,6 @@ function TodoList({ list }: any) {
   const openDeleteModal = () => {
     setDeleteModalOpen(!deleteModalOpen);
   };
-
-  // console.log(list);
 
   return (
     <TodoListContainer className={`${list.isCheck ? "clearTodo" : null}`}>
@@ -220,4 +104,107 @@ function TodoList({ list }: any) {
   );
 }
 
-export default TodoList;
+const TodoListContainer = styled.li`
+  display: flex;
+  align-items: center;
+  min-height: 4.5rem;
+  border-bottom: 1px solid #f0f0f0;
+
+  &.clearTodo {
+    color: gray;
+
+    .content {
+      text-decoration: line-through;
+    }
+  }
+`;
+
+const CheckboxArea = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-width: 3rem;
+
+  > input {
+    width: 1.1rem;
+    height: 1.1rem;
+    accent-color: #1b9c85;
+    cursor: pointer;
+  }
+`;
+
+const TextArea = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  row-gap: 0.5rem;
+  width: calc(100% - 10rem);
+  max-height: 4rem;
+  padding: 0 0.5rem 0 0.5rem;
+
+  > .content {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  > .date {
+    font-size: 0.8rem;
+  }
+`;
+
+const BtnArea = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  padding-left: 1rem;
+  column-gap: 1rem;
+  min-width: 7rem;
+`;
+
+const ImportantBtn = styled.button`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 1.5rem;
+  height: 1.5rem;
+  color: #ffe79b;
+  background-color: transparent;
+  border: none;
+`;
+
+const EditDropdownBtn = styled.button`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 1.5rem;
+  height: 1.5rem;
+  background-color: transparent;
+  border: none;
+`;
+
+const Dropdown = styled.ul`
+  display: flex;
+  flex-direction: column;
+  border-radius: 0.3rem;
+  width: 5rem;
+  font-size: 0.9rem;
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 8px;
+  background-color: white;
+  position: absolute;
+  top: 2rem;
+  right: 1.5rem;
+  list-style: none;
+  z-index: 999;
+  cursor: pointer;
+
+  > li {
+    padding: 0.5rem 0.8rem 0.5rem 0.8rem;
+
+    &:hover {
+      border-radius: 0.3rem;
+      background-color: #f7f7f7;
+    }
+  }
+`;

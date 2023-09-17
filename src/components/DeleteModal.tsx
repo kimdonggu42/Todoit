@@ -2,6 +2,43 @@ import styled from "styled-components";
 import { useFireStore } from "../hooks/useFirestore";
 import { toast } from "react-toastify";
 
+export default function DeleteModal({ list, deleteModalOpen, setDeleteModalOpen }: any) {
+  const { deleteDocument } = useFireStore("todo");
+
+  // firestore 데이터 삭제
+  const deleteTodo = async (id: string) => {
+    deleteDocument(id);
+    toast.success("선택한 할 일을 삭제했습니다.");
+  };
+
+  const openDeleteModal = () => {
+    setDeleteModalOpen(!deleteModalOpen);
+  };
+
+  return (
+    <DeleteModalBackdrop>
+      <DeleteModalView>
+        <div className='modal-title'>할 일 삭제</div>
+        <div className='warning-text'>정말 삭제하시겠습니까?</div>
+        <DeleteModalButtonArea>
+          <button
+            className='submit-button'
+            onClick={() => {
+              deleteTodo(list.id);
+              openDeleteModal();
+            }}
+          >
+            삭제
+          </button>
+          <button className='cancel-button' onClick={openDeleteModal}>
+            취소
+          </button>
+        </DeleteModalButtonArea>
+      </DeleteModalView>
+    </DeleteModalBackdrop>
+  );
+}
+
 const DeleteModalBackdrop = styled.div`
   position: fixed;
   z-index: 999;
@@ -42,7 +79,6 @@ const DeleteModalButtonArea = styled.div`
   display: flex;
   justify-content: flex-end;
   column-gap: 0.5rem;
-  /* border: 1px solid red; */
 
   > button {
     font-size: 1rem;
@@ -68,42 +104,3 @@ const DeleteModalButtonArea = styled.div`
     background-color: transparent;
   }
 `;
-
-function DeleteModal({ list, deleteModalOpen, setDeleteModalOpen }: any) {
-  const { deleteDocument } = useFireStore("todo");
-
-  // firestore 데이터 삭제
-  const deleteTodo = async (id: string) => {
-    deleteDocument(id);
-    toast.success("선택한 할 일을 삭제했습니다.");
-  };
-
-  const openDeleteModal = () => {
-    setDeleteModalOpen(!deleteModalOpen);
-  };
-
-  return (
-    <DeleteModalBackdrop>
-      <DeleteModalView>
-        <div className='modal-title'>할 일 삭제</div>
-        <div className='warning-text'>정말 삭제하시겠습니까?</div>
-        <DeleteModalButtonArea>
-          <button
-            className='submit-button'
-            onClick={() => {
-              deleteTodo(list.id);
-              openDeleteModal();
-            }}
-          >
-            삭제
-          </button>
-          <button className='cancel-button' onClick={openDeleteModal}>
-            취소
-          </button>
-        </DeleteModalButtonArea>
-      </DeleteModalView>
-    </DeleteModalBackdrop>
-  );
-}
-
-export default DeleteModal;

@@ -3,6 +3,61 @@ import { useState } from "react";
 import { useFireStore } from "../hooks/useFirestore";
 import { toast } from "react-toastify";
 
+export default function AddTodoModal({ addModalOpen, setAddModalOpen, uid }: any) {
+  const [todoBody, setTodoBody] = useState<string>(""); // 작성한 텍스트 값이 담긴 변수
+  const [todoDate, setTodoDate] = useState<string>(""); // 선택한 날짜 값이 담긴 변수
+
+  const { addDocument } = useFireStore("todo");
+
+  // firestore에 데이터 추가
+  const addTodoSubmit = () => {
+    if (todoBody && todoDate) {
+      addDocument({ uid, todoBody, todoDate, isCheck: false, isImportant: false });
+      toast.success("새로운 할 일이 등록되었습니다.");
+      setAddModalOpen(!addModalOpen);
+    } else if (todoBody.length === 0) {
+      toast.error("할 일을 입력해주세요.");
+    } else if (todoDate.length === 0) {
+      toast.error("완료 기한을 선택해주세요.");
+    }
+  };
+
+  const changeAddContent = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setTodoBody(e.target.value);
+  };
+
+  const changeAddCreatedAt = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setTodoDate(e.target.value);
+  };
+
+  const openAddModal = () => {
+    setAddModalOpen(!addModalOpen);
+  };
+
+  return (
+    <AddModalBackdrop>
+      <AddModalView>
+        <div className='modal-title'>할 일 등록</div>
+        <ContentInput
+          className='content-input'
+          type='text'
+          placeholder='할 일을 입력해주세요'
+          onChange={changeAddContent}
+        />
+        <DateInput className='createdAt-input' type='date' onChange={changeAddCreatedAt} />
+        <AddModalButtonArea>
+          <button className='submit-button' onClick={addTodoSubmit}>
+            등록
+          </button>
+          <button className='cancel-button' onClick={openAddModal}>
+            취소
+          </button>
+        </AddModalButtonArea>
+      </AddModalView>
+    </AddModalBackdrop>
+  );
+}
+
 export const AddModalBackdrop = styled.div`
   position: fixed;
   z-index: 999;
@@ -67,7 +122,6 @@ export const AddModalButtonArea = styled.div`
   display: flex;
   justify-content: flex-end;
   column-gap: 0.5rem;
-  /* border: 1px solid red; */
 
   > button {
     font-size: 1rem;
@@ -93,60 +147,3 @@ export const AddModalButtonArea = styled.div`
     background-color: transparent;
   }
 `;
-
-function AddTodoModal({ addModalOpen, setAddModalOpen, uid }: any) {
-  const [todoBody, setTodoBody] = useState<string>(""); // 작성한 텍스트 값이 담긴 변수
-  const [todoDate, setTodoDate] = useState<string>(""); // 선택한 날짜 값이 담긴 변수
-
-  const { addDocument } = useFireStore("todo");
-
-  // firestore에 데이터 추가
-  const addTodoSubmit = () => {
-    if (todoBody && todoDate) {
-      addDocument({ uid, todoBody, todoDate, isCheck: false, isImportant: false });
-      toast.success("새로운 할 일이 등록되었습니다.");
-      setAddModalOpen(!addModalOpen);
-    } else if (todoBody.length === 0) {
-      toast.error("할 일을 입력해주세요.");
-    } else if (todoDate.length === 0) {
-      toast.error("완료 기한을 선택해주세요.");
-    }
-  };
-
-  const changeAddContent = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setTodoBody(e.target.value);
-  };
-
-  const changeAddCreatedAt = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setTodoDate(e.target.value);
-  };
-
-  const openAddModal = () => {
-    setAddModalOpen(!addModalOpen);
-  };
-
-  return (
-    <AddModalBackdrop>
-      <AddModalView>
-        <div className='modal-title'>할 일 등록</div>
-        <ContentInput
-          className='content-input'
-          type='text'
-          placeholder='할 일을 입력해주세요'
-          onChange={changeAddContent}
-        />
-        <DateInput className='createdAt-input' type='date' onChange={changeAddCreatedAt} />
-        <AddModalButtonArea>
-          <button className='submit-button' onClick={addTodoSubmit}>
-            등록
-          </button>
-          <button className='cancel-button' onClick={openAddModal}>
-            취소
-          </button>
-        </AddModalButtonArea>
-      </AddModalView>
-    </AddModalBackdrop>
-  );
-}
-
-export default AddTodoModal;

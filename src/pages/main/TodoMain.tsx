@@ -10,112 +10,10 @@ import Nav from "../../components/Nav";
 import Header from "../../components/Header";
 import { MainTabArrInterface } from "../../util/type";
 
-const TodoMainContainer = styled.div`
-  display: flex;
-  height: calc(100vh - 2.5rem);
-`;
-
-const TodoMainContent = styled.main`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  width: calc(100vw - 44rem);
-  font-size: 1rem;
-  // flex item의 최소 크기는 자식 요소의 크기보다 더 줄어들 수 없기 때문에
-  // 부모 요소인 flex item 의 최소 크기를 0 으로 변경해야 flex 상태에서 말줄임 적용됨
-  min-width: 30rem;
-  padding: 1rem 2rem 2rem 2rem;
-  overflow-y: auto;
-
-  @media screen and (max-width: 1300px) {
-    width: 100vw;
-  }
-
-  @media screen and (max-width: 480px) {
-    min-width: 10rem;
-    padding: 1rem 1rem 2rem 1rem;
-  }
-`;
-
-const TodoMainArea = styled.div`
-  width: 100%;
-  max-width: 50rem;
-  /* border: 1px solid skyblue; */
-`;
-
-const TodoTitle = styled.div`
-  display: flex;
-  align-items: center;
-  column-gap: 0.5rem;
-  font-size: 1.6rem;
-  font-weight: 600;
-  color: #353535;
-  margin-top: 1rem;
-  /* border: 1px solid lime; */
-
-  > .todaydate {
-    font-weight: 500;
-    font-size: 1rem;
-    color: #878787;
-  }
-`;
-
-const ListTab = styled.ul`
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  list-style: none;
-  column-gap: 1rem;
-  font-weight: 500;
-  margin: 1rem 0 1rem 0;
-  color: #8e92a4;
-  border-bottom: 1px solid #dddddd;
-  /* border: 1px solid red; */
-
-  > .tab {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    column-gap: 0.2rem;
-    width: 100vw;
-    padding: 0.5rem 0 0.5rem 0;
-    text-align: center;
-    cursor: pointer;
-    /* border: 1px solid blue; */
-
-    > .todocount {
-      font-size: 0.8rem;
-    }
-  }
-
-  > .focused {
-    font-weight: 600;
-    color: #1b9c85;
-    border-bottom: 2px solid #1b9c85;
-  }
-`;
-
-const TodoMainList = styled.ul`
-  width: 100%;
-  list-style: none;
-  /* border: 1px solid blue; */
-
-  li:last-child {
-    border: none;
-  }
-`;
-
-function TodoMain() {
+export default function TodoMain() {
   const [currentMenu, setCurrentMenu] = useState<number>(0);
   const [currentTab, setCurrentTab] = useState<number>(0);
   const [addModalOpen, setAddModalOpen] = useState<boolean>(false);
-
-  interface Developer {
-    name: string;
-    skill: string;
-  }
-
-  let capt: Developer;
 
   const { user }: any = useContext(AuthContext);
   const { documents, error } = useCollection("todo", ["uid", "==", user.uid]);
@@ -317,4 +215,97 @@ function TodoMain() {
   );
 }
 
-export default TodoMain;
+const TodoMainContainer = styled.div`
+  display: flex;
+  height: calc(100vh - 2.5rem);
+`;
+
+const TodoMainContent = styled.main`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: calc(100vw - 44rem);
+  font-size: 1rem;
+  // flex item의 최소 크기는 자식 요소의 크기보다 더 줄어들 수 없기 때문에
+  // 부모 요소인 flex item 의 최소 크기를 0 으로 변경해야 flex 상태에서 말줄임 적용됨
+  min-width: 30rem;
+  padding: 1rem 2rem 2rem 2rem;
+  overflow-y: auto;
+
+  @media screen and (max-width: 1300px) {
+    width: 100vw;
+  }
+
+  @media screen and (max-width: 480px) {
+    min-width: 10rem;
+    padding: 1rem 1rem 2rem 1rem;
+  }
+`;
+
+const TodoMainArea = styled.div`
+  width: 100%;
+  max-width: 50rem;
+  /* border: 1px solid skyblue; */
+`;
+
+const TodoTitle = styled.div`
+  display: flex;
+  align-items: center;
+  column-gap: 0.5rem;
+  font-size: 1.6rem;
+  font-weight: 600;
+  color: #353535;
+  margin-top: 1rem;
+  /* border: 1px solid lime; */
+
+  > .todaydate {
+    font-weight: 500;
+    font-size: 1rem;
+    color: #878787;
+  }
+`;
+
+const ListTab = styled.ul`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  list-style: none;
+  column-gap: 1rem;
+  font-weight: 500;
+  margin: 1rem 0 1rem 0;
+  color: #8e92a4;
+  border-bottom: 1px solid #dddddd;
+  /* border: 1px solid red; */
+
+  > .tab {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    column-gap: 0.2rem;
+    width: 100vw;
+    padding: 0.5rem 0 0.5rem 0;
+    text-align: center;
+    cursor: pointer;
+    /* border: 1px solid blue; */
+
+    > .todocount {
+      font-size: 0.8rem;
+    }
+  }
+
+  > .focused {
+    font-weight: 600;
+    color: #1b9c85;
+    border-bottom: 2px solid #1b9c85;
+  }
+`;
+
+const TodoMainList = styled.ul`
+  width: 100%;
+  list-style: none;
+  /* border: 1px solid blue; */
+
+  li:last-child {
+    border: none;
+  }
+`;

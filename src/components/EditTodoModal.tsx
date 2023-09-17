@@ -3,7 +3,7 @@ import { useState } from "react";
 import { useFireStore } from "../hooks/useFirestore";
 import { toast } from "react-toastify";
 
-function EditTodoModal({ list, editModalOpen, setEditModalOpen }: any) {
+export default function EditTodoModal({ list, editModalOpen, setEditModalOpen }: any) {
   const [editTodoBody, setEditTodoBody] = useState<string>(list.todoBody);
   const [editTodoDate, setEditTodoDate] = useState<string>(list.todoDate);
 
@@ -72,5 +72,3 @@ function EditTodoModal({ list, editModalOpen, setEditModalOpen }: any) {
     </AddTodoModal.AddModalBackdrop>
   );
 }
-
-export default EditTodoModal;

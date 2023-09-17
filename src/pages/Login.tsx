@@ -5,7 +5,7 @@ import authspinner from "../assets/images/auth-spinner.gif";
 import { LoginFormValueInterface } from "../util/type";
 import * as Signup from "./Signup";
 
-function Login() {
+export default function Login() {
   const [formValue, setFormValue] = useState<LoginFormValueInterface>({
     email: "",
     password: "",
@@ -56,5 +56,3 @@ function Login() {
     </Signup.SignupContainer>
   );
 }
-
-export default Login;

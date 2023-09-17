@@ -1,91 +1,14 @@
 import styled from "styled-components";
 import { useLogout } from "../hooks/useLogout";
-
 import { FcPlanner, FcIdea, FcOpenedFolder, FcLeft } from "react-icons/fc";
 
-const NavContainer = styled.div`
-  width: 100vw;
-  max-width: 19rem;
-  padding: 3rem 1rem 1rem 1rem;
-  font-size: 1rem;
-  font-weight: 500;
-  background-color: #f7f9fb;
-
-  @media screen and (max-width: 740px) {
-    display: none;
-  }
-`;
-
-const MenuListArea = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  height: 100%;
-  color: #353535;
-  /* border: 1px solid red; */
-`;
-
-const MenuList = styled.ul`
-  list-style: none;
-  /* border: 1px solid blue; */
-
-  > .menu {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    height: 3rem;
-    padding: 0 1rem 0 1rem;
-    border-radius: 0.5rem;
-    cursor: pointer;
-    /* border: 1px solid blue; */
-
-    > .menutext {
-      display: flex;
-      align-items: center;
-      column-gap: 1rem;
-    }
-
-    > .todocount {
-      color: #878787;
-    }
-
-    &:hover {
-      background-color: #eeeeee;
-    }
-  }
-
-  > .focused {
-    background-color: #eeeeee;
-
-    > .todocount {
-      color: #1b9c85;
-    }
-  }
-`;
-
-const Logout = styled.button`
-  font-size: 1rem;
-  font-weight: 500;
-  display: flex;
-  align-items: center;
-  height: 3rem;
-  padding: 0 1rem 0 1rem;
-  border-radius: 0.5rem;
-  border: none;
-  background-color: transparent;
-  cursor: pointer;
-  /* border: 1px solid green; */
-
-  > .nav-name {
-    margin-left: 1rem;
-  }
-
-  &:hover {
-    background-color: #eeeeee;
-  }
-`;
-
-function Nav({ currentMenu, setCurrentMenu, todayCount, upComingCount, pastCount }: any) {
+export default function Nav({
+  currentMenu,
+  setCurrentMenu,
+  todayCount,
+  upComingCount,
+  pastCount,
+}: any) {
   const { logout } = useLogout();
 
   const selectMenuHandler = (index: number) => {
@@ -136,4 +59,80 @@ function Nav({ currentMenu, setCurrentMenu, todayCount, upComingCount, pastCount
   );
 }
 
-export default Nav;
+const NavContainer = styled.div`
+  width: 100vw;
+  max-width: 19rem;
+  padding: 3rem 1rem 1rem 1rem;
+  font-size: 1rem;
+  font-weight: 500;
+  background-color: #f7f9fb;
+
+  @media screen and (max-width: 740px) {
+    display: none;
+  }
+`;
+
+const MenuListArea = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+  color: #353535;
+`;
+
+const MenuList = styled.ul`
+  list-style: none;
+
+  > .menu {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 3rem;
+    padding: 0 1rem 0 1rem;
+    border-radius: 0.5rem;
+    cursor: pointer;
+
+    > .menutext {
+      display: flex;
+      align-items: center;
+      column-gap: 1rem;
+    }
+
+    > .todocount {
+      color: #878787;
+    }
+
+    &:hover {
+      background-color: #eeeeee;
+    }
+  }
+
+  > .focused {
+    background-color: #eeeeee;
+
+    > .todocount {
+      color: #1b9c85;
+    }
+  }
+`;
+
+const Logout = styled.button`
+  font-size: 1rem;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  height: 3rem;
+  padding: 0 1rem 0 1rem;
+  border-radius: 0.5rem;
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+
+  > .nav-name {
+    margin-left: 1rem;
+  }
+
+  &:hover {
+    background-color: #eeeeee;
+  }
+`;

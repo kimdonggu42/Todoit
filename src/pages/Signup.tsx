@@ -5,6 +5,69 @@ import { Link } from "react-router-dom";
 import authspinner from "../assets/images/auth-spinner.gif";
 import { SignupFormValueInterface } from "../util/type";
 
+export default function Signup() {
+  const [formValue, setFormValue] = useState<SignupFormValueInterface>({
+    email: "",
+    password: "",
+    displayName: "",
+  });
+
+  const { isPending, signup } = useSignup();
+
+  const handleData = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (e.target.type === "email") {
+      setFormValue({ ...formValue, email: e.target.value });
+    } else if (e.target.type === "password") {
+      setFormValue({ ...formValue, password: e.target.value });
+    } else if (e.target.type === "text") {
+      setFormValue({ ...formValue, displayName: e.target.value });
+    }
+  };
+
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    signup(formValue.email, formValue.password, formValue.displayName);
+  };
+
+  return (
+    <SignupContainer>
+      <Logo>회원가입</Logo>
+      <FormArea onSubmit={handleSubmit}>
+        <Input
+          type='text'
+          placeholder='이름'
+          required
+          onChange={handleData}
+          value={formValue.displayName}
+        />
+        <Input
+          type='email'
+          placeholder='이메일'
+          required
+          onChange={handleData}
+          value={formValue.email}
+        />
+        <Input
+          type='password'
+          placeholder='비밀번호'
+          required
+          onChange={handleData}
+          value={formValue.password}
+        />
+        <SignupBtn type='submit'>
+          {isPending ? <img src={authspinner} alt='authspinner' /> : "회원가입"}
+        </SignupBtn>
+      </FormArea>
+      <MovePageButton>
+        <span>이미 계정이 있으신가요?</span>
+        <Link to='/login'>
+          <button>로그인</button>
+        </Link>
+      </MovePageButton>
+    </SignupContainer>
+  );
+}
+
 export const SignupContainer = styled.div`
   height: 100vh;
   display: flex;
@@ -18,7 +81,6 @@ export const Logo = styled.div`
   font-weight: 500;
   color: #353535;
   margin-bottom: 1rem;
-  /* border: 1px solid red; */
 `;
 
 export const FormArea = styled.form`
@@ -83,68 +145,3 @@ export const MovePageButton = styled.div`
     background-color: transparent;
   }
 `;
-
-function Signup() {
-  const [formValue, setFormValue] = useState<SignupFormValueInterface>({
-    email: "",
-    password: "",
-    displayName: "",
-  });
-
-  const { isPending, signup } = useSignup();
-
-  const handleData = (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (e.target.type === "email") {
-      setFormValue({ ...formValue, email: e.target.value });
-    } else if (e.target.type === "password") {
-      setFormValue({ ...formValue, password: e.target.value });
-    } else if (e.target.type === "text") {
-      setFormValue({ ...formValue, displayName: e.target.value });
-    }
-  };
-
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    signup(formValue.email, formValue.password, formValue.displayName);
-  };
-
-  return (
-    <SignupContainer>
-      <Logo>회원가입</Logo>
-      <FormArea onSubmit={handleSubmit}>
-        <Input
-          type='text'
-          placeholder='이름'
-          required
-          onChange={handleData}
-          value={formValue.displayName}
-        />
-        <Input
-          type='email'
-          placeholder='이메일'
-          required
-          onChange={handleData}
-          value={formValue.email}
-        />
-        <Input
-          type='password'
-          placeholder='비밀번호'
-          required
-          onChange={handleData}
-          value={formValue.password}
-        />
-        <SignupBtn type='submit'>
-          {isPending ? <img src={authspinner} alt='authspinner' /> : "회원가입"}
-        </SignupBtn>
-      </FormArea>
-      <MovePageButton>
-        <span>이미 계정이 있으신가요?</span>
-        <Link to='/login'>
-          <button>로그인</button>
-        </Link>
-      </MovePageButton>
-    </SignupContainer>
-  );
-}
-
-export default Signup;
