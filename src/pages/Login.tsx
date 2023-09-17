@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useLogin } from "../hooks/useLogin";
 import { Link } from "react-router-dom";
 import authspinner from "../assets/images/auth-spinner.gif";
-import { LoginFormValueInterface } from "../util/interface";
+import { LoginFormValueInterface } from "../util/type";
 import * as Signup from "./Signup";
 
 function Login() {

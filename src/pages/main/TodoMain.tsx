@@ -8,7 +8,7 @@ import { useContext } from "react";
 import { useCollection } from "../../hooks/useCollection";
 import Nav from "../../components/Nav";
 import Header from "../../components/Header";
-import { MainTabArrInterface } from "../../util/interface";
+import { MainTabArrInterface } from "../../util/type";
 
 const TodoMainContainer = styled.div`
   display: flex;

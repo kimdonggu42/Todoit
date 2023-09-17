@@ -3,7 +3,7 @@ import { useState } from "react";
 import { useSignup } from "../hooks/useSignup";
 import { Link } from "react-router-dom";
 import authspinner from "../assets/images/auth-spinner.gif";
-import { SignupFormValueInterface } from "../util/interface";
+import { SignupFormValueInterface } from "../util/type";
 
 export const SignupContainer = styled.div`
   height: 100vh;
