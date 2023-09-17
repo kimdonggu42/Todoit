@@ -1,4 +1,4 @@
-import { Route, Routes, Navigate } from "react-router-dom";
+import { BrowserRouter, Route, Routes, Navigate } from "react-router-dom";
 import Login from "./pages/Login";
 import Signup from "./pages/Signup";
 import TodoMain from "./pages/main/TodoMain";
@@ -10,7 +10,7 @@ export default function Router() {
   const { user, isAuthReady }: any = useContext(AuthContext);
 
   return (
-    <>
+    <BrowserRouter>
       {isAuthReady ? (
         <Routes>
           <Route path='/' element={user ? <TodoMain /> : <Navigate to='/login' replace={true} />} />
@@ -20,6 +20,6 @@ export default function Router() {
       ) : (
         <Spinner />
       )}
-    </>
+    </BrowserRouter>
   );
 }
