@@ -26,7 +26,6 @@ const TodoMainContent = styled.main`
   min-width: 30rem;
   padding: 1rem 2rem 2rem 2rem;
   overflow-y: auto;
-  /* border: 1px solid red; */
 
   @media screen and (max-width: 1300px) {
     width: 100vw;
