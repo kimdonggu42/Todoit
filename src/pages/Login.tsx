@@ -12,12 +12,11 @@ export default function Login() {
   });
   const { isPending, login } = useLogin();
 
-  const handleData = (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (e.target.type === "email") {
-      setFormValue({ ...formValue, email: e.target.value });
-    } else if (e.target.type === "password") {
-      setFormValue({ ...formValue, password: e.target.value });
-    }
+  const handleFormValueChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setFormValue({
+      ...formValue,
+      [e.target.name]: e.target.value,
+    });
   };
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
@@ -31,16 +30,18 @@ export default function Login() {
       <Signup.FormArea onSubmit={handleSubmit}>
         <Signup.Input
           type='email'
+          name='email'
           placeholder='이메일'
           required
-          onChange={handleData}
+          onChange={handleFormValueChange}
           value={formValue.email}
         />
         <Signup.Input
           type='password'
+          name='password'
           placeholder='비밀번호'
           required
-          onChange={handleData}
+          onChange={handleFormValueChange}
           value={formValue.password}
         />
         <Signup.SignupBtn type='submit'>
